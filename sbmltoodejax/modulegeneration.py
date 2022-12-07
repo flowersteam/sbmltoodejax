@@ -359,7 +359,7 @@ def GenerateModel(modelData, outputFilePath,
             raise Exception('Algebraic Loop in AssignmentRules')
 
     # ================================================================================================================================
-    outputFile.write(f"t0 = {t0}\n")
+    outputFile.write(f"t0 = {t0}\n\n")
 
     outputFile.write(f"y0 = jnp.array({y0})\n")
     outputFile.write(f"y_indexes = {y_indexes}\n\n")
@@ -370,13 +370,6 @@ def GenerateModel(modelData, outputFilePath,
     outputFile.write(f"c = jnp.array({c}) \n")
     outputFile.write(f"c_indexes = {c_indexes}\n\n")
     # ================================================================================================================================
-
-    outputFile.write("class " + RateofSpeciesChangeName + "(eqx.Module):\n")
-    outputFile.write(f"\tn_reactions = {len(reactions)}\n")
-    outputFile.write(f"\tn_raterules = {len(rateRules)}\n")
-
-    outputFile.write("\t@jit\n")
-    outputFile.write("\tdef __call__(self, y, t, w, c):\n")
 
     # Set up stoichCoeffMat, a matrix of stoichiometric coefficients for solving the reactions
     reactionCounter = 0
@@ -392,17 +385,26 @@ def GenerateModel(modelData, outputFilePath,
             if not (species[reactant[1]].isBoundarySpecies == "True"):
                 stoichCoeffMat = stoichCoeffMat.at[y_indexes[reactant[1]], reactionIndex[rxnId]].add(reactant[0])
 
-
     rateArray = ['0.0'] * len(y_indexes)
     for rule_name, rule in rateRules.items():
         rateArray[y_indexes[rule.variable]] = 'self.Rate' + rule.variable + '(y, w, c, t)'
 
-    outputFile.write('\t\trateRuleVector = jnp.array([' + ', '.join(var for var in rateArray) + '], dtype=jnp.float32)\n\n')
 
-    outputFile.write(f'\t\tstoichiometricMatrix = jnp.array({str(stoichCoeffMat.tolist())}, dtype=jnp.float32)\n\n')
+    # Write
+    outputFile.write("class " + RateofSpeciesChangeName + "(eqx.Module):\n")
+    outputFile.write(f"\tn_reactions = {len(reactions)}\n")
+    outputFile.write(f"\tn_raterules = {len(rateRules)}\n")
+    outputFile.write(f"\tstoichiometricMatrix = jnp.array({str(stoichCoeffMat.tolist())}, dtype=jnp.float32) \n\n")
+
+    outputFile.write("\t@jit\n")
+    outputFile.write("\tdef __call__(self, y, t, w, c):\n")
+
+
+
+    outputFile.write('\t\trateRuleVector = jnp.array([' + ', '.join(var for var in rateArray) + '], dtype=jnp.float32)\n\n')
     outputFile.write('\t\treactionVelocities = self.calc_reaction_velocities(y, w, c, t)\n\n')
 
-    outputFile.write('\t\trateOfSpeciesChange = stoichiometricMatrix @ reactionVelocities + rateRuleVector\n\n')
+    outputFile.write('\t\trateOfSpeciesChange = self.stoichiometricMatrix @ reactionVelocities + rateRuleVector\n\n')
     outputFile.write('\t\treturn rateOfSpeciesChange\n\n')
 
     outputFile.write(f'\n\tdef calc_reaction_velocities(self, y, w, c, t):\n')
@@ -557,21 +559,20 @@ def GenerateModel(modelData, outputFilePath,
                      f"y0=jnp.array({y0}), "
                      f"w0=jnp.array({w0}), "
                      f"c=jnp.array({c}), "
-                     f"t0={t0} "
+                     f"t0={t0}"
                      f"):\n\n")
 
     outputFile.write("\t\t@jit\n")
     outputFile.write("\t\tdef f(carry, x):\n")
     outputFile.write("\t\t\ty, w, c, t = carry\n")
-    outputFile.write("\t\t\treturn self.modelstepfunc(y, w, c, t, self.deltaT), (y, w)\n")
+    outputFile.write("\t\t\treturn self.modelstepfunc(y, w, c, t, self.deltaT), (y, w, t)\n")
 
-    outputFile.write("\t\t(y, w, c, t), (ys, ws) = lax.scan(f, (y0, w0, c, t0), jnp.arange(n_steps))\n")
+    outputFile.write("\t\t(y, w, c, t), (ys, ws, ts) = lax.scan(f, (y0, w0, c, t0), jnp.arange(n_steps))\n")
 
-    outputFile.write("\t\tys = jnp.concatenate([y0[:, jnp.newaxis], jnp.moveaxis(ys, 0, -1)], axis=-1)\n")
-    outputFile.write("\t\tws = jnp.concatenate([w0[:, jnp.newaxis], jnp.moveaxis(ws, 0, -1)], axis=-1)\n")
-    outputFile.write("\t\ttimes = jnp.arange(t0, t0 + (n_steps+1) * self.deltaT, self.deltaT)\n")
+    outputFile.write("\t\tys = jnp.moveaxis(ys, 0, -1)\n")
+    outputFile.write("\t\tws = jnp.moveaxis(ws, 0, -1)\n")
 
-    outputFile.write("\t\treturn ys, ws, times\n\n")
+    outputFile.write("\t\treturn ys, ws, ts\n\n")
 
     # ================================================================================================================================
     outputFile.close()
