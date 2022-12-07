@@ -30,6 +30,10 @@ def coth(x):
     return jnp.reciprocal(jnp.tanh(x))
 
 @jit
+def sigmoid(x):
+    return 1 / (1 + jnp.exp(-x))
+
+@jit
 def piecewise(*args):
     cond_list = jnp.array(args[1::2])
     func_list = []
