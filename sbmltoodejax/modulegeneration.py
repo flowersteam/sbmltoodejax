@@ -41,6 +41,9 @@ def GenerateModel(modelData, outputFilePath,
 
     parameters = modelData.parameters
     compartments = modelData.compartments
+    for k, v in compartments.items():
+        if not v.isConstant:
+            raise NotImplementedError
     species = modelData.species
     reactions = modelData.reactions
     functions = modelData.functions
