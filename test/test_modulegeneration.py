@@ -113,13 +113,13 @@ def test_modulegeneration():
 
         # Simulate for n time steps
         cstart = time.time()
-        py_ys = np.zeros((len(y_indexes), n_steps+1))
+        py_ys = np.zeros((len(y_indexes), n_steps))
         py_ys[:, 0] = py_y0
-        py_ws = np.zeros((len(w_indexes), n_steps+1))
+        py_ws = np.zeros((len(w_indexes), n_steps))
         py_ws[:, 0] = py_w0
-        py_times = np.zeros(n_steps+1)
+        py_times = np.zeros(n_steps)
         py_times[0] = 0.0
-        for i in range(1, n_steps+1):
+        for i in range(1, n_steps):
             model.RunSimulation(
                 deltaT, absoluteTolerance=atol, relativeTolerance=rtol
             )
