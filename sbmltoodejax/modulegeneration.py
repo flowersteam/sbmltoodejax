@@ -109,6 +109,7 @@ def GenerateModel(modelData, outputFilePath,
     # ================================================================================================================================
 
     outputFile.write("import equinox as eqx\n")
+    outputFile.write("from functools import partial\n")
     outputFile.write("from jax import jit, lax, vmap\n")
     outputFile.write("from jax.experimental.ode import odeint\n")
     outputFile.write("import jax.numpy as jnp\n\n")
@@ -558,6 +559,7 @@ def GenerateModel(modelData, outputFilePath,
     outputFile.write("\t\tself.deltaT = deltaT\n")
     outputFile.write(f"\t\tself.modelstepfunc = {ModelStepName}(atol=atol, rtol=rtol, mxstep=mxstep)\n\n")
 
+    outputFile.write("\t@partial(jit, static_argnums=(0,))\n")
     outputFile.write("\tdef __call__(self, n_steps, "
                      f"y0=jnp.array({y0}), "
                      f"w0=jnp.array({w0}), "
