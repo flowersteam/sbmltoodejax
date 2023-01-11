@@ -539,7 +539,7 @@ def GenerateModel(modelData, outputFilePath,
     outputFile.write("\t\tself.atol = atol\n")
     outputFile.write("\t\tself.mxstep = mxstep\n")
 
-    outputFile.write(f"\t\tself.assignmentfunc = {AssignmentRuleName}()\n")
+    outputFile.write(f"\t\tself.assignmentfunc = {AssignmentRuleName}()\n\n")
     
 
     outputFile.write("\t@jit\n")
@@ -559,7 +559,7 @@ def GenerateModel(modelData, outputFilePath,
     outputFile.write("\t\tself.deltaT = deltaT\n")
     outputFile.write(f"\t\tself.modelstepfunc = {ModelStepName}(atol=atol, rtol=rtol, mxstep=mxstep)\n\n")
 
-    outputFile.write("\t@partial(jit, static_argnums=(0,))\n")
+    outputFile.write("\t@partial(jit, static_argnames=(\"n_steps\",))\n")
     outputFile.write("\tdef __call__(self, n_steps, "
                      f"y0=jnp.array({y0}), "
                      f"w0=jnp.array({w0}), "
