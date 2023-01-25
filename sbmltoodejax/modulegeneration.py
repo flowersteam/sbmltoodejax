@@ -43,7 +43,7 @@ def GenerateModel(modelData, outputFilePath,
     compartments = modelData.compartments
     for k, v in compartments.items():
         if not v.isConstant:
-            raise NotImplementedError
+            raise NotImplementedError("Varying compartment size is not handled")
     species = modelData.species
     reactions = modelData.reactions
     functions = modelData.functions
@@ -131,11 +131,9 @@ def GenerateModel(modelData, outputFilePath,
                     elif species[reactant].valueType == "Concentration":
                         y_amount = species[reactant].value * compartments[species[reactant].compartment].size
                     else:
-                        raise ValueError
-                elif reactant in parameters:
-                    raise NotImplementedError
-                elif reactant in compartments:
-                    raise NotImplementedError
+                        raise ValueError("Specie value is not of type amount nor concentration")
+                else:
+                    raise NotImplementedError("Reactant is not a specie")
                 y0.append(y_amount)
                 y_indexes[reactant] = len(y0) - 1
 
@@ -147,11 +145,11 @@ def GenerateModel(modelData, outputFilePath,
                 elif species[rule.variable].valueType == "Concentration":
                     y_amount = species[rule.variable].value * compartments[species[rule.variable].compartment].size
                 else:
-                    raise ValueError
+                    raise ValueError("Specie value is not of type amount nor concentration")
             elif rule.variable in parameters:
                 y_amount = parameters[rule.variable].value
             elif rule.variable in compartments:
-                raise NotImplementedError
+                raise NotImplementedError("Varying compartment size is not handled")
             y0.append(y_amount)
             y_indexes[rule.variable] = len(y0) - 1
 
@@ -164,7 +162,7 @@ def GenerateModel(modelData, outputFilePath,
             elif species[v.variable].valueType == "Concentration":
                 w_amount = species[v.variable].value * compartments[species[v.variable].compartment].size
             else:
-                raise ValueError
+                raise ValueError("Specie value is not of type amount nor concentration")
         elif v.variable in parameters:
             w_amount = parameters[v.variable].value
         elif v.variable in compartments:
@@ -183,7 +181,7 @@ def GenerateModel(modelData, outputFilePath,
             elif v.valueType == "Concentration":
                 c_amount = v.value * compartments[v.compartment].size
             else:
-                raise ValueError
+                raise ValueError("Specie value is not of type amount nor concentration")
             c.append(c_amount)
             c_indexes[k] = len(c) - 1
     for k, v in parameters.items():
@@ -251,7 +249,7 @@ def GenerateModel(modelData, outputFilePath,
                 elif variable[0] in mathFuncs:
                     returnRHS += mathFuncs[variable[0]]
                 elif variable[0] in functions:
-                    raise NotImplementedError("Custom Functions not Handled")
+                    raise NotImplementedError("Custom functions are not handled")
                 elif variable[0] == "time":
                     returnRHS += f'{tvar}'
                 elif variable[0] == "pi":
@@ -307,7 +305,7 @@ def GenerateModel(modelData, outputFilePath,
                 elif rule.variable in w_indexes:
                     w0[w_indexes[rule.variable]] = var_amount
                 else:
-                    raise ValueError
+                    raise ValueError("Rule variable is not in y nor w")
                 varDefinedThisLoop = rule.variable
                 rule.dependents = None
                 continueVar = True
@@ -332,7 +330,7 @@ def GenerateModel(modelData, outputFilePath,
                     elif assignment.variable in c_indexes:
                         c[c_indexes[assignment.variable]] = var_amount
                     else:
-                        raise ValueError
+                        raise ValueError("Assignment variable is not in y, w nor c")
                     varDefinedThisLoop = assignment.variable
                     assignment.dependents = None
                     continueVar = True
@@ -396,8 +394,6 @@ def GenerateModel(modelData, outputFilePath,
 
     # Write
     outputFile.write("class " + RateofSpeciesChangeName + "(eqx.Module):\n")
-    outputFile.write(f"\tn_reactions = {len(reactions)}\n")
-    outputFile.write(f"\tn_raterules = {len(rateRules)}\n")
     outputFile.write(f"\tstoichiometricMatrix = jnp.array({str(stoichCoeffMat.tolist())}, dtype=jnp.float32) \n\n")
 
     outputFile.write("\t@jit\n")
@@ -463,7 +459,6 @@ def GenerateModel(modelData, outputFilePath,
     # ================================================================================================================================
 
     outputFile.write("class " + AssignmentRuleName + "(eqx.Module):\n")
-    outputFile.write(f"\tn_assignmentrules = {len(assignmentRules)}\n\n")
 
     outputFile.write("\t@jit\n")
     outputFile.write("\tdef __call__(self, y, w, c, t):\n")

@@ -23,11 +23,15 @@ def ParseSBMLFile(file: str):
             f.write(file)
         doc = libsbml.readSBMLFromString(file)
         filePath = tmp_sbml_file.name
+
+    # Raise an Error if SBML error
+    if doc.getNumErrors() > 0:
+        raise ValueError("LibSBML read error")
     
     # Raise an Error if the model contains events as they are not handled by SBMLtoODEpy
     model = doc.getModel()
     if model.getNumEvents() > 0:
-        raise NotImplementedError("Events not Handled")
+        raise NotImplementedError("Events are not handled")
 
     modelData = sbmltoodepy.parse.ParseSBMLFile(filePath)
     
