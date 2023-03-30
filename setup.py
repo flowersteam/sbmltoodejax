@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='sbmltoodejax',
-    version='0.1',
+    version='0.2',
     author='Mayalen Etcheverry',
     author_email='mayalen.etcheverry@inria.fr',
     description='python software built upon jax, that allows to convert SBML models into python classes',
