@@ -76,6 +76,5 @@ html_theme_options = {
     "use_download_button": True,
 }
 html_baseurl = "https://sbmltoodejax.readthedocs.io/en/latest/"
-nb_execution_mode = "auto"
-nb_execution_excludepatterns = ["benchmarks.ipynb"]
+nb_execution_mode = "off"
 nb_execution_timeout = -1

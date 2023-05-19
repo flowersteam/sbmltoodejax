@@ -1,5 +1,5 @@
 ## Dependencies
-pip install sphinx myst-nb sphinx-book-theme
+pip install sphinx myst-nb sphinx-book-theme sbmltoodejax
 
 ## Build
 cd docs
