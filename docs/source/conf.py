@@ -66,8 +66,8 @@ html_theme_options = {
     "repository_url": "https://github.com/flowersteam/sbmltoodejax",
     "repository_branch": "main",
     "launch_buttons": {
-        "binderhub_url": "https://mybinder.org",
-        "notebook_interface": "jupyterlab",
+        #"binderhub_url": "https://mybinder.org",
+        #"notebook_interface": "jupyterlab",
         "colab_url": "https://colab.research.google.com/",
     },
     #"use_edit_page_button": True,
