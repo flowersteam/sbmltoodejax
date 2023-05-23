@@ -17,22 +17,47 @@ def coth(x):
     return jnp.reciprocal(jnp.tanh(x))
 
 def GenerateModel(modelData, outputFilePath,
-                     RateofSpeciesChangeName: str ='RateofSpeciesChange',
-                     AssignmentRuleName: str='AssignmentRule',
-                     ModelStepName: str='ModelStep',
-                     ModelRolloutName: str='ModelRollout',
-                     deltaT: float =0.1,
-                     atol: float=1e-6,
-                     rtol: float = 1e-12,
-                     mxstep: int = 5000000,
-                     vmap_over_reactions: bool =False,
-                     ):
+                  RateofSpeciesChangeName: str ='RateofSpeciesChange',
+                  AssignmentRuleName: str='AssignmentRule',
+                  ModelStepName: str='ModelStep',
+                  ModelRolloutName: str='ModelRollout',
+                  deltaT: float =0.1,
+                  atol: float=1e-6,
+                  rtol: float = 1e-12,
+                  mxstep: int = 5000000,
+                  vmap_over_reactions: bool =False,
+                  ):
     """
-    This function takes model data, either from ParseSBMLFIle() or imported from a .json file,
-    and generates a Python file containing a class that implements the SBML model in Jax.
-    It is adapted from sbmltoodepy's GenerateModel function.
+    This function takes model data created by :func:`~sbmltoodejax.parse.ParseSBMLFile` and generates a python file containing
+    variables and modules that implement the SBML model.
 
-    In order to take advantage of jax main features the python class that simulates the model is written in functional paradigm style.
+    Note:
+        This function is adapted from ``sbmltoodepy.modulegeneration.GenerateModel`` function, however the generated python file is
+        written in JAX and follows different conventions for the generated variables and modules, as detailed in :ref:`structure-of-the-generated-python-file`
+
+
+    Args:
+        modelData (sbmltoodepy.dataclasses.ModelData): An object containing all the model components and values.
+
+        outputFilePath (str): The desired file path of the resulting python file.
+
+        RateofSpeciesChangeName (str, optional): The name of the RateofSpeciesChange module defined in the resulting python file. Default to 'RateofSpeciesChange'.
+
+        AssignmentRuleName (str): The name of the AssignmentRule module defined in the resulting python file. Default to 'AssignmentRule'.
+
+        ModelStepName (str): The name of the ModelStep module defined in the resulting python file. Default to 'ModelStep'.
+
+        ModelRolloutName (str): The name of the ModelRollout module defined in the resulting python file. Default to'ModelRollout'.
+
+        deltaT (float): Time step size (in seconds). Default to 0.1.
+
+        atol (float): Absolute local error tolerance for ``jax.experimental.odeint`` solver. Default to 1e-6.
+
+        rtol (float): Relative local error tolerance for ``jax.experimental.odeint`` solver. Default to 1e-12.
+
+        mxstep (int): Maximum number of steps to take for each timepoint for ``jax.experimental.odeint`` solver. Default to 5000000.
+
+
     """
 
     jnp.set_printoptions(threshold=sys.maxsize)
