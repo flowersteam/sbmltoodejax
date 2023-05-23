@@ -30,6 +30,7 @@ release = sbmltoodejax.__version__
 extensions = ["sphinx.ext.autodoc",
     "sphinx.ext.mathjax",
     "sphinx.ext.napoleon",
+    "sphinx.ext.viewcode",
     "myst_nb",
 ]
 
@@ -60,7 +61,7 @@ html_logo = "_static/logo.svg"
 html_favicon = "_static/logo.svg"
 
 html_static_path = ["_static"]
-html_show_sourcelink = False
+html_show_sourcelink = True
 html_theme_options = {
     "path_to_docs": "docs",
     "repository_url": "https://github.com/flowersteam/sbmltoodejax",
