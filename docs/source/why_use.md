@@ -24,23 +24,23 @@ subsequent calls to the function use this compiled trace, resulting in improved 
 
 JIT allows us to efficiently execute model rollouts by jitting the *ModelStep* function which is called at each time step.
 Below we compare the average simulation time of model rollouts, on the same machine and for different rollout lengths, run with the SBMLtoODEpy library  (shown in pink) versus with
-the SBMLtoODEjax library that makes advantage of just-in-time compilation (shown in blue).
-We can see that for short reaction times (< 100 secs), the compute time is very fast for both simulator (<<1 sec) and even faster with the original SBMLtoODEpy (see Log Scale).
+the SBMLtoODEjax library (shown in blue).
+We can see that for short reaction times (here <100 secs with $\Delta T=0.1$), the compute time is faster with the original SBMLtoODEpy (see Log Scale), but very fast for both simulator (<<1 sec).
 Here SBMLtoODEjax is less efficient because when calling *ModelStep* for the first time, it takes some time to generate the compiled trace.
-However, the advantage of using JAX becomes obvious when considering longer rollouts (>100 secs) where we obtain huge speed-ups with respect to original python for-loops 
-with linear compute time increase.
-<img src="_static/benchmark_n_secs.svg" width="550px">
+However, the advantage of SBMLtoODEjax becomes clear when considering longer rollouts where we obtain huge speed-ups with respect to original SBMLtoODEpy library (see Linear Scale).
+This is because the original SBMLtoODEpy python code uses for-loops, hence have linear increase of compute time, whereas the JIT compiled step function is executes much faster.
 
+<img src="_static/benchmark_n_secs.svg" width="550px">
 You can check our [Benchmarking](tutorials/benchmark.ipynb) tutorial for more details on the comparison.
 
 ### Automatic vectorization
 `vmap` is another core function transformations in JAX.  
 It enables efficient (and seamless) vectorization of functions which is particularly useful when working with batched computations such as batch of initial conditions.
 
-Below we compare the average simulation time of model rollouts, for a rollout length of 10 seconds on the same machine and for different batch sizes, run with the SBMLtoODEpy library and for loop 
-over the batched inputs (shown in pink), with the SBMLtoODEpy library and pooling over the batched inputs (shown in orange) and finally with
-the SBMLtoODEjax library and jit+vmap (shown in blue). 
-Again, similar conclusions can be drawn: for small batch sizes (and a rollout length of 10 seconds) SBMLtoODEjax is not the more efficient however its advantage becomes
+Below we compare the average simulation time of model rollouts for different batch sizes (on the same machine and for a rollout length of 10 seconds with $\Delta T=0.1$), 
+run with the SBMLtoODEpy library and for loop over the batched inputs (shown in pink), with the SBMLtoODEpy library and pooling over the batched inputs (shown in orange) 
+and finally with the SBMLtoODEjax library and jit+vmap (shown in blue). 
+Again, similar conclusions can be drawn: for small batch sizes SBMLtoODEjax is not the more efficient however its advantage becomes
 clear for larger batch sizes.
 
 <img src="_static/benchmark_n_in_parallel.svg" width="550px">
@@ -57,6 +57,8 @@ Below we show an example use case where we use gradient descent to optimize one 
 of calcium ions oscillations.
 <img src="_static/sgd_c.svg" width="750px">
 
+To our knowledge, this is the first software tool that allows to perform automatic differentiation 
+and gradient-descent based optimization of SBML models parameters and/or dynamical states.
 However gradient descent can be quite hard in the considered biological systems for several reasons, 
 you can check our [Gradient Descent](tutorials/gradient_descent.ipynb) tutorial for more informations.
 
@@ -80,7 +82,7 @@ Be sure to check it before starting to write your code in JAX, as they are the m
 
 ### Does not (yet) handle several cases 
 SBMLtoODEjax is a lightweight library that is still in its early phase so they are several limitations to it at the moment.
-In particular, they error several error cases that are not handled by the current simulator including:
+In particular, they are several error cases that are not handled by the current simulator including:
 * Events: SBML files with events (discrete occurrences that can trigger discontinuous changes in the model) are not handled
 * Custom Functions: we handle a large portion of functions possibly-used in SBML files (see `mathFuncs` in `sbmltoodejax.modulegeneration.GenerateModel`), but not all 
 * Custom solvers: To integrate the model's equation, we use jax experimental `odeint` solver but do not yet allow for other solvers.
