@@ -32,8 +32,8 @@ The SBMLtoODEjax project is licensed under the [MIT license](https://github.com/
 ## Acknowledgements
 SBMLtoODEjax builds on:
 * [SBMLtoODEpy](https://github.com/AnabelSMRuggiero/sbmltoodepy)'s parsing and conversion of SBML files, by Steve M. Ruggiero and Ashlee N. Ford
-* [JAX](https://github.com/google/jax)'s main principles and computing performances, by the Google team
-* [Equinox](https://github.com/patrick-kidger/equinox)'s module implementation, by Patrick Kidger
+* [JAX](https://github.com/google/jax)'s composable transformations, by the Google team
+* [Equinox](https://github.com/patrick-kidger/equinox)'s module abstraction, by Patrick Kidger
 * [BasiCO](https://github.com/copasi/basico/blob/d058c10dd51f2c3e926efeaa29c6194f86bfdc90/basico/biomodels.py)'s access the BioModels REST api, by the COPASI team
 
 Our documentation was also inspired by the [GPJax](https://docs.jaxgaussianprocesses.com/) documentation, by Thomas Pinder and team.
