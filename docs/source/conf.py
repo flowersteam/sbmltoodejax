@@ -76,6 +76,6 @@ html_theme_options = {
     "use_repository_button": True,
     "use_download_button": True,
 }
-html_baseurl = "https://flowersteam.github.io/sbmltoodejax/"
+html_baseurl = "https://developmentalsystems.org/sbmltoodejax/"
 nb_execution_mode = "off"
 nb_execution_timeout = -1

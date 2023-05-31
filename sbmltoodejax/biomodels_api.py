@@ -96,7 +96,7 @@ def get_files_for_model(model_id):
     """Retrieves the json structure for all files for the given biomodel.
     The structure is of form:
 
-    .. code-block:: json
+    .. code-block::
 
         {
             'additional': [
