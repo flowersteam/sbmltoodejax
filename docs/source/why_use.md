@@ -1,6 +1,6 @@
 # Should you use SBMLtoODEjax?
 
-## 👍 Why you should
+## 👍 Advantages
 
 ### Ease of use
 
@@ -11,10 +11,10 @@ hosted on the BioModels website, one simply needs to implement the following:
 <div style="display: flex; align-items: center;">
 
 ```python
-from sbmltoodejax.utils import load_model
+from sbmltoodejax.utils import load_biomodel
 
 # load and simulate model 
-model, _, _, _ = load_model(10)
+model, _, _, _ = load_biomodel(10)
 n_secs = 150*60
 n_steps = int(n_secs / model.deltaT)
 ys, ws, ts = model(n_steps)
@@ -164,7 +164,7 @@ might be more adapted.
 
 
 
-## 👎 Why you should NOT
+## 👎 Limitations
 
 
 ### JAX can be hard
@@ -182,7 +182,7 @@ Be sure to check it before starting to write your code in JAX, as they are the m
 :::
 
 ### Does not (yet) handle several cases 
-SBMLtoODEjax is a lightweight library that is still in its early phase so they are several limitations to it at the moment.
+SBMLtoODEjax is still in its early phase so they are several limitations to it at the moment.
 In particular, they are several error cases that are not handled by the current simulator including:
 * Events: SBML files with events (discrete occurrences that can trigger discontinuous changes in the model) are not handled
 * Custom Functions: we handle a large portion of functions possibly-used in SBML files (see `mathFuncs` in `sbmltoodejax.modulegeneration.GenerateModel`), but not all 

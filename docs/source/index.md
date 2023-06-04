@@ -8,7 +8,7 @@ For an overview of SBMLtoODEjax’s advantages and limitations, please check the
 
 SBMLtoODEjax extends [SBMLtoODEpy](https://github.com/AnabelSMRuggiero/sbmltoodepy), a python library developed in 2019
 for converting SBML files into python files written in Numpy/Scipy. 
-The chosen conventions for the generated variables and modules are slightly different than the standard SBML conventions (as used in the SBMLtoODEpy library) 
+The chosen conventions for the generated variables and modules are slightly different from the standard SBML conventions (used in the SBMLtoODEpy library) 
 with the aim here to accommodate for more flexible manipulations while preserving JAX-like functional programming style. 
 For more details on the structure/conventions of the generated files, please check the [🎨 Design Principles](./design_principles.md) section.
 
