@@ -11,8 +11,7 @@ def GenerateModel(modelData, outputFilePath,
                   deltaT: float =0.1,
                   atol: float=1e-6,
                   rtol: float = 1e-12,
-                  mxstep: int = 5000000,
-                  vmap_over_reactions: bool =False,
+                  mxstep: int = 5000000
                   ):
     """
     This function takes model data created by :func:`~sbmltoodejax.parse.ParseSBMLFile` and generates a python file containing
@@ -423,37 +422,16 @@ def GenerateModel(modelData, outputFilePath,
 
     reactionElements = ''
 
-    if vmap_over_reactions:
-        if reactions:
-            outputFile.write('\t\tcalc_reaction_velocities = vmap(lambda i, y, w, c, t: lax.switch(i, [')
-            for reactionId in reactions:
-                if reactionElements == '':
-                    reactionElements += ('self.' + str(reactionId))
-                else:
-                    reactionElements += (', self.' + str(reactionId))
-            outputFile.write(reactionElements + '], y, w, c, t), in_axes=0)\n\n')
-            outputFile.write(
-                f'\t\treactionVelocities = calc_reaction_velocities('
-                f'jnp.arange({len(reactions)}), '
-                f'jnp.tile(y, ({len(reactions)}, 1)), '
-                f'jnp.tile(t, ({len(reactions)}, 1)), '
-                f'jnp.tile(w, ({len(reactions)}, 1)))\n\n')
-
-        else:
-            outputFile.write(
-                '\t\treactionVelocities = jnp.array([0.0], dtype=jnp.float32)\n\n')
-
+    outputFile.write('\t\treactionVelocities = jnp.array([')
+    if reactions:
+        for reactionId in reactions:
+            if reactionElements == '':
+                reactionElements += ('self.' + str(reactionId) + '(y, w, c, t)')
+            else:
+                reactionElements += (', self.' + str(reactionId) + '(y, w, c, t)')
     else:
-        outputFile.write('\t\treactionVelocities = jnp.array([')
-        if reactions:
-            for reactionId in reactions:
-                if reactionElements == '':
-                    reactionElements += ('self.' + str(reactionId) + '(y, w, c, t)')
-                else:
-                    reactionElements += (', self.' + str(reactionId) + '(y, w, c, t)')
-        else:
-            reactionElements = '0'
-        outputFile.write(reactionElements + '], dtype=jnp.float32)\n\n')
+        reactionElements = '0'
+    outputFile.write(reactionElements + '], dtype=jnp.float32)\n\n')
 
     outputFile.write('\t\treturn reactionVelocities\n\n')
 
