@@ -3,19 +3,6 @@ from sbmltoodejax import jaxfuncs
 import re
 import sys
 
-def sec(x):
-    return jnp.reciprocal(jnp.cos(x))
-def csc(x):
-    return jnp.reciprocal(jnp.sin(x))
-def cot(x):
-    return jnp.reciprocal(jnp.tan(x))
-def sech(x):
-    return jnp.reciprocal(jnp.cosh(x))
-def csch(x):
-    return jnp.reciprocal(jnp.sinh(x))
-def coth(x):
-    return jnp.reciprocal(jnp.tanh(x))
-
 def GenerateModel(modelData, outputFilePath,
                   RateofSpeciesChangeName: str ='RateofSpeciesChange',
                   AssignmentRuleName: str='AssignmentRule',
