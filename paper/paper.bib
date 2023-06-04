@@ -26,6 +26,24 @@
   month = mar
 }
 
+@article{bezginJAXFluidsFullydifferentiableHighorder2023,
+  title = {{{JAX-Fluids}}: {{A}} Fully-Differentiable High-Order Computational Fluid Dynamics Solver for Compressible Two-Phase Flows},
+  shorttitle = {{{JAX-Fluids}}},
+  author = {Bezgin, Deniz A. and Buhendwa, Aaron B. and Adams, Nikolaus A.},
+  year = {2023},
+  month = jan,
+  journal = {Computer Physics Communications},
+  volume = {282},
+  pages = {108527},
+  issn = {0010-4655},
+  doi = {10.1016/j.cpc.2022.108527},
+  urldate = {2023-06-02},
+  abstract = {Physical systems are governed by partial differential equations (PDEs). The Navier-Stokes equations describe fluid flows and are representative of nonlinear physical systems with complex spatio-temporal interactions. Fluid flows are omnipresent in nature and engineering applications, and their accurate simulation is essential for providing insights into these processes. While PDEs are typically solved with numerical methods, the recent success of machine learning (ML) has shown that ML methods can provide novel avenues of finding solutions to PDEs. ML is becoming more and more present in computational fluid dynamics (CFD). However, up to this date, there does not exist a general-purpose ML-CFD package which provides 1) powerful state-of-the-art numerical methods, 2) seamless hybridization of ML with CFD, and 3) automatic differentiation (AD) capabilities. AD in particular is essential to ML-CFD research as it provides gradient information and enables optimization of preexisting and novel CFD models. In this work, we propose JAX-Fluids: a comprehensive fully-differentiable CFD Python solver for compressible two-phase flows. JAX-Fluids is intended for ML-supported CFD research. The framework allows the simulation of complex fluid dynamics with phenomena like three-dimensional turbulence, compressibility effects, and two-phase flows. Written entirely in JAX, it is straightforward to include existing ML models into the proposed framework. Furthermore, JAX-Fluids enables end-to-end optimization. I.e., ML models can be optimized with gradients that are backpropagated through the entire CFD algorithm, and therefore contain not only information of the underlying PDE but also of the applied numerical methods. We believe that a Python package like JAX-Fluids is crucial to facilitate research at the intersection of ML and CFD and may pave the way for an era of differentiable fluid dynamics. Program summary Program title: JAX-Fluids CPC Library link to program files: https://doi.org/10.17632/pzvkwn5s6p.1 Developer's repository link: https://github.com/tumaer/JAXFLUIDS Code Ocean capsule: https://codeocean.com/capsule/6819679 Licensing provisions: GNU GPLv3 Programming language: Python Supplementary material: Source code; Examples; Videos: Moving solid bodies, Taylor-Green vortex, Rising bubble, Shock-bubble interaction. Nature of problem: The compressible Navier-Stokes equations describe continuum-scale fluid flows. These flows often involve highly complex flow phenomena such as shocks, material interfaces, and turbulence. The intrinsic nonlinear dynamics render the numerical simulation of the these equations challenging. Machine learning provides novel avenues for describing partial differential equations. Machine learning models rely on gradient information provided by automatic differentiation and are often implemented in Python. In contrast, existing high-performance computational fluid dynamics codes are typically written in Fortran or C++ and do not offer inherent automatic differentiation capabilities. These discrepancies hinder the advance of machine-learning-supported computational fluid dynamics. Up to this day, a general-purpose fully-differentiable computational fluid dynamics solver for compressible two-phase flows is missing. Solution method: We introduce JAX-Fluids: a general-purpose three-dimensional fully-differentiable computational fluid dynamics solver for compressible two-phase flows. JAX-Fluids is a simulation framework intended for machine-learning-supported computational fluid dynamics research. Our framework is written entirely in JAX, a high-performance numerical computing library with automatic differentiation capabilities. We have used an object-oriented programming style and a modular design philosophy. This allows the straightforward exchange of numerical methods. We provide a wide variety of state-of-the-art high-order computational methods for compressible flows. The modularity of our framework additionally facilitates the integration of custom subroutines. We use the sharp-interface level-set method to model two-phase flows. The software package can easily be installed as a Python package. We have build the source code around the JAX NumPy API. This makes JAX-Fluids accessible and performant. JAX-Fluids runs on CPUs, GPUs, and TPUs. We use HDF5 in combination with XDMF for writing output quantities. The Python packages Haiku and Optax are used for implementation and training of machine learning methods. Additional comments including restrictions and unusual features: JAX-Fluids relies on open-source third-party Python libraries. These are automatically installed. In the current version, JAX-Fluids only runs on a single accelerator (CPU/GPU/TPU). Future versions will include support for parallel execution. JAX-Fluids has been tested on Linux and macOS operating systems.},
+  langid = {english},
+  keywords = {Computational fluid dynamics,Differential programming,Level-set,Machine learning,Navier-Stokes equations,Turbulence,Two-phase flows},
+  file = {/home/mayalen/Zotero/storage/PNTHT69L/Bezgin et al. - 2023 - JAX-Fluids A fully-differentiable high-order comp.pdf;/home/mayalen/Zotero/storage/EGUI6VR3/S0010465522002466.html}
+}
+
 @article{Bornstein2008libsbml,
   title = {{{LibSBML}}: {{An API}} Library for {{SBML}}},
   author = {Bornstein, Benjamin J. and Keating, Sarah M. and Jouraku, Akiya and Hucka, Michael},
@@ -54,6 +72,44 @@
   pmid = {29887378},
   keywords = {Algorithms,Computational Biology,{Databases, Factual},deep learning,Drug Discovery,Drug-Related Side Effects and Adverse Reactions,Humans,Machine leaning,Machine Learning,Microbiota,network biology,neural networks,{Neural Networks, Computer},synthetic biology,systems biology},
   file = {/home/mayalen/Zotero/storage/B2C99EF3/Camacho et al. - 2018 - Next-Generation Machine Learning for Biological Ne.pdf}
+}
+
+@article{campagneJAXCOSMOEndtoEndDifferentiable2023,
+  title = {{{JAX-COSMO}}: {{An End-to-End Differentiable}} and {{GPU Accelerated Cosmology Library}}},
+  shorttitle = {{{JAX-COSMO}}},
+  author = {Campagne, Jean-Eric and Lanusse, Fran{\c c}ois and Zuntz, Joe and Boucaud, Alexandre and Casas, Santiago and Karamanis, Minas and Kirkby, David and Lanzieri, Denise and Li, Yin and Peel, Austin},
+  year = {2023},
+  month = apr,
+  journal = {The Open Journal of Astrophysics},
+  volume = {6},
+  eprint = {2302.05163},
+  primaryclass = {astro-ph},
+  pages = {10.21105/astro.2302.05163},
+  issn = {2565-6120},
+  doi = {10.21105/astro.2302.05163},
+  urldate = {2023-06-02},
+  abstract = {We present jax-cosmo, a library for automatically differentiable cosmological theory calculations. It uses the JAX library, which has created a new coding ecosystem, especially in probabilistic programming. As well as batch acceleration, just-in-time compilation, and automatic optimization of code for different hardware modalities (CPU, GPU, TPU), JAX exposes an automatic differentiation (autodiff) mechanism. Thanks to autodiff, jax-cosmo gives access to the derivatives of cosmological likelihoods with respect to any of their parameters, and thus enables a range of powerful Bayesian inference algorithms, otherwise impractical in cosmology, such as Hamiltonian Monte Carlo and Variational Inference. In its initial release, jax-cosmo implements background evolution, linear and non-linear power spectra (using halofit or the Eisenstein and Hu transfer function), as well as angular power spectra with the Limber approximation for galaxy and weak lensing probes, all differentiable with respect to the cosmological parameters and their other inputs. We illustrate how autodiff can be a game-changer for common tasks involving Fisher matrix computations, or full posterior inference with gradient-based techniques. In particular, we show how Fisher matrices are now fast, exact, no longer require any fine tuning, and are themselves differentiable. Finally, using a Dark Energy Survey Year 1 3x2pt analysis as a benchmark, we demonstrate how jax-cosmo can be combined with Probabilistic Programming Languages to perform posterior inference with state-of-the-art algorithms including a No U-Turn Sampler, Automatic Differentiation Variational Inference,and Neural Transport HMC. We further demonstrate that Normalizing Flows using Neural Transport are a promising methodology for model validation in the early stages of analysis.},
+  archiveprefix = {arxiv},
+  keywords = {Astrophysics - Cosmology and Nongalactic Astrophysics,Astrophysics - Instrumentation and Methods for Astrophysics},
+  file = {/home/mayalen/Zotero/storage/CXRB4Y2A/Campagne et al. - 2023 - JAX-COSMO An End-to-End Differentiable and GPU Ac.pdf;/home/mayalen/Zotero/storage/WAPAFZNT/2302.html}
+}
+
+@article{carleoNetKetMachineLearning2019,
+  title = {{{NetKet}}: {{A}} Machine Learning Toolkit for Many-Body Quantum Systems},
+  shorttitle = {{{NetKet}}},
+  author = {Carleo, Giuseppe and Choo, Kenny and Hofmann, Damian and Smith, James E. T. and Westerhout, Tom and Alet, Fabien and Davis, Emily J. and Efthymiou, Stavros and Glasser, Ivan and Lin, Sheng-Hsuan and Mauri, Marta and Mazzola, Guglielmo and Mendl, Christian B. and {van Nieuwenburg}, Evert and O'Reilly, Ossian and Th{\'e}veniaut, Hugo and Torlai, Giacomo and Vicentini, Filippo and Wietek, Alexander},
+  year = {2019},
+  month = jul,
+  journal = {SoftwareX},
+  volume = {10},
+  pages = {100311},
+  issn = {2352-7110},
+  doi = {10.1016/j.softx.2019.100311},
+  urldate = {2023-06-02},
+  abstract = {We introduce NetKet, a comprehensive open source framework for the study of many-body quantum systems using machine learning techniques. The framework is built around a general and flexible implementation of neural-network quantum states, which are used as a variational ansatz for quantum wavefunctions. NetKet provides algorithms for several key tasks in quantum many-body physics and quantum technology, namely quantum state tomography, supervised learning from wavefunction data, and ground state searches for a wide range of customizable lattice models. Our aim is to provide a common platform for open research and to stimulate the collaborative development of computational methods at the interface of machine learning and many-body physics.},
+  langid = {english},
+  keywords = {Machine learning,Neural-network quantum states,Quantum state tomography,Supervised learning,Variational Monte Carlo},
+  file = {/home/mayalen/Zotero/storage/MQLD6B3J/Carleo et al. - 2019 - NetKet A machine learning toolkit for many-body q.pdf;/home/mayalen/Zotero/storage/CPVL6TZA/S2352711019300974.html}
 }
 
 @article{choiTelluriumExtensiblePythonbased2018,
@@ -146,7 +202,7 @@
   doi = {10.1109/JPROC.2008.925458},
   abstract = {Understanding of the logic and dynamics of gene-regulatory and biochemical networks is a major challenge of systems biology. To facilitate this research topic, we have developed a modeling/simulating tool called CellDesigner. CellDesigner primarily has capabilities to visualize, model, and simulate gene-regulatory and biochemical networks. Two major characteristics embedded in CellDesigner boost its usability to create/import/export models: 1) solidly defined and comprehensive graphical representation (systems biology graphical notation) of network models and 2) systems biology markup language (SBML) as a model-describing basis, which function as intertool media to import/export SBML-based models. In addition, since its initial release in 2004, we have extended various capabilities of CellDesigner. For example, we integrated other systems biology workbench enabled simulation/analysis software packages. CellDesigner also supports simulation and parameter search, supported by integration with SBML ODE Solver, enabling users to simulate through our sophisticated graphical user interface. Users can also browse and modify existing models by referring to existing databases directly through CellDesigner. Those extended functions empower CellDesigner as not only a modeling/simulating tool but also an integrated analysis suite. CellDesigner is implemented in Java and thus supports various platforms (i.e., Windows, Linux, and MacOS X). CellDesigner is freely available via our Web site.},
   keywords = {Analytical models,Biochemical simulation,Biological system modeling,Graphical user interfaces,kinetic modeling,Logic,Markup languages,SBGN,SBML,Software packages,Solid modeling,systems biology,Systems biology,Usability,Visualization},
-  file = {/home/mayalen/Zotero/storage/97CFB9Y2/Funahashi et al. - 2008 - CellDesigner 3.5 A Versatile Modeling Tool for Bi.pdf}
+  file = {/home/mayalen/Zotero/storage/97CFB9Y2/Funahashi et al. - 2008 - CellDesigner 3.5 A Versatile Modeling Tool for Bi.pdf;/home/mayalen/Zotero/storage/UIG9CE5J/4567412.html}
 }
 
 @article{glontBioModelsExpandingHorizons2018,
@@ -164,6 +220,24 @@
   urldate = {2023-05-23},
   abstract = {BioModels serves as a central repository of mathematical models representing biological processes. It offers a platform to make mathematical models easily shareable across the systems modelling community, thereby supporting model reuse. To facilitate hosting a broader range of model formats derived from diverse modelling approaches and tools, a new infrastructure for BioModels has been developed that is available at http://www.ebi.ac.uk/biomodels. This new system allows submitting and sharing of a wide range of models with improved support for formats other than SBML. It also offers a version-control backed environment in which authors and curators can work collaboratively to curate models. This article summarises the features available in the current system and discusses the potential benefit they offer to the users over the previous system. In summary, the new portal broadens the scope of models accepted in BioModels and supports collaborative model curation which is crucial for model reproducibility and sharing.},
   file = {/home/mayalen/Zotero/storage/26BJLJ2B/Glont et al. - 2018 - BioModels expanding horizons to include more mode.pdf}
+}
+
+@article{hafnerFastCheapTurbulent2021,
+  title = {Fast, {{Cheap}}, and {{Turbulent}}\textemdash{{Global Ocean Modeling With GPU Acceleration}} in {{Python}}},
+  author = {H{\"a}fner, Dion and Nuterman, Roman and Jochum, Markus},
+  year = {2021},
+  journal = {Journal of Advances in Modeling Earth Systems},
+  volume = {13},
+  number = {12},
+  pages = {e2021MS002717},
+  issn = {1942-2466},
+  doi = {10.1029/2021MS002717},
+  urldate = {2023-06-02},
+  abstract = {Even to this date, most earth system models are coded in Fortran, especially those used at the largest compute scales. Our ocean model Veros takes a different approach: it is implemented using the high-level programming language Python. Besides numerous usability advantages, this allows us to leverage modern high-performance frameworks that emerged in tandem with the machine learning boom. By interfacing with the JAX library, Veros is able to run high-performance simulations on both central processing units (CPU) and graphical processing unit (GPU) through the same code base, with full support for distributed architectures. On CPU, Veros is able to match the performance of a Fortran reference, both on a single process and on hundreds of CPU cores. On GPU, we find that each device can replace dozens to hundreds of CPU cores, at a fraction of the energy consumption. We demonstrate the viability of using GPUs for earth system modeling by integrating a global 0.1\textdegree{} eddy-resolving setup in single precision, where we achieve 1.3 model years per day on a single compute instance with 16 GPUs, comparable to over 2,000 Fortran processes.},
+  copyright = {\textcopyright{} 2021 The Authors. Journal of Advances in Modeling Earth Systems published by Wiley Periodicals LLC on behalf of American Geophysical Union.},
+  langid = {english},
+  keywords = {benchmarks,GPU,high-performance,ocean modeling,Python},
+  file = {/home/mayalen/Zotero/storage/TCDAH6VG/Häfner et al. - 2021 - Fast, Cheap, and Turbulent—Global Ocean Modeling W.pdf;/home/mayalen/Zotero/storage/XW63R7AA/2021MS002717.html}
 }
 
 @article{hoopsCOPASICOmplexPAthway2006,
@@ -203,6 +277,23 @@
   title = {{{JAX}}: Composable Transformations of {{Python}}+{{NumPy}} Programs},
   author = {Bradbury, James and Frostig, Roy and Hawkins, Peter and Johnson, Matthew James and Leary, Chris and Maclaurin, Dougal and Necula, George and Paszke, Adam and VanderPlas, Jake and {Wanderman-Milne}, Skye and Zhang, Qiao},
   year = {2018}
+}
+
+@article{kholodenkoNegativeFeedbackUltrasensitivity2000,
+  title = {Negative Feedback and Ultrasensitivity Can Bring about Oscillations in the Mitogen-Activated Protein Kinase Cascades},
+  author = {Kholodenko, B. N.},
+  year = {2000},
+  month = mar,
+  journal = {European Journal of Biochemistry},
+  volume = {267},
+  number = {6},
+  pages = {1583--1588},
+  issn = {0014-2956},
+  doi = {10.1046/j.1432-1327.2000.01197.x},
+  abstract = {Functional organization of signal transduction into protein phosphorylation cascades, such as the mitogen-activated protein kinase (MAPK) cascades, greatly enhances the sensitivity of cellular targets to external stimuli. The sensitivity increases multiplicatively with the number of cascade levels, so that a tiny change in a stimulus results in a large change in the response, the phenomenon referred to as ultrasensitivity. In a variety of cell types, the MAPK cascades are imbedded in long feedback loops, positive or negative, depending on whether the terminal kinase stimulates or inhibits the activation of the initial level. Here we demonstrate that a negative feedback loop combined with intrinsic ultrasensitivity of the MAPK cascade can bring about sustained oscillations in MAPK phosphorylation. Based on recent kinetic data on the MAPK cascades, we predict that the period of oscillations can range from minutes to hours. The phosphorylation level can vary between the base level and almost 100\% of the total protein. The oscillations of the phosphorylation cascades and slow protein diffusion in the cytoplasm can lead to intracellular waves of phospho-proteins.},
+  langid = {english},
+  pmid = {10712587},
+  keywords = {Animals,Feedback,MAP Kinase Signaling System,{Models, Biological},Periodicity,Phosphorylation,{Protein Processing, Post-Translational}}
 }
 
 @article{kidger2021equinox,
@@ -263,6 +354,42 @@
   file = {/home/mayalen/Zotero/storage/Y2XS8UUK/Malik-Sheriff et al. - 2020 - BioModels—15 years of sharing computational models.pdf}
 }
 
+@article{mannPVEndtoendDifferentiable2022,
+  title = {{$\partial$}{{PV}}: {{An}} End-to-End Differentiable Solar-Cell Simulator},
+  shorttitle = {{$\partial$}{{PV}}},
+  author = {Mann, Sean and Fadel, Eric and Schoenholz, Samuel S. and Cubuk, Ekin D. and Johnson, Steven G. and Romano, Giuseppe},
+  year = {2022},
+  month = mar,
+  journal = {Computer Physics Communications},
+  volume = {272},
+  pages = {108232},
+  issn = {0010-4655},
+  doi = {10.1016/j.cpc.2021.108232},
+  urldate = {2023-06-02},
+  abstract = {We introduce {$\partial$}PV, an end-to-end differentiable photovoltaic (PV) cell simulator based on the drift-diffusion model and Beer\textendash Lambert law for optical absorption. {$\partial$}PV is programmed in Python using JAX, an automatic differentiation (AD) library for scientific computing. Using AD coupled with the implicit function theorem, {$\partial$}PV computes the power conversion efficiency (PCE) of an input PV design as well as the derivative of the PCE with respect to any input parameters, all within comparable time of solving the forward problem. We show an example of perovskite solar-cell optimization and multi-parameter discovery, and compare results with random search and finite differences. The simulator can be integrated with optimization algorithms and neural networks, opening up possibilities for data-efficient optimization and parameter discovery. Program summary Program Title: {$\partial$}PV CPC Library link to program files: https://doi.org/10.17632/7w7r8mtx3d.1 Developer's repository link: https://github.com/romanodev/deltapv.git Code Ocean capsule: https://codeocean.com/capsule/0851990 Licensing provisions: MIT Programming language: Python Nature of problem: Photovoltaic cell optimization has been traditionally difficult due to the lack of gradients from numerical drift-diffusion solvers. This results in the need to treat the problem as a case of black-box optimization, which incurs high computational costs and low data efficiency. Solution method: An end-to-end differentiable photovoltaic simulator via the drift-diffusion model was developed using JAX, a growing scientific computation and automatic-differentiation library. To enhance computational speed, the implicit function theorem was used to bypass the need for directly differentiating through iterative solvers.},
+  langid = {english},
+  keywords = {Drift-diffusion,Energy,Photovoltaic},
+  file = {/home/mayalen/Zotero/storage/23IDK227/Mann et al. - 2022 - ∂PV An end-to-end differentiable solar-cell simul.pdf;/home/mayalen/Zotero/storage/U7FSMQE8/S0010465521003441.html}
+}
+
+@misc{maReimplementingUnirepJAX2020,
+  title = {Reimplementing {{Unirep}} in {{JAX}}},
+  author = {Ma, Eric J. and Kummer, Arkadij},
+  year = {2020},
+  month = may,
+  primaryclass = {Confirmatory Results},
+  pages = {2020.05.11.088344},
+  publisher = {{bioRxiv}},
+  doi = {10.1101/2020.05.11.088344},
+  urldate = {2023-06-02},
+  abstract = {UniRep is a recurrent neural network model trained on 24 million protein sequences, and has shown utility in protein engineering. The original model, however, has rough spots in its implementation, and a convenient API is not available for certain tasks. To rectify this, we reimplemented the model in JAX/NumPy, achieving near-100X speedups in forward pass performance, and implemented a convenient API for specialized tasks. In this article, we wish to document our model reimplementation process with the goal of educating others interested in learning how to dissect a deep learning model, and engineer it for robustness and ease of use.},
+  archiveprefix = {bioRxiv},
+  chapter = {Confirmatory Results},
+  copyright = {\textcopyright{} 2020, Posted by Cold Spring Harbor Laboratory. This pre-print is available under a Creative Commons License (Attribution-NonCommercial-NoDerivs 4.0 International), CC BY-NC-ND 4.0, as described at http://creativecommons.org/licenses/by-nc-nd/4.0/},
+  langid = {english},
+  file = {/home/mayalen/Zotero/storage/YXL866GI/Ma and Kummer - 2020 - Reimplementing Unirep in JAX.pdf}
+}
+
 @article{muzioBiologicalNetworkAnalysis2021,
   title = {Biological Network Analysis with Deep Learning},
   author = {Muzio, Giulia and O'Bray, Leslie and Borgwardt, Karsten},
@@ -314,6 +441,23 @@
   file = {/home/mayalen/Zotero/storage/77LYRNBU/Ruggiero and Versypt - 2019 - SBMLtoODEpy A software program for converting SBM.pdf}
 }
 
+@misc{schoenholzJAXFrameworkDifferentiable2020,
+  title = {{{JAX}}, {{M}}.{{D}}.: {{A Framework}} for {{Differentiable Physics}}},
+  shorttitle = {{{JAX}}, {{M}}.{{D}}.},
+  author = {Schoenholz, Samuel S. and Cubuk, Ekin D.},
+  year = {2020},
+  month = dec,
+  number = {arXiv:1912.04232},
+  eprint = {1912.04232},
+  primaryclass = {cond-mat, physics:physics, stat},
+  publisher = {{arXiv}},
+  urldate = {2023-06-02},
+  abstract = {We introduce JAX MD, a software package for performing differentiable physics simulations with a focus on molecular dynamics. JAX MD includes a number of physics simulation environments, as well as interaction potentials and neural networks that can be integrated into these environments without writing any additional code. Since the simulations themselves are differentiable functions, entire trajectories can be differentiated to perform meta-optimization. These features are built on primitive operations, such as spatial partitioning, that allow simulations to scale to hundreds-of-thousands of particles on a single GPU. These primitives are flexible enough that they can be used to scale up workloads outside of molecular dynamics. We present several examples that highlight the features of JAX MD including: integration of graph neural networks into traditional simulations, meta-optimization through minimization of particle packings, and a multi-agent flocking simulation. JAX MD is available at www.github.com/google/jax-md.},
+  archiveprefix = {arxiv},
+  keywords = {Condensed Matter - Materials Science,Condensed Matter - Soft Condensed Matter,Physics - Computational Physics,Statistics - Machine Learning},
+  file = {/home/mayalen/Zotero/storage/ECZAU53K/Schoenholz and Cubuk - 2020 - JAX, M.D. A Framework for Differentiable Physics.pdf;/home/mayalen/Zotero/storage/SIH4FL83/1912.html}
+}
+
 @article{slepchenkoQuantitativeCellBiology2003a,
   title = {Quantitative Cell Biology with the {{Virtual Cell}}},
   author = {Slepchenko, Boris M. and Schaff, James C. and Macara, Ian and Loew, Leslie M.},
@@ -346,6 +490,44 @@
   urldate = {2023-05-23},
   abstract = {Motivation: This article presents libRoadRunner, an extensible, high-performance, cross-platform, open-source software library for the simulation and analysis of models expressed using Systems Biology Markup Language (SBML). SBML is the most widely used standard for representing dynamic networks, especially biochemical networks. libRoadRunner is fast enough to support large-scale problems such as tissue models, studies that require large numbers of repeated runs and interactive simulations.Results: libRoadRunner is a self-contained library, able to run both as a component inside other tools via its C++ and C bindings, and interactively through its Python interface. Its Python Application Programming Interface (API) is similar to the APIs of MATLAB (www.mathworks.com) and SciPy (http://www.scipy.org/), making it fast and easy to learn. libRoadRunner uses a custom Just-In-Time (JIT) compiler built on the widely used LLVM JIT compiler framework. It compiles SBML-specified models directly into native machine code for a variety of processors, making it appropriate for solving extremely large models or repeated runs. libRoadRunner is flexible, supporting the bulk of the SBML specification (except for delay and non-linear algebraic equations) including several SBML extensions (composition and distributions). It offers multiple deterministic and stochastic integrators, as well as tools for steady-state analysis, stability analysis and structural analysis of the stoichiometric matrix.Availability and implementation: libRoadRunner binary distributions are available for Mac OS X, Linux and Windows. The library is licensed under Apache License Version 2.0. libRoadRunner is also available for ARM-based computers such as the Raspberry Pi. http://www.libroadrunner.org provides online documentation, full build instructions, binaries and a git source repository.Contacts: ~hsauro@u.washington.edu or somogyie@indiana.eduSupplementary information: ~Supplementary data are available at Bioinformatics online.},
   file = {/home/mayalen/Zotero/storage/HHNFMDAD/Somogyi et al. - 2015 - libRoadRunner a high performance SBML simulation .pdf;/home/mayalen/Zotero/storage/M227REMM/195758.html}
+}
+
+@article{stadterBenchmarkingNumericalIntegration2021a,
+  title = {Benchmarking of Numerical Integration Methods for {{ODE}} Models of Biological Systems},
+  author = {St{\"a}dter, Philipp and Sch{\"a}lte, Yannik and Schmiester, Leonard and Hasenauer, Jan and Stapor, Paul L.},
+  year = {2021},
+  month = jan,
+  journal = {Scientific Reports},
+  volume = {11},
+  number = {1},
+  pages = {2696},
+  publisher = {{Nature Publishing Group}},
+  issn = {2045-2322},
+  doi = {10.1038/s41598-021-82196-2},
+  urldate = {2023-06-04},
+  abstract = {Ordinary differential equation (ODE) models are a key tool to understand complex mechanisms in systems biology. These models are studied using various approaches, including stability and bifurcation analysis, but most frequently by numerical simulations. The number of required simulations is often large, e.g., when unknown parameters need to be inferred. This renders efficient and reliable numerical integration methods essential. However, these methods depend on various hyperparameters, which strongly impact the ODE solution. Despite this, and although hundreds of published ODE models are freely available in public databases, a thorough study that quantifies the impact of hyperparameters on the ODE solver in terms of accuracy and computation time is still missing. In this manuscript, we investigate which choices of algorithms and hyperparameters are generally favorable when dealing with ODE models arising from biological processes. To ensure a representative evaluation, we considered 142 published models. Our study provides evidence that most ODEs in computational biology are stiff, and we give guidelines for the choice of algorithms and hyperparameters. We anticipate that our results will help researchers in systems biology to choose appropriate numerical methods when dealing with ODE models.},
+  copyright = {2021 The Author(s)},
+  langid = {english},
+  keywords = {Biochemical reaction networks,Computational models,Computational platforms and environments,Computer modelling,Computer science,Differential equations,Dynamical systems,Nonlinear dynamics,Numerical simulations,Software},
+  file = {/home/mayalen/Zotero/storage/AL8Z2U4X/Städter et al. - 2021 - Benchmarking of numerical integration methods for .pdf}
+}
+
+@article{stanziolaJWaveOpensourceDifferentiable2023,
+  title = {J-{{Wave}}: {{An}} Open-Source Differentiable Wave Simulator},
+  shorttitle = {J-{{Wave}}},
+  author = {Stanziola, Antonio and Arridge, Simon R. and Cox, Ben T. and Treeby, Bradley E.},
+  year = {2023},
+  month = may,
+  journal = {SoftwareX},
+  volume = {22},
+  pages = {101338},
+  issn = {2352-7110},
+  doi = {10.1016/j.softx.2023.101338},
+  urldate = {2023-06-02},
+  abstract = {We present an open-source differentiable acoustic simulator, j-Wave, which can solve time-varying and time-harmonic acoustic problems. It supports automatic differentiation, which is a program transformation technique that has many applications, especially in machine learning and scientific computing. j-Wave is composed of modular components that can be easily customized and reused. At the same time, it is compatible with some of the most popular machine learning libraries, such as JAX and TensorFlow. The accuracy of the simulation results for known configurations is evaluated against the widely used k-Wave toolbox and a cohort of acoustic simulation software. j-Wave is available from https://github.com/ucl-bug/jwave.},
+  langid = {english},
+  keywords = {Acoustics,Differentiable simulator,GPU acceleration,Helmholtz equation,JAX,Machine learning,Wave equation},
+  file = {/home/mayalen/Zotero/storage/2W7YAKLY/Stanziola et al. - 2023 - j-Wave An open-source differentiable wave simulat.pdf;/home/mayalen/Zotero/storage/FFREF2HQ/S2352711023000341.html}
 }
 
 @misc{SystemsBiologyMarkup,
