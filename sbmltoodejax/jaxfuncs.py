@@ -2,10 +2,6 @@ import jax.numpy as jnp
 from jax import jit
 
 @jit
-def factorial(n):
-    raise NotImplementedError
-
-@jit
 def sec(x):
     """
     Secant function :math:`sec(x) = \\frac{1}{\\cos(x)}`
