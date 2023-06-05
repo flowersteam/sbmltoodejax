@@ -3,11 +3,12 @@ from sbmltoodejax.biomodels_api import get_content_for_model
 from sbmltoodejax.modulegeneration import GenerateModel
 from sbmltoodejax.parse import ParseSBMLFile
 
-def generate_biomodel(model_idx, deltaT=0.1, atol=1e-6, rtol=1e-12, mxstep=5000000):
+def generate_biomodel(model_idx, model_fp="jax_model.py", deltaT=0.1, atol=1e-6, rtol=1e-12, mxstep=5000000):
     """Calls the `sbmltoodejax.modulegeneration.GenerateModel` for a SBML model hosted on the BioModel website and indexed by the provided `model_idx`.
 
     Args:
         model_idx: either an integer, or a valid model id
+        model_fp (str): filepath for the generated file
         deltaT (float, optional): parameter passed to `sbmltoodejax.modulegeneration.GenerateModel`. Default to 0.1.
         atol (float, optional): parameter passed to `sbmltoodejax.modulegeneration.GenerateModel`. Default to 1e-6.
         rtol (float, optional): parameter passed to `sbmltoodejax.modulegeneration.GenerateModel`. Default to 1e-12.
@@ -16,20 +17,20 @@ def generate_biomodel(model_idx, deltaT=0.1, atol=1e-6, rtol=1e-12, mxstep=50000
     Returns:
         model_fp (str): the filepath containing the generated python file
     """
-    model_fp = "jax_model.py"
     model_xml_body = get_content_for_model(model_idx)
     model_data = ParseSBMLFile(model_xml_body)
-    GenerateModel(model_data, model_fp, deltaT=deltaT, atol=atol, rtol=rtol)
+    GenerateModel(model_data, model_fp, deltaT=deltaT, atol=atol, rtol=rtol, mxstep=mxstep)
 
     return model_fp
 
 
-def load_biomodel(model_idx, deltaT=0.1, atol=1e-6, rtol=1e-12, mxstep=5000000):
+def load_biomodel(model_idx, model_fp="jax_model.py", deltaT=0.1, atol=1e-6, rtol=1e-12, mxstep=5000000):
     """Calls the generate_biomodel function for a SBML model hosted on the BioModel website and indexed by the provided `model_idx`,
     then loads and returns the generated `model` module and `y0`, `w0`, `c` variables.
 
     Args:
         model_idx: either an integer, or a valid model id
+        model_fp (str): filepath for the generated file
         deltaT (float, optional): parameter passed to `generate_biomodel`. Default to 0.1.
         atol (float, optional): parameter passed to `generate_biomodel`. Default to 1e-6.
         rtol (float, optional): parameter passed to `generate_biomodel`. Default to 1e-12.
@@ -43,7 +44,7 @@ def load_biomodel(model_idx, deltaT=0.1, atol=1e-6, rtol=1e-12, mxstep=5000000):
         - w0 (jax.numpy.Array): default initial state of w variable (as provided in the SBML file)
         - c (jax.numpy.Array): default values of constant kinematic parameters c (as provided in the SBML file)
     """
-    model_fp = generate_biomodel(model_idx, deltaT=deltaT, atol=atol, rtol=rtol, mxstep=mxstep)
+    model_fp = generate_biomodel(model_idx, model_fp=model_fp, deltaT=deltaT, atol=atol, rtol=rtol, mxstep=mxstep)
     spec = importlib.util.spec_from_file_location("JaxModelSpec", model_fp)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
