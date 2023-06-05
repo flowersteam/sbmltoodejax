@@ -1,184 +1,77 @@
-import importlib
-import jax
-import jax.numpy as jnp
-import numpy as np
-from sbmltoodepy.modulegeneration import GenerateModel
-from sbmltoodejax.modulegeneration import GenerateModel as GenerateJaxModel
-from sbmltoodejax.parse import ParseSBMLFile
-from tempfile import NamedTemporaryFile
-import time
-from urllib.request import urlopen
-
-
-def get_sbmltoodepy_model_variables(model, y_indexes, w_indexes, c_indexes):
-    y = np.zeros(len(y_indexes))
-    w = np.zeros(len(w_indexes))
-    c = np.zeros(len(c_indexes))
-
-    for k, v in model.s.items():
-        if k in y_indexes:
-            y[y_indexes[k]] = v.amount
-        elif k in w_indexes:
-            w[w_indexes[k]] = v.amount
-        elif k in c_indexes:
-            c[c_indexes[k]] = v.amount
-
-    for k, v in model.p.items():
-        if k in y_indexes:
-            y[y_indexes[k]] = v.value
-        elif k in w_indexes:
-            w[w_indexes[k]] = v.value
-        elif k in c_indexes:
-            c[c_indexes[k]] = v.value
-
-    for k, v in model.c.items():
-        if k in y_indexes:
-            y[y_indexes[k]] = v.size
-        elif k in w_indexes:
-            w[w_indexes[k]] = v.size
-        elif k in c_indexes:
-            c[c_indexes[k]] = v.size
-
-    for k, v in model.r.items():
-        for sub_k, sub_v in v.p.items():
-            if f"{k}_{sub_k}" in w_indexes:
-                w[w_indexes[f"{k}_{sub_k}"]] = sub_v.value
-            elif f"{k}_{sub_k}" in c_indexes:
-                c[c_indexes[f"{k}_{sub_k}"]] = sub_v.value
-
-    return y, w, c
+from sbmltoodejax.utils import load_biomodel
 
 def test_modulegeneration():
-    jax.config.update("jax_platform_name", "cpu")
+    """
+    Check the initial assignments of models states and (constant) parameter values with respect to onrs specified in PDF files on BioModels website
+    """
 
-    for model_idx in [3, 4, 6, 8, 10, 12, 14, 21]:
+    #BIOMD 3
+    model, y0, w0, c = load_biomodel(3)
+    y_indexes = model.modelstepfunc.y_indexes
+    c_indexes = model.modelstepfunc.c_indexes
+    assert y0[y_indexes['C']] == 0.01
+    assert y0[y_indexes['M']] == 0.01
+    assert y0[y_indexes['X']] == 0.01
+    assert c[c_indexes['VM1']] == 3.0
+    assert c[c_indexes['VM3']] == 1.
+    assert c[c_indexes['Kc']] == 0.5
 
-        model_url = f'https://www.ebi.ac.uk/biomodels/model/download/BIOMD{model_idx:010d}.2?filename=BIOMD{model_idx:010d}_url.xml'
-        with urlopen(model_url) as response:
-            model_data = ParseSBMLFile(response.read().decode("utf-8"))
-        model_py_file = NamedTemporaryFile(suffix=".py")
-        model_jax_file = NamedTemporaryFile(suffix=".py")
-        # from collections import namedtuple
-        # tmpfile = namedtuple("tmpfile", "name")
-        # model_py_file = tmpfile("py_model.py")
-        # model_jax_file = tmpfile("jax_model.py")
-        model_name = "Model"
+    # BIOMD 4
+    model, y0, w0, c = load_biomodel(4)
+    y_indexes = model.modelstepfunc.y_indexes
+    c_indexes = model.modelstepfunc.c_indexes
 
-        deltaT = 0.01
-        atol = 1e-6
-        rtol = 1e-12
-        mxstep = 5000
-        n_secs = 200
-        n_steps = int(n_secs/deltaT)
-
-        # Load Jax-based Model
-        model_rollout_name = 'ModelRollout'
-        GenerateJaxModel(model_data, model_jax_file.name,
-                         ModelRolloutName=model_rollout_name)
-
-        module_name = "jaxmodelfuncs"
-        spec = importlib.util.spec_from_file_location(
-            module_name, model_jax_file.name
-        )
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-        modelrolloutfunc_cls = getattr(module, model_rollout_name)
-        model_rollout = modelrolloutfunc_cls(deltaT=deltaT, atol=atol, rtol=rtol, mxstep=mxstep)
-
-        c = getattr(module, "c")
-        c_indexes = getattr(module, "c_indexes")
-        y0 = getattr(module, "y0")
-        y_indexes = getattr(module, "y_indexes")
-        w0 = getattr(module, "w0")
-        w_indexes = getattr(module, "w_indexes")
-        t0 = getattr(module, "t0")
-
-        # Simulate for n time steps
-        jaxcstart = time.time()
-        ys, ws, times = model_rollout(n_steps, y0, w0, c, t0)
-        jaxcend = time.time()
+    assert y0[y_indexes['C']] == 0.01
+    assert y0[y_indexes['MI']] == 0.99
+    assert y0[y_indexes['M']] == 0.01
+    assert y0[y_indexes['XI']] == 0.99
+    assert y0[y_indexes['X']] == 0.01
+    assert c[c_indexes['VM1']] == 3.0
+    assert c[c_indexes['VM3']] == 1.
+    assert c[c_indexes['Kc']] == 0.5
 
 
-        # Load original Numpy/Scipy-based Model
-        GenerateModel(model_data, model_py_file.name, objectName=model_name)
-        module_name = "modelclass"
-        spec = importlib.util.spec_from_file_location(
-            module_name, model_py_file.name
-        )
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-        model_cls = getattr(module, model_name)
-        model = model_cls()
-        py_y0, py_w0, py_c0 = get_sbmltoodepy_model_variables(model, y_indexes, w_indexes, c_indexes)
+    # BIOMD 6
+    model, y0, w0, c = load_biomodel(6)
+    y_indexes = model.modelstepfunc.y_indexes
+    c_indexes = model.modelstepfunc.c_indexes
 
-        # Simulate for n time steps
-        cstart = time.time()
-        py_ys = np.zeros((len(y_indexes), n_steps))
-        py_ys[:, 0] = py_y0
-        py_ws = np.zeros((len(w_indexes), n_steps))
-        py_ws[:, 0] = py_w0
-        py_times = np.zeros(n_steps)
-        py_times[0] = 0.0
-        for i in range(1, n_steps):
-            model.RunSimulation(
-                deltaT, absoluteTolerance=atol, relativeTolerance=rtol
-            )
-            py_times[i] = model.time
-            py_y, py_w, py_c = get_sbmltoodepy_model_variables(model, y_indexes, w_indexes, c_indexes)
-            py_ys[..., i] = py_y
-            py_ws[..., i] = py_w
-        cend = time.time()
+    y0[y_indexes['EmptySet']] == 1.0
+    assert y0[y_indexes['z']] == 0.0
+    assert y0[y_indexes['u']] == 0.0
+    assert y0[y_indexes['v']] == 0.0
+    assert c[c_indexes['kappa']] == 0.015
+    assert c[c_indexes['k6']] == 1.0
+    assert c[c_indexes['k4']] == 180.0
+    assert c[c_indexes['k4prime']] == 0.018
 
 
-        # check that initial values are the same between pymodel and jaxmodel
-        assert jnp.isclose(py_y0, y0).all()
-        assert jnp.isclose(py_w0, w0).all()
-        assert jnp.isclose(py_c0, c).all()
+    # BIOMD 8
+    model, y0, w0, c = load_biomodel(8)
+    y_indexes = model.modelstepfunc.y_indexes
+    c_indexes = model.modelstepfunc.c_indexes
 
-        # compare plot of intergrated values between pymodel and jaxmodel
-        difference_ys = jnp.abs(py_ys - ys)
-        difference_ws = jnp.abs(py_ws - ws)
+    assert y0[y_indexes['C']] == 0.0
+    assert y0[y_indexes['M']] == 0.0
+    assert y0[y_indexes['X']] == 0.0
+    assert y0[y_indexes['Y']] == 1.0
+    assert y0[y_indexes['Z']] == 1.0
+    assert c[c_indexes['K6']] == 0.3
+    assert c[c_indexes['V1p']] == 0.75
+    assert c[c_indexes['V3p']] == 0.3
 
-        show_plot = True
-        if show_plot:
-            import matplotlib.pyplot as plt
-            fig = plt.figure(constrained_layout=True, figsize=(20, 10))
-            subfigs = fig.subfigures(nrows=2, ncols=1)
+    # BIOMD 10
+    model, y0, w0, c = load_biomodel(10)
+    y_indexes = model.modelstepfunc.y_indexes
+    c_indexes = model.modelstepfunc.c_indexes
 
-            subfigs[0].suptitle(f'Differences in y(t=-1): {difference_ys[:,-1].mean():.3f} (mean), {difference_ys[:,-1].max():.3f} (max)')
-            axarr = subfigs[0].subplots(nrows=1, ncols=3)
-            for k, k_idx in y_indexes.items():
-                axarr[0].plot(times, py_ys[k_idx], label=k)
-                axarr[0].set_title(f'sbmltoodepy: {cend-cstart:.2f} secs')
-                axarr[1].plot(times, ys[k_idx], label=k)
-                axarr[1].set_title(f'sbmltoodejax: {jaxcend - jaxcstart:.2f} secs')
-            axarr[0].legend()
-            axarr[1].legend()
-            im = axarr[2].imshow(difference_ys, cmap="hot", vmin=0, interpolation='nearest', aspect='auto')
-            plt.colorbar(im)
-            axarr[2].set_yticks(ticks=range(len(y_indexes)), labels=list(y_indexes.keys()))
-
-            if len(w_indexes) > 0:
-                subfigs[1].suptitle(f'Differences in w(t=-1): {difference_ws[:, -1].mean():.3f} (mean), {difference_ws[:, -1].max():.3f} (max)')
-                axarr = subfigs[1].subplots(nrows=1, ncols=3)
-                for k, k_idx in w_indexes.items():
-                    axarr[0].plot(times, py_ws[k_idx], label=k)
-                    axarr[0].set_title(f'sbmltoodepy: {cend-cstart:.2f} secs')
-                    axarr[1].plot(times, ws[k_idx], label=k)
-                    axarr[1].set_title(f'sbmltoodejax: {jaxcend - jaxcstart:.2f} secs')
-                axarr[0].legend()
-                axarr[1].legend()
-                im = axarr[2].imshow(difference_ws, cmap="hot", vmin=0, interpolation='nearest', aspect='auto')
-                plt.colorbar(im)
-                axarr[2].set_yticks(ticks=range(len(w_indexes)), labels=list(w_indexes.keys()))
-
-            plt.suptitle(f"Model #{model_idx}")
-            plt.legend()
-            plt.show()
-
-        # epsilon_ys = jnp.maximum(0.1 * py_ys.max(1), 0.1)
-        # epsilon_ws = jnp.maximum(0.1 * py_ws.max(1), 0.1)
-        # assert (difference_ys.max(1) < epsilon_ys).all(), print(model_idx, difference_ys.max(1), epsilon_ys)
-        # assert (difference_ws.max(1) < epsilon_ws).all(), print(model_idx, difference_ws.max(1), epsilon_ws)
+    assert y0[y_indexes['MKKK']] == 90.0
+    assert y0[y_indexes['MKKK_P']] == 10.0
+    assert y0[y_indexes['MKK']] == 280.0
+    assert y0[y_indexes['MKK_P']] == 10.0
+    assert y0[y_indexes['MKK_PP']] == 10.0
+    assert y0[y_indexes['MAPK']] == 280.0
+    assert y0[y_indexes['MAPK_P']] == 10.0
+    assert y0[y_indexes['MAPK_PP']] == 10.0
 
 
