@@ -100,8 +100,7 @@ projects. As shown in \autoref{fig:fig1}, with only a few lines of python code o
 files.
 
 ![Example code (left) and output snapshot (right) reproducing [original simulation results](https://www.ebi.ac.uk/biomodels/BIOMD0000000010#Curation)
-of Kholodenko 2000's paper [@kholodenkoNegativeFeedbackUltrasensitivity2000] hosted on BioModels website. \label{fig:fig1}](fig1.png)
-{width=80%}
+of Kholodenko 2000's paper [@kholodenkoNegativeFeedbackUltrasensitivity2000] hosted on BioModels website. \label{fig:fig1}](fig1.png){width=80%}
 
 ***JAX-friendly*** The generated python models are tailored to take advantage of JAX main features.
 Model rollouts use `jit` transformation and `scan` primitive to reduce compilation and execution time of
