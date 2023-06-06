@@ -40,7 +40,7 @@ This effort has resulted in the development of large collections of publicly-ava
 exchanged on online platforms (such as the BioModels
 Database [@glontBioModelsExpandingHorizons2018; @malik-sheriffBioModels15Years2020a]) using the Systems Biology Markup
 Language (SBML), a standard format for representing mathematical models of biological
-systems [@huckaSystemsBiologyMarkup2003;@SystemsBiologyMarkup].
+systems [@huckaSystemsBiologyMarkup2003;@huckaSystemsBiologyMarkup2019].
 
 SBMLtoODEjax is a lightweight library that allows to automatically parse and convert SBML models into python models
 written end-to-end in JAX, a high-performance numerical computing library with automatic differentiation
@@ -77,7 +77,7 @@ as COPASI [@hoopsCOPASICOmplexPAthway2006;@Bergmann_copasi_basico_Release_0_48_2
 Cell [@loewVirtualCellSoftware2001;@slepchenkoQuantitativeCellBiology2003a] and Cell
 Designer [funahashiCellDesignerProcessDiagram2003;@funahashiCellDesignerVersatileModeling2008]) or provide scripting
 interfaces in Python or Matlab but rely on backend engines that do not support hardware acceleration or automatic
-differentiation (like Tellurium [@choiTelluriumExtensiblePythonbased2018;@TelluriumNotebooksEnvironment] and
+differentiation (like Tellurium [@choiTelluriumExtensiblePythonbased2018;@medleyTelluriumNotebooksEnvironment2018] and
 SBMLtoODEpy [@ruggieroSBMLtoODEpySoftwareProgram2019] python packages, or the Systems Biology Format Converter (SBFC)
 which generates MATLAB and OCTAVE code [@rodriguezSystemsBiologyFormat2016]).
 
@@ -147,7 +147,7 @@ SBML model rollout,
 applying it in practice can be hard and other optimization methods, such as evolutionary strategies, might be more
 adapted.
 
-***Documentation*** Please refer to https://developmentalsystems.org/sbmltoodejax/ for additional details on
+***Documentation*** Please refer to [https://developmentalsystems.org/sbmltoodejax/](https://developmentalsystems.org/sbmltoodejax/) for additional details on
 SBMLtoODEjax’s
 main [design principles](https://developmentalsystems.org/sbmltoodejax/design_principles.html), [advantages and limitations](https://developmentalsystems.org/sbmltoodejax/why_use.html),
 and API docs as well as for various hands-on tutorials for
