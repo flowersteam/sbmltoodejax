@@ -1,36 +1,33 @@
 ---
 title: "SBMLtoODEjax: efficient simulation and optimization of ODE SBML models in JAX"
-tags:
-  - SBML
-  - Biological Network Analysis
-  - Python
-  - JAX
-  - high performance computing
-  - parallel computing
-authors:
-  - name: Mayalen Etcheverry^[corresponding author]
-    affiliation: "1, 2"
-  - name: Michael Levin
-    affiliation: "3"
-  - name: Clément Moulin-Frier
-    affiliation: "1"
-  - name: Pierre-Yves Oudeyer
-    affiliation: "1"
-affiliations:
-  - name: INRIA, University of Bordeaux, Talence 33405, France
-    index: 1
-  - name: Poietis, Pessac 33600, France
-    index: 2
-  - name: Allen Discovery Center, Tufts University, Medford, MA, USA
-    index: 3
-
-date: 01 June 2023
 bibliography: paper.bib
+csl: ieee.csl
+institute:
+  - 1: INRIA, University of Bordeaux, Talence 33405, France
+  - 2: Poietis, Pessac 33600, France
+  - 3: Allen Discovery Center, Tufts University, Medford, MA, USA
+author:
+  - Mayalen Etcheverry:
+      institute: [1, 2]
+      correspondence: "yes"
+      email: mayalen.etcheverry@inria.fr
+  - Michael Levin:
+      institute: [3]
+  - Clément Moulin-Frier:
+      institute: [1]
+  - Pierre-Yves Oudeyer:
+      institute: [1]
+geometry: margin=3.5cm
+colorlinks: true
+boxlinks: true
+linkcolor: OliveGreen
+urlcolor: OliveGreen
+citecolor: OliveGreen
 ---
 
-# SBMLtoODEjax: efficient simulation and optimization of ODE SBML models in JAX
+**Keywords:** SBML, Biological Network Analysis, Python, JAX, high performance computing, parallel computing
 
-## Summary
+# Summary
 
 Developing methods to explore, predict and control the dynamic behavior of biological systems, from protein pathways to
 complex cellular processes, is an essential frontier of research for bioengineering and
@@ -55,7 +52,9 @@ Numpy/Scipy [@ruggieroSBMLtoODEpySoftwareProgram2019]. The chosen conventions fo
 are slightly different from the standard SBML conventions (used in the SBMLtoODEpy library) with the aim to
 accommodate for more flexible manipulations while preserving JAX-like functional programming style.
 
-## Statement of Need
+SBMLtoODEjax is available at [https://github.com/flowersteam/sbmltoodejax](https://github.com/flowersteam/sbmltoodejax).
+
+# Statement of Need
 
 Despite the wealth of available SBML models, scientists still lack an in-depth understanding of the range of possible
 behaviors that these models can exhibit under different initial data and environmental stimuli, and lack effective ways
@@ -75,7 +74,7 @@ Whereas there exists many software tools for manipulation and numerical simulati
 typically rely either on specialized simulation platforms limiting the flexibility for customization and scripting (such
 as COPASI [@hoopsCOPASICOmplexPAthway2006;@Bergmann_copasi_basico_Release_0_48_2023], Virtual
 Cell [@loewVirtualCellSoftware2001;@slepchenkoQuantitativeCellBiology2003a] and Cell
-Designer [funahashiCellDesignerProcessDiagram2003;@funahashiCellDesignerVersatileModeling2008]) or provide scripting
+Designer [@funahashiCellDesignerProcessDiagram2003;@funahashiCellDesignerVersatileModeling2008]) or provide scripting
 interfaces in Python or Matlab but rely on backend engines that do not support hardware acceleration or automatic
 differentiation (like Tellurium [@choiTelluriumExtensiblePythonbased2018;@medleyTelluriumNotebooksEnvironment2018] and
 SBMLtoODEpy [@ruggieroSBMLtoODEpySoftwareProgram2019] python packages, or the Systems Biology Format Converter (SBFC)
@@ -93,6 +92,8 @@ dynamics [@bezginJAXFluidsFullydifferentiableHighorder2023]. SBMLtoODEjax aims t
 tools to accelerate research
 in biological network analysis.
 
+# Why use SBMLtoODEjax?
+
 ***Simplicity and extensibility***
 SBMLtoODEjax retains the simplicity of the SBMLtoODEPy library to facilitate incorporation and refactoring of the
 ODE models into one’s own python
@@ -106,7 +107,7 @@ of Kholodenko 2000's paper [@kholodenkoNegativeFeedbackUltrasensitivity2000] hos
 Model rollouts use `jit` transformation and `scan` primitive to reduce compilation and execution time of
 the recursive ODE integration steps, which is particularly useful when running large numbers of steps (long reaction
 times).
-Models also inherit from the Equinox module abstraction [22] and are registered as PyTree
+Models also inherit from the Equinox module abstraction [@kidger2021equinox] and are registered as PyTree
 containers, which facilitates the application of JAX core transformations to any SBMLtoODEjax object.
 
 ***Efficiency simulation and optimization*** The application of JAX core transformations, such as just-in-time
@@ -154,15 +155,13 @@ and API docs as well as for various hands-on tutorials for
 [loading and simulating biomodels](https://developmentalsystems.org/sbmltoodejax/tutorials/biomodels_curation.html), [parallel execution](https://developmentalsystems.org/sbmltoodejax/tutorials/parallel_execution.html)
 and [gradient descent](https://developmentalsystems.org/sbmltoodejax/tutorials/gradient_descent.html).
 
-## Software requirements and external usage
+# Software requirements
 
 SBMLtoODEjax is developed under the MIT license and available on `PyPI` via `pip install sbmltoodejax`. It is written on
 top of SBMLtoODEpy [@ruggieroSBMLtoODEpySoftwareProgram2019], JAX (cpu) [@jax2018github] and
-Equinox [@kidger2021equinox], which are the main requirements. SBMLtoODEjax has been used in
-the [AutoDiscJax](https://github.com/flowersteam/autodiscjax) library and in
-one [ongoing research project](https://developmentalsystems.org/curious-exploration-of-grn-competencies/paper.html).
+Equinox [@kidger2021equinox], which are the main requirements. 
 
-## Acknowledgements
+# Acknowledgements
 
 SBMLtoODEjax builds on SBMLtoODEpy's parsing and conversion of SBML files [@ruggieroSBMLtoODEpySoftwareProgram2019],
 JAX's composable transformations [@jax2018github], Equinox's module abstraction [@kidger2021equinox] and BasiCO’s access
@@ -175,4 +174,4 @@ It also benefited from two mobility research scholarships given by the French Ac
 and the University of Bordeaux (UBGRS-Mob scholarship).
 Finally, this work benefited from the use of the Jean Zay supercomputer associated with the Genci grant A0091011996.
 
-## References
+# References
