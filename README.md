@@ -146,7 +146,7 @@ Pinder and team.
 
 # Citing SBMLtoODEjax
 
-If you use SBMLtoODEjax in your research, please cite the [arXiv paper](https://arxiv.org/abs/2307.08452).
+If you use SBMLtoODEjax in your research, please cite the paper:
 
 ```
 @inproceedings{etcheverry2023sbmltoodejax,
