@@ -149,12 +149,11 @@ Pinder and team.
 If you use SBMLtoODEjax in your research, please cite the [arXiv paper](https://arxiv.org/abs/2307.08452).
 
 ```
-@misc{etcheverry2023sbmltoodejax,
-      title={SBMLtoODEjax: efficient simulation and optimization of ODE SBML models in JAX}, 
-      author={Mayalen Etcheverry and Michael Levin and Clément Moulin-Frier and Pierre-Yves Oudeyer},
-      year={2023},
-      eprint={2307.08452},
-      archivePrefix={arXiv},
-      primaryClass={q-bio.BM}
+@inproceedings{etcheverry2023sbmltoodejax,
+title={SBMLtoODEjax: Efficient Simulation and Optimization of Biological Network Models in JAX},
+author={Mayalen Etcheverry and Michael Levin and Clement Moulin-Frier and Pierre-Yves Oudeyer},
+booktitle={NeurIPS 2023 AI for Science Workshop},
+year={2023},
+url={https://openreview.net/forum?id=exP6UntwqJ}
 }
 ```
