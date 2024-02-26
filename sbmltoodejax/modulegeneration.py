@@ -9,6 +9,7 @@ def GenerateModel(modelData, outputFilePath,
                   ModelStepName: str='ModelStep',
                   ModelRolloutName: str='ModelRollout',
                   vary_constant_reactants: bool=False,
+                  vary_boundary_reactants: bool=False,
                   deltaT: float =0.1,
                   atol: float=1e-6,
                   rtol: float = 1e-12,
@@ -398,8 +399,9 @@ def GenerateModel(modelData, outputFilePath,
         reactionCounter += 1
         reaction = reactions[rxnId]
         for reactant in reaction.reactants:
-            if (reactant[1] in y_indexes) and (not species[reactant[1]].isBoundarySpecies):
-                stoichCoeffMat = stoichCoeffMat.at[y_indexes[reactant[1]], reactionIndex[rxnId]].add(reactant[0])
+            if (reactant[1] in y_indexes):
+                if (not species[reactant[1]].isBoundarySpecies) or vary_boundary_reactants:
+                    stoichCoeffMat = stoichCoeffMat.at[y_indexes[reactant[1]], reactionIndex[rxnId]].add(reactant[0])
 
     rateArray = ['0.0'] * len(y_indexes)
     for rule_name, rule in rateRules.items():

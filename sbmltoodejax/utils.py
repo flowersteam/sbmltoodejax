@@ -3,7 +3,9 @@ from sbmltoodejax.biomodels_api import get_content_for_model
 from sbmltoodejax.modulegeneration import GenerateModel
 from sbmltoodejax.parse import ParseSBMLFile
 
-def generate_biomodel(model_idx, model_fp="jax_model.py", deltaT=0.1, atol=1e-6, rtol=1e-12, mxstep=5000000):
+def generate_biomodel(model_idx, model_fp="jax_model.py",
+                      vary_constant_reactants=False, vary_boundary_reactants=False,
+                      deltaT=0.1, atol=1e-6, rtol=1e-12, mxstep=5000000):
     """Calls the `sbmltoodejax.modulegeneration.GenerateModel` for a SBML model hosted on the BioModel website and indexed by the provided `model_idx`.
 
     Args:
@@ -19,7 +21,9 @@ def generate_biomodel(model_idx, model_fp="jax_model.py", deltaT=0.1, atol=1e-6,
     """
     model_xml_body = get_content_for_model(model_idx)
     model_data = ParseSBMLFile(model_xml_body)
-    GenerateModel(model_data, model_fp, deltaT=deltaT, atol=atol, rtol=rtol, mxstep=mxstep)
+    GenerateModel(model_data, model_fp,
+                  vary_constant_reactants=vary_constant_reactants, vary_boundary_reactants=vary_boundary_reactants,
+                  deltaT=deltaT, atol=atol, rtol=rtol, mxstep=mxstep)
 
     return model_fp
 
