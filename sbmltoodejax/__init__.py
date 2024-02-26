@@ -3,7 +3,7 @@ import sbmltoodejax.jaxfuncs
 import sbmltoodejax.modulegeneration
 import sbmltoodejax.parse
 
-__version__ = "0.3.1"
+__version__ = "0.4.1"
 
 __author__ = "Mayalen Etcheverry"
 __email__ = "mayalen.etcheverry@inria.fr"
