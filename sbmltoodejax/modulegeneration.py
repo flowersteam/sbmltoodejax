@@ -8,6 +8,7 @@ def GenerateModel(modelData, outputFilePath,
                   AssignmentRuleName: str='AssignmentRule',
                   ModelStepName: str='ModelStep',
                   ModelRolloutName: str='ModelRollout',
+                  vary_constant_reactants: bool=False,
                   deltaT: float =0.1,
                   atol: float=1e-6,
                   rtol: float = 1e-12,
@@ -145,8 +146,10 @@ def GenerateModel(modelData, outputFilePath,
                         raise ValueError("Specie value is not of type amount nor concentration")
                 else:
                     raise NotImplementedError("Reactant is not a specie")
-                y0.append(y_amount)
-                y_indexes[reactant] = len(y0) - 1
+                if not species[reactant].isConstant or vary_constant_reactants:
+                    y0.append(y_amount)
+                    y_indexes[reactant] = len(y0) - 1
+
 
     for rule_name, rule in rateRules.items():
         if rule.variable not in y_indexes:
@@ -253,10 +256,10 @@ def GenerateModel(modelData, outputFilePath,
 
                 if variable[0] in c_indexes:
                     returnRHS += f'{cvar}[{c_indexes[variable[0]]}]'
-                elif variable[0] in y_indexes:
-                    returnRHS += f'{yvar}[{y_indexes[variable[0]]}]'
                 elif variable[0] in w_indexes:
                     returnRHS += f'{wvar}[{w_indexes[variable[0]]}]'
+                elif variable[0] in y_indexes:
+                    returnRHS += f'{yvar}[{y_indexes[variable[0]]}]'
                 elif variable[0] in mathFuncs:
                     returnRHS += mathFuncs[variable[0]]
                 elif variable[0] in functions:
@@ -395,7 +398,7 @@ def GenerateModel(modelData, outputFilePath,
         reactionCounter += 1
         reaction = reactions[rxnId]
         for reactant in reaction.reactants:
-            if not (species[reactant[1]].isBoundarySpecies == "True"):
+            if (reactant[1] in y_indexes) and (not species[reactant[1]].isBoundarySpecies):
                 stoichCoeffMat = stoichCoeffMat.at[y_indexes[reactant[1]], reactionIndex[rxnId]].add(reactant[0])
 
     rateArray = ['0.0'] * len(y_indexes)
