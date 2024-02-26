@@ -14,7 +14,7 @@ jobs:
       - name: Sphinx build
         run: |
           cd docs
-          python -m sphinx-build -nW --keep-going -b html source/ build/html
+          python -m sphinx.cmd.build -nW --keep-going -b html source/ build/html
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
