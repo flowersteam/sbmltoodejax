@@ -28,7 +28,9 @@ def generate_biomodel(model_idx, model_fp="jax_model.py",
     return model_fp
 
 
-def load_biomodel(model_idx, model_fp="jax_model.py", deltaT=0.1, atol=1e-6, rtol=1e-12, mxstep=5000000):
+def load_biomodel(model_idx, model_fp="jax_model.py",
+                  vary_constant_reactants=False, vary_boundary_reactants=False,
+                  deltaT=0.1, atol=1e-6, rtol=1e-12, mxstep=5000000):
     """Calls the generate_biomodel function for a SBML model hosted on the BioModel website and indexed by the provided `model_idx`,
     then loads and returns the generated `model` module and `y0`, `w0`, `c` variables.
 
@@ -48,7 +50,9 @@ def load_biomodel(model_idx, model_fp="jax_model.py", deltaT=0.1, atol=1e-6, rto
         - w0 (jax.numpy.Array): default initial state of w variable (as provided in the SBML file)
         - c (jax.numpy.Array): default values of constant kinematic parameters c (as provided in the SBML file)
     """
-    model_fp = generate_biomodel(model_idx, model_fp=model_fp, deltaT=deltaT, atol=atol, rtol=rtol, mxstep=mxstep)
+    model_fp = generate_biomodel(model_idx, model_fp=model_fp,
+                                 vary_constant_reactants=vary_constant_reactants, vary_boundary_reactants=vary_boundary_reactants,
+                                 deltaT=deltaT, atol=atol, rtol=rtol, mxstep=mxstep)
     spec = importlib.util.spec_from_file_location("JaxModelSpec", model_fp)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
