@@ -125,7 +125,9 @@ def GenerateModel(modelData, outputFilePath,
     outputFile.write("from functools import partial\n")
     outputFile.write("from jax import jit, lax, vmap\n")
     outputFile.write("from jax.experimental.ode import odeint\n")
-    outputFile.write("import jax.numpy as jnp\n\n")
+    outputFile.write("import jax.numpy as jnp\n")
+    outputFile.write("from diffrax import ODETerm, Tsit5\n")
+    outputFile.write("from typing import Any\n\n")
     outputFile.write("from sbmltoodejax import jaxfuncs\n\n")
 
 
@@ -512,32 +514,46 @@ def GenerateModel(modelData, outputFilePath,
     outputFile.write("\tatol: float = eqx.static_field()\n")
     outputFile.write("\trtol: float = eqx.static_field()\n")
     outputFile.write("\tmxstep: int = eqx.static_field()\n")
-    outputFile.write(f"\tassignmentfunc: {AssignmentRuleName}\n\n")
+    outputFile.write(f"\tassignmentfunc: {AssignmentRuleName}\n")
+    outputFile.write("\tsolver_type: str = eqx.static_field()\n")
+    outputFile.write("\tsolver: Any = eqx.static_field()\n\n")
 
     outputFile.write(f"\tdef __init__(self, "
                      f"y_indexes={y_indexes}, "
                      f"w_indexes={w_indexes}, "
                      f"c_indexes={c_indexes}, "
-                     f"atol={atol}, rtol={rtol}, mxstep={mxstep}):\n\n")
+                     f"atol={atol}, rtol={rtol}, mxstep={mxstep}, "
+                     f"solver_type='odeint'):\n\n")
 
     outputFile.write("\t\tself.y_indexes = y_indexes\n")
     outputFile.write("\t\tself.w_indexes = w_indexes\n")
-    outputFile.write("\t\tself.c_indexes = c_indexes\n\n")
-
+    outputFile.write("\t\tself.c_indexes = c_indexes\n")
     outputFile.write(f"\t\tself.ratefunc = {RateofSpeciesChangeName}()\n")
     outputFile.write("\t\tself.rtol = rtol\n")
     outputFile.write("\t\tself.atol = atol\n")
     outputFile.write("\t\tself.mxstep = mxstep\n")
-
-    outputFile.write(f"\t\tself.assignmentfunc = {AssignmentRuleName}()\n\n")
-    
+    outputFile.write(f"\t\tself.assignmentfunc = {AssignmentRuleName}()\n")
+    outputFile.write("\t\tself.solver_type = solver_type\n")
+    outputFile.write("\t\tif solver_type == 'odeint':\n")
+    outputFile.write("\t\t\tself.solver = odeint\n")
+    outputFile.write("\t\telif solver_type == 'diffrax':\n")
+    outputFile.write("\t\t\tfrom diffrax import ODETerm, Tsit5\n")
+    outputFile.write("\t\t\tself.solver = Tsit5()\n")
+    outputFile.write("\t\telse:\n")
+    outputFile.write("\t\t\traise ValueError(f'Unknown solver type: {solver_type}')\n\n")
 
     outputFile.write("\t@jit\n")
     outputFile.write("\tdef __call__(self, y, w, c, t, deltaT):\n")
-    outputFile.write("\t\ty_new = odeint(self.ratefunc, y, jnp.array([t, t + deltaT]), w, c, atol=self.atol, rtol=self.rtol, mxstep=self.mxstep)[-1]\t\n")
-    outputFile.write("\t\tt_new = t + deltaT\t\n")
-    outputFile.write("\t\tw_new = self.assignmentfunc(y_new, w, c, t_new)\t\n")
-    outputFile.write("\t\treturn y_new, w_new, c, t_new\t\n\n")
+    outputFile.write("\t\tif self.solver_type == 'odeint':\n")
+    outputFile.write("\t\t\ty_new = odeint(self.ratefunc, y, jnp.array([t, t + deltaT]), w, c, atol=self.atol, rtol=self.rtol, mxstep=self.mxstep)[-1]\n")
+    outputFile.write("\t\telse:  # diffrax\n")
+    outputFile.write("\t\t\tterm = ODETerm(lambda t, y, args: self.ratefunc(y, t, *args))\n")
+    outputFile.write("\t\t\ttprev, tnext = t, t + deltaT\n")
+    outputFile.write("\t\t\tstate = self.solver.init(term, tprev, tnext, y, (w, c))\n")
+    outputFile.write("\t\t\ty_new, _, _, _, _ = self.solver.step(term, tprev, tnext, y, (w, c), state, made_jump=False)\n")
+    outputFile.write("\t\tt_new = t + deltaT\n")
+    outputFile.write("\t\tw_new = self.assignmentfunc(y_new, w, c, t_new)\n")
+    outputFile.write("\t\treturn y_new, w_new, c, t_new\n\n")
 
     # ================================================================================================================================
 
@@ -571,3 +587,4 @@ def GenerateModel(modelData, outputFilePath,
 
     # ================================================================================================================================
     outputFile.close()
+
