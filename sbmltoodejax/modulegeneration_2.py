@@ -13,7 +13,8 @@ def GenerateModel(modelData, outputFilePath,
                   deltaT: float =0.1,
                   atol: float=1e-6,
                   rtol: float = 1e-12,
-                  mxstep: int = 5000000
+                  mxstep: int = 5000000,
+                  solver_type: str = 'odeint'
                   ):
     """
     This function takes model data created by :func:`~sbmltoodejax.parse.ParseSBMLFile` and generates a python file containing
@@ -561,9 +562,9 @@ def GenerateModel(modelData, outputFilePath,
     outputFile.write("\tdeltaT: float = eqx.static_field()\n")
     outputFile.write(f"\tmodelstepfunc: {ModelStepName}\n\n")
 
-    outputFile.write(f"\tdef __init__(self, deltaT={deltaT}, atol={atol}, rtol={rtol}, mxstep={mxstep}):\n\n")
+    outputFile.write(f"\tdef __init__(self, deltaT={deltaT}, atol={atol}, rtol={rtol}, mxstep={mxstep}, solver_type='{solver_type}'):\n\n")
     outputFile.write("\t\tself.deltaT = deltaT\n")
-    outputFile.write(f"\t\tself.modelstepfunc = {ModelStepName}(atol=atol, rtol=rtol, mxstep=mxstep)\n\n")
+    outputFile.write(f"\t\tself.modelstepfunc = {ModelStepName}(atol=atol, rtol=rtol, mxstep=mxstep, solver_type=solver_type)\n\n")
 
     outputFile.write("\t@partial(jit, static_argnames=(\"n_steps\",))\n")
     outputFile.write("\tdef __call__(self, n_steps, "
@@ -587,4 +588,7 @@ def GenerateModel(modelData, outputFilePath,
 
     # ================================================================================================================================
     outputFile.close()
+
+
+
 
