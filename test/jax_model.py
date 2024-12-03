@@ -10,21 +10,21 @@ from sbmltoodejax import jaxfuncs
 
 t0 = 0.0
 
-y0 = jnp.array([10.0, 0.0, 6.0, 0.0, 200.0, 0.0, 0.0, 0.9, 0.0, 0.0, 30.0, 0.0])
-y_indexes = {'Pfr': 0, 'Pr': 1, 'Xi': 2, 'Xa': 3, 'prepreS': 4, 'preS': 5, 'S': 6, 'Ya': 7, 'Gluc': 8, 'Yi': 9, 'V': 10, 'Pi': 11}
+y0 = jnp.array([90.0, 10.0, 280.0, 10.0, 10.0, 280.0, 10.0, 10.0])
+y_indexes = {'MKKK': 0, 'MKKK_P': 1, 'MKK': 2, 'MKK_P': 3, 'MKK_PP': 4, 'MAPK': 5, 'MAPK_P': 6, 'MAPK_PP': 7}
 
 w0 = jnp.array([])
 w_indexes = {}
 
-c = jnp.array([1.0, 0.1, 0.0, 0.1, 0.8, 0.2, 1.0, 0.1, 30.0, 50.0, 1.0, 1.0, 0.1]) 
-c_indexes = {'compartment': 0, 'Photoreceptor_activation_IfrSfrPfr': 1, 'Photoreceptor_inactivation_IrSrPr': 2, 'Transducer_activation_kia': 3, 'Transducer_inactivation_kai': 4, 'preS_formation_kx': 5, 'S_generation_ky': 6, 'Glucose_sensor_inactivation_kG': 7, 'S_formation_alpha1': 8, 'V_formation_alpha2': 9, 'S_degradation_kd_s': 10, 'V_degradation_kd_v': 11, 'Photoreceptor_decay_kd': 12}
+c = jnp.array([1.0, 2.5, 9.0, 1.0, 10.0, 0.25, 8.0, 0.025, 15.0, 0.025, 15.0, 0.75, 15.0, 0.75, 15.0, 0.025, 15.0, 0.025, 15.0, 0.5, 15.0, 0.5, 15.0]) 
+c_indexes = {'uVol': 0, 'J0_V1': 1, 'J0_Ki': 2, 'J0_n': 3, 'J0_K1': 4, 'J1_V2': 5, 'J1_KK2': 6, 'J2_k3': 7, 'J2_KK3': 8, 'J3_k4': 9, 'J3_KK4': 10, 'J4_V5': 11, 'J4_KK5': 12, 'J5_V6': 13, 'J5_KK6': 14, 'J6_k7': 15, 'J6_KK7': 16, 'J7_k8': 17, 'J7_KK8': 18, 'J8_V9': 19, 'J8_KK9': 20, 'J9_V10': 21, 'J9_KK10': 22}
 
 class RateofSpeciesChange(eqx.Module):
-	stoichiometricMatrix = jnp.array([[-1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0], [0.0, 0.0, -1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, -1.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, -1.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]], dtype=jnp.float32) 
+	stoichiometricMatrix = jnp.array([[-1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, -1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 1.0, -1.0, 1.0, -1.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 1.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, -1.0, 1.0, -1.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, -1.0, 0.0]], dtype=jnp.float32) 
 
 	@jit
 	def __call__(self, y, t, w, c):
-		rateRuleVector = jnp.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], dtype=jnp.float32)
+		rateRuleVector = jnp.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], dtype=jnp.float32)
 
 		reactionVelocities = self.calc_reaction_velocities(y, w, c, t)
 
@@ -34,57 +34,49 @@ class RateofSpeciesChange(eqx.Module):
 
 
 	def calc_reaction_velocities(self, y, w, c, t):
-		reactionVelocities = jnp.array([self.Photoreceptor_activation(y, w, c, t), self.Photoreceptor_inactivation(y, w, c, t), self.Transducer_activation(y, w, c, t), self.Transducer_inactivation(y, w, c, t), self.preS_formation(y, w, c, t), self.S_generation(y, w, c, t), self.Glucose_sensor_inactivation(y, w, c, t), self.S_formation(y, w, c, t), self.V_formation(y, w, c, t), self.S_degradation(y, w, c, t), self.V_degradation(y, w, c, t), self.Photoreceptor_decay(y, w, c, t)], dtype=jnp.float32)
+		reactionVelocities = jnp.array([self.J0(y, w, c, t), self.J1(y, w, c, t), self.J2(y, w, c, t), self.J3(y, w, c, t), self.J4(y, w, c, t), self.J5(y, w, c, t), self.J6(y, w, c, t), self.J7(y, w, c, t), self.J8(y, w, c, t), self.J9(y, w, c, t)], dtype=jnp.float32)
 
 		return reactionVelocities
 
 
-	def Photoreceptor_activation(self, y, w, c, t):
-		return c[0] * (y[0]/1.0) * c[1]
+	def J0(self, y, w, c, t):
+		return c[0] * c[1] * (y[0]/1.0) / ((1 + ((y[7]/1.0) / c[2])**c[3]) * (c[4] + (y[0]/1.0)))
 
 
-	def Photoreceptor_inactivation(self, y, w, c, t):
-		return c[2] * (y[1]/1.0) * c[0]
+	def J1(self, y, w, c, t):
+		return c[0] * c[5] * (y[1]/1.0) / (c[6] + (y[1]/1.0))
 
 
-	def Transducer_activation(self, y, w, c, t):
-		return (y[2]/1.0) * c[3] * (y[1]/1.0) * c[0]
+	def J2(self, y, w, c, t):
+		return c[0] * c[7] * (y[1]/1.0) * (y[2]/1.0) / (c[8] + (y[2]/1.0))
 
 
-	def Transducer_inactivation(self, y, w, c, t):
-		return c[4] * (y[3]/1.0) * c[0]
+	def J3(self, y, w, c, t):
+		return c[0] * c[9] * (y[1]/1.0) * (y[3]/1.0) / (c[10] + (y[3]/1.0))
 
 
-	def preS_formation(self, y, w, c, t):
-		return (y[4]/1.0) * c[5] * (y[3]/1.0) * c[0]
+	def J4(self, y, w, c, t):
+		return c[0] * c[11] * (y[4]/1.0) / (c[12] + (y[4]/1.0))
 
 
-	def S_generation(self, y, w, c, t):
-		return (y[5]/1.0) * c[6] * (y[7]/1.0) * c[0]
+	def J5(self, y, w, c, t):
+		return c[0] * c[13] * (y[3]/1.0) / (c[14] + (y[3]/1.0))
 
 
-	def Glucose_sensor_inactivation(self, y, w, c, t):
-		return c[7] * (y[7]/1.0) * (y[8]/1.0) * c[0]
+	def J6(self, y, w, c, t):
+		return c[0] * c[15] * (y[4]/1.0) * (y[5]/1.0) / (c[16] + (y[5]/1.0))
 
 
-	def S_formation(self, y, w, c, t):
-		return c[0] * (c[8] / (1 + (y[10]/1.0)**3))
+	def J7(self, y, w, c, t):
+		return c[0] * c[17] * (y[4]/1.0) * (y[6]/1.0) / (c[18] + (y[6]/1.0))
 
 
-	def V_formation(self, y, w, c, t):
-		return c[0] * (c[9] / (1 + (y[6]/1.0)**3))
+	def J8(self, y, w, c, t):
+		return c[0] * c[19] * (y[7]/1.0) / (c[20] + (y[7]/1.0))
 
 
-	def S_degradation(self, y, w, c, t):
-		return c[10] * (y[6]/1.0) * c[0]
-
-
-	def V_degradation(self, y, w, c, t):
-		return c[0] * (y[10]/1.0) * c[11]
-
-
-	def Photoreceptor_decay(self, y, w, c, t):
-		return c[0] * c[12] * (y[1]/1.0)
+	def J9(self, y, w, c, t):
+		return c[0] * c[21] * (y[6]/1.0) / (c[22] + (y[6]/1.0))
 
 class AssignmentRule(eqx.Module):
 	@jit
@@ -103,7 +95,7 @@ class ModelStep(eqx.Module):
 	solver_type: str = eqx.static_field()
 	solver: Any = eqx.static_field()
 
-	def __init__(self, y_indexes={'Pfr': 0, 'Pr': 1, 'Xi': 2, 'Xa': 3, 'prepreS': 4, 'preS': 5, 'S': 6, 'Ya': 7, 'Gluc': 8, 'Yi': 9, 'V': 10, 'Pi': 11}, w_indexes={}, c_indexes={'compartment': 0, 'Photoreceptor_activation_IfrSfrPfr': 1, 'Photoreceptor_inactivation_IrSrPr': 2, 'Transducer_activation_kia': 3, 'Transducer_inactivation_kai': 4, 'preS_formation_kx': 5, 'S_generation_ky': 6, 'Glucose_sensor_inactivation_kG': 7, 'S_formation_alpha1': 8, 'V_formation_alpha2': 9, 'S_degradation_kd_s': 10, 'V_degradation_kd_v': 11, 'Photoreceptor_decay_kd': 12}, atol=1e-06, rtol=1e-12, mxstep=5000000, solver_type='diffrax', diffrax_solver='Dopri8'):
+	def __init__(self, y_indexes={'MKKK': 0, 'MKKK_P': 1, 'MKK': 2, 'MKK_P': 3, 'MKK_PP': 4, 'MAPK': 5, 'MAPK_P': 6, 'MAPK_PP': 7}, w_indexes={}, c_indexes={'uVol': 0, 'J0_V1': 1, 'J0_Ki': 2, 'J0_n': 3, 'J0_K1': 4, 'J1_V2': 5, 'J1_KK2': 6, 'J2_k3': 7, 'J2_KK3': 8, 'J3_k4': 9, 'J3_KK4': 10, 'J4_V5': 11, 'J4_KK5': 12, 'J5_V6': 13, 'J5_KK6': 14, 'J6_k7': 15, 'J6_KK7': 16, 'J7_k8': 17, 'J7_KK8': 18, 'J8_V9': 19, 'J8_KK9': 20, 'J9_V10': 21, 'J9_KK10': 22}, atol=1e-06, rtol=1e-12, mxstep=5000000, solver_type='diffrax', diffrax_solver='Dopri8'):
 
 		self.y_indexes = y_indexes
 		self.w_indexes = w_indexes
@@ -148,7 +140,7 @@ class ModelRollout(eqx.Module):
 		self.modelstepfunc = ModelStep(atol=atol, rtol=rtol, mxstep=mxstep, solver_type=solver_type, diffrax_solver=diffrax_solver)
 
 	@partial(jit, static_argnames=("n_steps",))
-	def __call__(self, n_steps, y0=jnp.array([10.0, 0.0, 6.0, 0.0, 200.0, 0.0, 0.0, 0.9, 0.0, 0.0, 30.0, 0.0]), w0=jnp.array([]), c=jnp.array([1.0, 0.1, 0.0, 0.1, 0.8, 0.2, 1.0, 0.1, 30.0, 50.0, 1.0, 1.0, 0.1]), t0=0.0):
+	def __call__(self, n_steps, y0=jnp.array([90.0, 10.0, 280.0, 10.0, 10.0, 280.0, 10.0, 10.0]), w0=jnp.array([]), c=jnp.array([1.0, 2.5, 9.0, 1.0, 10.0, 0.25, 8.0, 0.025, 15.0, 0.025, 15.0, 0.75, 15.0, 0.75, 15.0, 0.025, 15.0, 0.025, 15.0, 0.5, 15.0, 0.5, 15.0]), t0=0.0):
 
 		@jit
 		def f(carry, x):
