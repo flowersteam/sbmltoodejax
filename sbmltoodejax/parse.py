@@ -44,7 +44,6 @@ def ParseSBMLFile(file: str):
     """
 
     if os.path.exists(file):
-        libsbml.readSBML(file)
         doc = libsbml.readSBML(file)
 
     else:
