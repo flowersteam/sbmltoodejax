@@ -1,7 +1,6 @@
 import libsbml
 import os
-import sbmltoodepy
-from tempfile import NamedTemporaryFile
+from sbmltoodepy.parse import *
 
 def ParseSBMLFile(file: str):
     """
@@ -45,16 +44,11 @@ def ParseSBMLFile(file: str):
     """
 
     if os.path.exists(file):
-        filePath = file
-        libsbml.readSBML(filePath)
+        libsbml.readSBML(file)
         doc = libsbml.readSBML(file)
 
     else:
-        tmp_sbml_file = NamedTemporaryFile(suffix=".xml")
-        with open(tmp_sbml_file.name, 'w') as f:
-            f.write(file)
         doc = libsbml.readSBMLFromString(file)
-        filePath = tmp_sbml_file.name
 
     # Raise an Error if SBML error
     if doc.getNumErrors() > 0:
@@ -65,7 +59,31 @@ def ParseSBMLFile(file: str):
     if model.getNumEvents() > 0:
         raise NotImplementedError("Events are not handled")
 
-    modelData = sbmltoodepy.parse.ParseSBMLFile(filePath)
+    modelData = sbmltoodepy.dataclasses.ModelData()
+    for i in range(model.getNumParameters()):
+        newParameter = ParseParameterAssignment(i, model.getParameter(i))
+        modelData.parameters[newParameter.Id] = newParameter
+    for i in range(model.getNumCompartments()):
+        newCompartment = ParseCompartment(i, model.getCompartment(i))        
+        modelData.compartments[newCompartment.Id] = newCompartment
+    for i in range(model.getNumSpecies()):
+        newSpecies = ParseSpecies(i, model.getSpecies(i))
+        modelData.species[newSpecies.Id] = newSpecies 
+    for i in range(model.getNumFunctionDefinitions()):
+        newFunction = ParseFunction(i, model.getFunctionDefinition(i))
+        modelData.functions[newFunction.Id] = newFunction
+    for i in range(model.getNumRules()):
+        newRule = ParseRule(i,model.getRule(i))
+        if type(newRule) == sbmltoodepy.dataclasses.AssignmentRuleData:
+            modelData.assignmentRules[newRule.Id] = newRule
+        elif type(newRule) == sbmltoodepy.dataclasses.RateRuleData:
+            modelData.rateRules[newRule.Id] = newRule
+    for i in range(model.getNumReactions()):
+        newReaction = ParseReaction(i, model.getReaction(i))     
+        modelData.reactions[newReaction.Id] = newReaction
+    for i in range(model.getNumInitialAssignments()):
+        newAssignment = ParseInitialAssignment(i, model.getInitialAssignment(i))
+        modelData.initialAssignments[newAssignment.Id] = newAssignment
     
     return modelData
 
