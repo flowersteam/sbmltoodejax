@@ -1,0 +1,627 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>sbmltoodejax.biomodels_api &#8212; sbmltoodejax</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=0f4711b3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/biomodels_api';</script>
+    <link rel="canonical" href="https://developmentalsystems.org/sbmltoodejax/api/biomodels_api.html" />
+    <link rel="icon" href="../_static/logo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="sbmltoodejax.utils" href="utils.html" />
+    <link rel="prev" title="sbmltoodejax.jaxfuncs" href="jaxfuncs.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.4.3" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="sbmltoodejax - Home"/>
+    <img src="../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="sbmltoodejax - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">SBMLtoODEjax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">🏡 Home</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">🛠️ Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../why_use.html">👀 Why SBMLtoODEjax?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design_principles.html">🎨 Design Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">🤝 Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jax101.html">📎 Jax 101 [external]</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🎓 Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/biomodels_curation.html">Numerical simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/parallel_execution.html">Parallel execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/benchmark.html">Benchmarking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/gradient_descent.html">Gradient descent</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Public API - sbmltoodejax package</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="parse.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.parse</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulegeneration.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.modulegeneration</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="jaxfuncs.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.jaxfuncs</span></code></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.biomodels_api</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.utils</span></code></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/flowersteam/sbmltoodejax" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api/biomodels_api.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>sbmltoodejax.biomodels_api</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sbmltoodejax.biomodels_api.download_from"><code class="docutils literal notranslate"><span class="pre">download_from()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sbmltoodejax.biomodels_api.download_json"><code class="docutils literal notranslate"><span class="pre">download_json()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sbmltoodejax.biomodels_api.get_content_for_model"><code class="docutils literal notranslate"><span class="pre">get_content_for_model()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sbmltoodejax.biomodels_api.get_files_for_model"><code class="docutils literal notranslate"><span class="pre">get_files_for_model()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sbmltoodejax.biomodels_api.get_model_info"><code class="docutils literal notranslate"><span class="pre">get_model_info()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sbmltoodejax.biomodels_api.search_for_model"><code class="docutils literal notranslate"><span class="pre">search_for_model()</span></code></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-sbmltoodejax.biomodels_api">
+<span id="sbmltoodejax-biomodels-api"></span><h1><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.biomodels_api</span></code><a class="headerlink" href="#module-sbmltoodejax.biomodels_api" title="Link to this heading">#</a></h1>
+<p>This provides several utils functions for accessing the BioModels API as described on <a class="reference external" href="https://www.ebi.ac.uk/biomodels/docs/">https://www.ebi.ac.uk/biomodels/docs/</a></p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The biomodels_api code and documentation is copied (and slightly adapated) from the basico repository that is maintained by the COPASI group and under Artistic License 2.0.
+The original code can be found at <a class="github reference external" href="https://github.com/copasi/basico/blob/master/basico/biomodels.py">copasi/basico</a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The only (minor) modification with respect to original code is that we deal with special characters in <a class="reference internal" href="#sbmltoodejax.biomodels_api.get_content_for_model" title="sbmltoodejax.biomodels_api.get_content_for_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_content_for_model()</span></code></a> using <code class="docutils literal notranslate"><span class="pre">urllib.parse.quote</span></code></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># get info for a specific model</span>
+<span class="n">info</span> <span class="o">=</span> <span class="n">get_model_info</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;files&#39;</span><span class="p">][</span><span class="s1">&#39;main&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+<span class="c1"># get all files for one model</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">get_files_for_model</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">files</span><span class="p">[</span><span class="s1">&#39;main&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+<span class="c1"># get content of specific model</span>
+<span class="n">sbml</span> <span class="o">=</span> <span class="n">get_content_for_model</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sbml</span><span class="p">)</span>
+<span class="c1"># search for model</span>
+<span class="n">models</span> <span class="o">=</span> <span class="n">search_for_model</span><span class="p">(</span><span class="s1">&#39;repressilator&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">model</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">model</span><span class="p">[</span><span class="s1">&#39;format&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<dl class="py function">
+<dt class="sig sig-object py" id="sbmltoodejax.biomodels_api.download_from">
+<span class="sig-prename descclassname"><span class="pre">sbmltoodejax.biomodels_api.</span></span><span class="sig-name descname"><span class="pre">download_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sbmltoodejax/biomodels_api.html#download_from"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sbmltoodejax.biomodels_api.download_from" title="Link to this definition">#</a></dt>
+<dd><p>Convenience method reading content from a URL.
+This convenience method uses urlopen on either python 2.7 or 3.x</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>url</strong> (<em>str</em>) – the url to read from</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the contents of the URL as str</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sbmltoodejax.biomodels_api.download_json">
+<span class="sig-prename descclassname"><span class="pre">sbmltoodejax.biomodels_api.</span></span><span class="sig-name descname"><span class="pre">download_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sbmltoodejax/biomodels_api.html#download_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sbmltoodejax.biomodels_api.download_json" title="Link to this definition">#</a></dt>
+<dd><p>Convenience method reading the content of the url as JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>url</strong> (<em>str</em>) – the url to read from</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a python object representing the json content loaded</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sbmltoodejax.biomodels_api.get_content_for_model">
+<span class="sig-prename descclassname"><span class="pre">sbmltoodejax.biomodels_api.</span></span><span class="sig-name descname"><span class="pre">get_content_for_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sbmltoodejax/biomodels_api.html#get_content_for_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sbmltoodejax.biomodels_api.get_content_for_model" title="Link to this definition">#</a></dt>
+<dd><p>Downloads the specified file from biomodels</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_id</strong> – either an integer, or a valid model id</p></li>
+<li><p><strong>file_name</strong> – the filename to download (or None, to download the main file)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the content of the specified file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sbmltoodejax.biomodels_api.get_files_for_model">
+<span class="sig-prename descclassname"><span class="pre">sbmltoodejax.biomodels_api.</span></span><span class="sig-name descname"><span class="pre">get_files_for_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sbmltoodejax/biomodels_api.html#get_files_for_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sbmltoodejax.biomodels_api.get_files_for_model" title="Link to this definition">#</a></dt>
+<dd><p>Retrieves the json structure for all files for the given biomodel.
+The structure is of form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;additional&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Auto-generated Scilab file&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;fileSize&#39;</span><span class="p">:</span> <span class="s1">&#39;3873&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;BIOMD0000000010.sci&#39;</span><span class="p">},</span>
+         <span class="o">...</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;main&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;fileSize&#39;</span><span class="p">:</span> <span class="s1">&#39;31568&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;BIOMD0000000010_url.xml&#39;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_id</strong> – either an integer, or a valid model id</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>json structure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sbmltoodejax.biomodels_api.get_model_info">
+<span class="sig-prename descclassname"><span class="pre">sbmltoodejax.biomodels_api.</span></span><span class="sig-name descname"><span class="pre">get_model_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sbmltoodejax/biomodels_api.html#get_model_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sbmltoodejax.biomodels_api.get_model_info" title="Link to this definition">#</a></dt>
+<dd><p>Return the model info for the provided <cite>model_id</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_id</strong> – either an integer, or a valid model id</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a python object describing the model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sbmltoodejax.biomodels_api.search_for_model">
+<span class="sig-prename descclassname"><span class="pre">sbmltoodejax.biomodels_api.</span></span><span class="sig-name descname"><span class="pre">search_for_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_results</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id-asc'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sbmltoodejax/biomodels_api.html#search_for_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sbmltoodejax.biomodels_api.search_for_model" title="Link to this definition">#</a></dt>
+<dd><p>Queries the biomodel database
+Queries the database, for information about the query system see: <a class="reference external" href="https://www.ebi.ac.uk/biomodels-static/jummp-biomodels-help/model_search.html">https://www.ebi.ac.uk/biomodels-static/jummp-biomodels-help/model_search.html</a></p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">search_for_model</span><span class="p">(</span><span class="s1">&#39;glycolysis&#39;</span><span class="p">)</span>
+<span class="go">[...,</span>
+<span class="go">    {</span>
+<span class="go">    &#39;format&#39;: &#39;SBML&#39;,</span>
+<span class="go">    &#39;id&#39;: &#39;BIOMD0000000206&#39;,</span>
+<span class="go">    &#39;lastModified&#39;: &#39;2012-07-04T23:00:00Z&#39;,</span>
+<span class="go">    &#39;name&#39;: &#39;Wolf2000_Glycolytic_Oscillations&#39;,</span>
+<span class="go">    &#39;submissionDate&#39;: &#39;2008-11-27T00:00:00Z&#39;,</span>
+<span class="go">    &#39;submitter&#39;: &#39;Harish Dharuri&#39;,</span>
+<span class="go">    &#39;url&#39;: &#39;https://www.ebi.ac.uk/biomodels/BIOMD0000000206&#39;</span>
+<span class="go">    }</span>
+<span class="go">]</span>
+<span class="go">Note by default, it will include only manually curated models, to obtain Non-curated models you would use:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">search_for_model</span><span class="p">(</span><span class="s1">&#39;Hodgkin AND curationstatus:&quot;Non-curated&quot;&#39;</span><span class="p">)</span>
+<span class="go">[...,</span>
+<span class="go">    {</span>
+<span class="go">    &#39;format&#39;: &#39;SBML&#39;,</span>
+<span class="go">    &#39;id&#39;: &#39;MODEL1006230012&#39;,</span>
+<span class="go">    &#39;lastModified&#39;: &#39;2012-02-02T00:00:00Z&#39;&#39;,</span>
+<span class="go">    &#39;name&#39;: &#39;Stewart2009_ActionPotential_PurkinjeFibreCells&#39;,</span>
+<span class="go">    &#39;submissionDate&#39;: &#39;2010-06-22T23:00:00Z&#39;,</span>
+<span class="go">    &#39;submitter&#39;: &#39;Camille Laibe&#39;,</span>
+<span class="go">    &#39;url&#39;: &#39;https://www.ebi.ac.uk/biomodels/MODEL1006230012&#39;</span>
+<span class="go">    }</span>
+<span class="go">]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> – the query to use (it will be encoded with quote_plus before send out, so it is safe to use spaces)</p></li>
+<li><p><strong>offset</strong> – offset (defaults to 0)</p></li>
+<li><p><strong>num_results</strong> – number of results to obtain (defaults to 10)</p></li>
+<li><p><strong>sort</strong> – sort criteria to be used (defaults to id-asc)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the search result as [{}]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="jaxfuncs.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.jaxfuncs</span></code></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="utils.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.utils</span></code></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sbmltoodejax.biomodels_api.download_from"><code class="docutils literal notranslate"><span class="pre">download_from()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sbmltoodejax.biomodels_api.download_json"><code class="docutils literal notranslate"><span class="pre">download_json()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sbmltoodejax.biomodels_api.get_content_for_model"><code class="docutils literal notranslate"><span class="pre">get_content_for_model()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sbmltoodejax.biomodels_api.get_files_for_model"><code class="docutils literal notranslate"><span class="pre">get_files_for_model()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sbmltoodejax.biomodels_api.get_model_info"><code class="docutils literal notranslate"><span class="pre">get_model_info()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sbmltoodejax.biomodels_api.search_for_model"><code class="docutils literal notranslate"><span class="pre">search_for_model()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mayalen Etcheverry
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023, Mayalen Etcheverry.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

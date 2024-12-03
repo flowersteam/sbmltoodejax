@@ -1,0 +1,461 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sbmltoodejax.jaxfuncs &#8212; sbmltoodejax</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../_static/documentation_options.js?v=0f4711b3"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/sbmltoodejax/jaxfuncs';</script>
+    <link rel="canonical" href="https://developmentalsystems.org/sbmltoodejax/_modules/sbmltoodejax/jaxfuncs.html" />
+    <link rel="icon" href="../../_static/logo.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.4.3" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.svg" class="logo__image only-light" alt="sbmltoodejax - Home"/>
+    <img src="../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="sbmltoodejax - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">SBMLtoODEjax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">🏡 Home</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">🛠️ Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../why_use.html">👀 Why SBMLtoODEjax?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design_principles.html">🎨 Design Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">🤝 Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../jax101.html">📎 Jax 101 [external]</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🎓 Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/biomodels_curation.html">Numerical simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/parallel_execution.html">Parallel execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/benchmark.html">Benchmarking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/gradient_descent.html">Gradient descent</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Public API - sbmltoodejax package</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../api/parse.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.parse</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modulegeneration.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.modulegeneration</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/jaxfuncs.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.jaxfuncs</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/biomodels_api.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.biomodels_api</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/utils.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.utils</span></code></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/flowersteam/sbmltoodejax" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for sbmltoodejax.jaxfuncs</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span>
+
+<div class="viewcode-block" id="sec">
+<a class="viewcode-back" href="../../api/jaxfuncs.html#sbmltoodejax.jaxfuncs.sec">[docs]</a>
+<span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">sec</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Secant function :math:`sec(x) = \\frac{1}{\\cos(x)}`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reciprocal</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="csc">
+<a class="viewcode-back" href="../../api/jaxfuncs.html#sbmltoodejax.jaxfuncs.csc">[docs]</a>
+<span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">csc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Cosecant function :math:`csc(x) = \\frac{1}{\\sin(x)}`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reciprocal</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="cot">
+<a class="viewcode-back" href="../../api/jaxfuncs.html#sbmltoodejax.jaxfuncs.cot">[docs]</a>
+<span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">cot</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Cotangent function :math:`cot(x) = \\frac{1}{\\tan(x)}`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reciprocal</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">x</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="sech">
+<a class="viewcode-back" href="../../api/jaxfuncs.html#sbmltoodejax.jaxfuncs.sech">[docs]</a>
+<span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">sech</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Hyperbolic secant function :math:`sech(x) = \\frac{1}{\\cosh(x)}`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reciprocal</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="csch">
+<a class="viewcode-back" href="../../api/jaxfuncs.html#sbmltoodejax.jaxfuncs.csch">[docs]</a>
+<span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">csch</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Hyperbolic cosecant function :math:`csch(x) = \\frac{1}{\\sinh(x)}`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reciprocal</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="coth">
+<a class="viewcode-back" href="../../api/jaxfuncs.html#sbmltoodejax.jaxfuncs.coth">[docs]</a>
+<span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">coth</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Hyperbolic cotangent function :math:`csch(x) = \\frac{1}{\\tanh(x)}`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reciprocal</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="sigmoid">
+<a class="viewcode-back" href="../../api/jaxfuncs.html#sbmltoodejax.jaxfuncs.sigmoid">[docs]</a>
+<span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sigmoid function :math:`sigmoid(x) = \\frac{1}{1+\\exp(-x)}`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="piecewise">
+<a class="viewcode-back" href="../../api/jaxfuncs.html#sbmltoodejax.jaxfuncs.piecewise">[docs]</a>
+<span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">piecewise</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function implements the Piecewise function used in SBML models:</span>
+<span class="sd">    :code:`Piecewise(expression1, condition1 [, expression2, condition2 [,...]])`</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        expressionN (float): a numerical value</span>
+
+<span class="sd">        conditionN (bool): a boolean value</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The first expression passed as argument with a ``True`` condition, read left to right. If all conditions are false, will return 0.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This function is not intended to be used by a user, but is defined in a way that matches how libSBML formats piecewise</span>
+<span class="sd">        functions are used in SBML models. This is similar to ``jax.numpy.piecewise`` function but instead of evaluating inputs</span>
+<span class="sd">        inside the function, they are evaluated before being passed to the function.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        For example, if called like so ``piecewise(x + 2, x &lt; 3, x + 4, x &gt; 3)``</span>
+<span class="sd">        and if ``x = 2``, then the arguments will be evaluated to ``piecewise(4, True, 6, False)``</span>
+<span class="sd">        and returns 4.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cond_list</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">func_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">arg_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">[::</span><span class="mi">2</span><span class="p">])):</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">arg_idx</span><span class="o">=</span><span class="n">arg_idx</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">arg_idx</span><span class="p">])</span>  <span class="c1"># python closure pb: https://stackoverflow.com/questions/20536362/python-append-lambda-functions-to-list</span>
+        <span class="n">func_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">jit</span><span class="p">(</span><span class="n">func</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cond_list</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">func_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">cond_list</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">cond_list</span><span class="p">,</span> <span class="o">~</span><span class="n">cond_list</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;bool&quot;</span><span class="p">)[</span><span class="n">jnp</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]])</span>
+
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">piecewise</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">empty</span><span class="p">(()),</span> <span class="n">cond_list</span><span class="p">,</span> <span class="n">func_list</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mayalen Etcheverry
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023, Mayalen Etcheverry.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

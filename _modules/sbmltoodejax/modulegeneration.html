@@ -1,0 +1,928 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sbmltoodejax.modulegeneration &#8212; sbmltoodejax</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../_static/documentation_options.js?v=0f4711b3"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/sbmltoodejax/modulegeneration';</script>
+    <link rel="canonical" href="https://developmentalsystems.org/sbmltoodejax/_modules/sbmltoodejax/modulegeneration.html" />
+    <link rel="icon" href="../../_static/logo.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.4.3" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.svg" class="logo__image only-light" alt="sbmltoodejax - Home"/>
+    <img src="../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="sbmltoodejax - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">SBMLtoODEjax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">🏡 Home</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">🛠️ Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../why_use.html">👀 Why SBMLtoODEjax?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design_principles.html">🎨 Design Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">🤝 Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../jax101.html">📎 Jax 101 [external]</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🎓 Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/biomodels_curation.html">Numerical simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/parallel_execution.html">Parallel execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/benchmark.html">Benchmarking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/gradient_descent.html">Gradient descent</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Public API - sbmltoodejax package</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../api/parse.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.parse</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modulegeneration.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.modulegeneration</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/jaxfuncs.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.jaxfuncs</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/biomodels_api.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.biomodels_api</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/utils.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.utils</span></code></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/flowersteam/sbmltoodejax" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for sbmltoodejax.modulegeneration</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">from</span> <span class="nn">sbmltoodejax</span> <span class="kn">import</span> <span class="n">jaxfuncs</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<div class="viewcode-block" id="GenerateModel">
+<a class="viewcode-back" href="../../api/modulegeneration.html#sbmltoodejax.modulegeneration.GenerateModel">[docs]</a>
+<span class="k">def</span> <span class="nf">GenerateModel</span><span class="p">(</span><span class="n">modelData</span><span class="p">,</span> <span class="n">outputFilePath</span><span class="p">,</span>
+                  <span class="n">RateofSpeciesChangeName</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span><span class="s1">&#39;RateofSpeciesChange&#39;</span><span class="p">,</span>
+                  <span class="n">AssignmentRuleName</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;AssignmentRule&#39;</span><span class="p">,</span>
+                  <span class="n">ModelStepName</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;ModelStep&#39;</span><span class="p">,</span>
+                  <span class="n">ModelRolloutName</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;ModelRollout&#39;</span><span class="p">,</span>
+                  <span class="n">vary_constant_reactants</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="n">vary_boundary_reactants</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="n">deltaT</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                  <span class="n">atol</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span>
+                  <span class="n">rtol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-12</span><span class="p">,</span>
+                  <span class="n">mxstep</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5000000</span>
+                  <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function takes model data created by :func:`~sbmltoodejax.parse.ParseSBMLFile` and generates a python file containing</span>
+<span class="sd">    variables and modules that implement the SBML model.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This function is adapted from ``sbmltoodepy.modulegeneration.GenerateModel`` function, however the generated python file is</span>
+<span class="sd">        written in JAX and follows different conventions for the generated variables and modules, as detailed in :ref:`structure-of-the-generated-python-file`</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        modelData (sbmltoodepy.dataclasses.ModelData): An object containing all the model components and values.</span>
+
+<span class="sd">        outputFilePath (str): The desired file path of the resulting python file.</span>
+
+<span class="sd">        RateofSpeciesChangeName (str, optional): The name of the RateofSpeciesChange module defined in the resulting python file. Default to &#39;RateofSpeciesChange&#39;.</span>
+
+<span class="sd">        AssignmentRuleName (str): The name of the AssignmentRule module defined in the resulting python file. Default to &#39;AssignmentRule&#39;.</span>
+
+<span class="sd">        ModelStepName (str): The name of the ModelStep module defined in the resulting python file. Default to &#39;ModelStep&#39;.</span>
+
+<span class="sd">        ModelRolloutName (str): The name of the ModelRollout module defined in the resulting python file. Default to&#39;ModelRollout&#39;.</span>
+
+<span class="sd">        deltaT (float): Time step size (in seconds). Default to 0.1.</span>
+
+<span class="sd">        atol (float): Absolute local error tolerance for ``jax.experimental.odeint`` solver. Default to 1e-6.</span>
+
+<span class="sd">        rtol (float): Relative local error tolerance for ``jax.experimental.odeint`` solver. Default to 1e-12.</span>
+
+<span class="sd">        mxstep (int): Maximum number of steps to take for each timepoint for ``jax.experimental.odeint`` solver. Default to 5000000.</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">jnp</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">)</span>
+
+    <span class="n">outputFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">outputFilePath</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+
+    <span class="n">parameters</span> <span class="o">=</span> <span class="n">modelData</span><span class="o">.</span><span class="n">parameters</span>
+    <span class="n">compartments</span> <span class="o">=</span> <span class="n">modelData</span><span class="o">.</span><span class="n">compartments</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">compartments</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">v</span><span class="o">.</span><span class="n">isConstant</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Varying compartment size is not handled&quot;</span><span class="p">)</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="n">modelData</span><span class="o">.</span><span class="n">species</span>
+    <span class="n">reactions</span> <span class="o">=</span> <span class="n">modelData</span><span class="o">.</span><span class="n">reactions</span>
+    <span class="n">functions</span> <span class="o">=</span> <span class="n">modelData</span><span class="o">.</span><span class="n">functions</span>
+
+    <span class="n">assignmentRules</span> <span class="o">=</span> <span class="n">modelData</span><span class="o">.</span><span class="n">assignmentRules</span>
+    <span class="n">rateRules</span> <span class="o">=</span> <span class="n">modelData</span><span class="o">.</span><span class="n">rateRules</span>
+    <span class="n">initialAssignments</span> <span class="o">=</span> <span class="n">modelData</span><span class="o">.</span><span class="n">initialAssignments</span>
+
+    <span class="n">mathFuncs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;abs&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.abs&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.max&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.min&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;pow&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.power&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;exp&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.exp&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;floor&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.floor&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;ceiling&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.ceil&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;ln&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.log&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;log&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.log10&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;factorial&#39;</span><span class="p">:</span> <span class="s1">&#39;jaxfuncs.factorial&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;sqrt&#39;</span><span class="p">:</span> <span class="s1">&#39;no.sqrt&#39;</span><span class="p">,</span>
+
+                 <span class="s1">&#39;eq&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.equal&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;neq&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.not_equal&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;gt&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.greater&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;lt&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.less&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;geq&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.greater_equal&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;leq&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.less_equal&#39;</span><span class="p">,</span>
+
+                 <span class="s1">&#39;and&#39;</span><span class="p">:</span> <span class="s1">&#39;and&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;or&#39;</span><span class="p">:</span> <span class="s1">&#39;or&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;xor&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.logical_xor&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;not&#39;</span><span class="p">:</span> <span class="s1">&#39;not&#39;</span><span class="p">,</span>
+
+                 <span class="s1">&#39;sin&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.sin&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;cos&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.cos&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;tan&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.tan&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;sec&#39;</span><span class="p">:</span> <span class="s1">&#39;jaxfuncs.sec&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;csc&#39;</span><span class="p">:</span> <span class="s1">&#39;jaxfuncs.csc&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;cot&#39;</span><span class="p">:</span> <span class="s1">&#39;jaxfuncs.cot&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;sinh&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.sinh&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;cosh&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.cosh&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;tanh&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.tanh&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;sech&#39;</span><span class="p">:</span> <span class="s1">&#39;jaxfuncs.sech&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;csch&#39;</span><span class="p">:</span> <span class="s1">&#39;jaxfuncs.csch&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;coth&#39;</span><span class="p">:</span> <span class="s1">&#39;jaxfuncs.coth&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;arcsin&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.arcsin&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;arccos&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.arccos&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;arctan&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.arctan&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;arcsinh&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.arcsinh&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;arccosh&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.arccosh&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;arctanh&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.arctanh&#39;</span><span class="p">,</span>
+
+                 <span class="s1">&#39;true&#39;</span><span class="p">:</span> <span class="s1">&#39;True&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;false&#39;</span><span class="p">:</span> <span class="s1">&#39;False&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;notanumber&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.nan&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;pi&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.pi&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;infinity&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.inf&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;exponentiale&#39;</span><span class="p">:</span> <span class="s1">&#39;jnp.e&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;piecewise&#39;</span><span class="p">:</span> <span class="s1">&#39;jaxfuncs.piecewise&#39;</span>
+                 <span class="p">}</span>
+
+    <span class="c1"># TODO: Add in user defined functions</span>
+
+    <span class="c1"># ================================================================================================================================</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;import equinox as eqx</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;from functools import partial</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;from jax import jit, lax, vmap</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;from jax.experimental.ode import odeint</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;import jax.numpy as jnp</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;from sbmltoodejax import jaxfuncs</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+    <span class="c1"># ================================================================================================================================</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="n">y0</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">y_indexes</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">reaction_name</span><span class="p">,</span> <span class="n">reaction</span> <span class="ow">in</span> <span class="n">reactions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">reactants</span> <span class="o">=</span> <span class="p">[</span><span class="n">reactant</span> <span class="k">for</span> <span class="p">(</span><span class="n">reactantCoeff</span><span class="p">,</span> <span class="n">reactant</span><span class="p">)</span> <span class="ow">in</span> <span class="n">reaction</span><span class="o">.</span><span class="n">reactants</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">reactant</span> <span class="ow">in</span> <span class="n">reactants</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">reactant</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">y_indexes</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">reactant</span> <span class="ow">in</span> <span class="n">species</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">species</span><span class="p">[</span><span class="n">reactant</span><span class="p">]</span><span class="o">.</span><span class="n">valueType</span> <span class="o">==</span> <span class="s2">&quot;Amount&quot;</span><span class="p">:</span>
+                        <span class="n">y_amount</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="n">reactant</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+                    <span class="k">elif</span> <span class="n">species</span><span class="p">[</span><span class="n">reactant</span><span class="p">]</span><span class="o">.</span><span class="n">valueType</span> <span class="o">==</span> <span class="s2">&quot;Concentration&quot;</span><span class="p">:</span>
+                        <span class="n">y_amount</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="n">reactant</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">compartments</span><span class="p">[</span><span class="n">species</span><span class="p">[</span><span class="n">reactant</span><span class="p">]</span><span class="o">.</span><span class="n">compartment</span><span class="p">]</span><span class="o">.</span><span class="n">size</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Specie value is not of type amount nor concentration&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Reactant is not a specie&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">species</span><span class="p">[</span><span class="n">reactant</span><span class="p">]</span><span class="o">.</span><span class="n">isConstant</span> <span class="ow">or</span> <span class="n">vary_constant_reactants</span><span class="p">:</span>
+                    <span class="n">y0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_amount</span><span class="p">)</span>
+                    <span class="n">y_indexes</span><span class="p">[</span><span class="n">reactant</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+
+    <span class="k">for</span> <span class="n">rule_name</span><span class="p">,</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rateRules</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">variable</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">y_indexes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">variable</span> <span class="ow">in</span> <span class="n">species</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">species</span><span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">valueType</span> <span class="o">==</span> <span class="s2">&quot;Amount&quot;</span><span class="p">:</span>
+                    <span class="n">y_amount</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+                <span class="k">elif</span> <span class="n">species</span><span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">valueType</span> <span class="o">==</span> <span class="s2">&quot;Concentration&quot;</span><span class="p">:</span>
+                    <span class="n">y_amount</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">compartments</span><span class="p">[</span><span class="n">species</span><span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">compartment</span><span class="p">]</span><span class="o">.</span><span class="n">size</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Specie value is not of type amount nor concentration&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">rule</span><span class="o">.</span><span class="n">variable</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+                <span class="n">y_amount</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+            <span class="k">elif</span> <span class="n">rule</span><span class="o">.</span><span class="n">variable</span> <span class="ow">in</span> <span class="n">compartments</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Varying compartment size is not handled&quot;</span><span class="p">)</span>
+            <span class="n">y0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_amount</span><span class="p">)</span>
+            <span class="n">y_indexes</span><span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="n">w0</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">w_indexes</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">assignmentRules</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">variable</span> <span class="ow">in</span> <span class="n">species</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">species</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">valueType</span> <span class="o">==</span> <span class="s2">&quot;Amount&quot;</span><span class="p">:</span>
+                <span class="n">w_amount</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+            <span class="k">elif</span> <span class="n">species</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">valueType</span> <span class="o">==</span> <span class="s2">&quot;Concentration&quot;</span><span class="p">:</span>
+                <span class="n">w_amount</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">compartments</span><span class="p">[</span><span class="n">species</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">compartment</span><span class="p">]</span><span class="o">.</span><span class="n">size</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Specie value is not of type amount nor concentration&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">v</span><span class="o">.</span><span class="n">variable</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+            <span class="n">w_amount</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">elif</span> <span class="n">v</span><span class="o">.</span><span class="n">variable</span> <span class="ow">in</span> <span class="n">compartments</span><span class="p">:</span>
+            <span class="n">w_amount</span> <span class="o">=</span> <span class="n">compartments</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">size</span>
+        <span class="n">w0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w_amount</span><span class="p">)</span>
+        <span class="n">w_indexes</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">w0</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+
+    <span class="c1"># Add all parameters that are not in w_indexes or y_indexes</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">c_indexes</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">species</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">y_indexes</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">w_indexes</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">valueType</span> <span class="o">==</span> <span class="s2">&quot;Amount&quot;</span><span class="p">:</span>
+                <span class="n">c_amount</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">value</span>
+            <span class="k">elif</span> <span class="n">v</span><span class="o">.</span><span class="n">valueType</span> <span class="o">==</span> <span class="s2">&quot;Concentration&quot;</span><span class="p">:</span>
+                <span class="n">c_amount</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">compartments</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">compartment</span><span class="p">]</span><span class="o">.</span><span class="n">size</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Specie value is not of type amount nor concentration&quot;</span><span class="p">)</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c_amount</span><span class="p">)</span>
+            <span class="n">c_indexes</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">y_indexes</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">w_indexes</span><span class="p">):</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">c_indexes</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">compartments</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">y_indexes</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">w_indexes</span><span class="p">):</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">compartments</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+            <span class="n">c_indexes</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="c1"># Add constant parameters that are defined in reactions or that for some reason are not written as &quot;constant&quot; in their definition</span>
+    <span class="k">for</span> <span class="n">reaction_name</span><span class="p">,</span> <span class="n">reaction</span> <span class="ow">in</span> <span class="n">reactions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">reaction</span><span class="o">.</span><span class="n">rxnParameters</span><span class="p">:</span>
+            <span class="n">param_name</span> <span class="o">=</span> <span class="n">reaction_name</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">param</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">assert</span> <span class="p">(</span><span class="n">param_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">y_indexes</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">param_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">w_indexes</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">param_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">c_indexes</span><span class="p">):</span>
+                <span class="n">c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">c_indexes</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="c1"># ================================================================================================================================</span>
+
+    <span class="k">def</span> <span class="nf">ParseLHS</span><span class="p">(</span><span class="n">rawLHS</span><span class="p">):</span>
+
+        <span class="k">assert</span> <span class="n">rawLHS</span> <span class="ow">in</span> <span class="n">w_indexes</span>
+        <span class="n">returnLHS</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;w = w.at[</span><span class="si">{</span><span class="n">w_indexes</span><span class="p">[</span><span class="n">rawLHS</span><span class="p">]</span><span class="si">}</span><span class="s2">].set(&quot;</span>
+        <span class="k">if</span> <span class="n">rawLHS</span> <span class="ow">in</span> <span class="n">species</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">species</span><span class="p">[</span><span class="n">rawLHS</span><span class="p">]</span><span class="o">.</span><span class="n">hasOnlySubstanceUnits</span><span class="p">:</span>
+                <span class="n">returnLHS</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">compartments</span><span class="p">[</span><span class="n">species</span><span class="p">[</span><span class="n">rawLHS</span><span class="p">]</span><span class="o">.</span><span class="n">compartment</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2"> * &quot;</span>
+        <span class="n">returnLHS</span> <span class="o">+=</span> <span class="s2">&quot;(&quot;</span>
+
+        <span class="k">return</span> <span class="n">returnLHS</span>
+
+    <span class="k">def</span> <span class="nf">ParseRHS</span><span class="p">(</span><span class="n">rawRateLaw</span><span class="p">,</span> <span class="n">extended_param_names</span><span class="o">=</span><span class="p">[],</span> <span class="n">reaction_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">yvar</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">wvar</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">cvar</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="n">tvar</span><span class="o">=</span><span class="s2">&quot;t&quot;</span><span class="p">):</span>
+        <span class="c1"># The main purpose of this function is to turn math strings given by libSBML into code formated to properly call self.c, self.w and y</span>
+
+        <span class="n">rawRateLaw</span> <span class="o">=</span> <span class="n">rawRateLaw</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;^&quot;</span><span class="p">,</span> <span class="s2">&quot;**&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;&amp;&quot;</span><span class="p">,</span> <span class="s2">&quot;&amp;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;||&quot;</span><span class="p">,</span> <span class="s2">&quot;|&quot;</span><span class="p">)</span>  <span class="c1"># Replace not understood operators</span>
+        <span class="n">variables</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\b[a-zA-Z_]\w*&#39;</span><span class="p">,</span> <span class="n">rawRateLaw</span><span class="p">):</span>  <span class="c1"># look for variable names</span>
+            <span class="c1"># ToDo: check for function calls</span>
+            <span class="n">variables</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">rawRateLaw</span><span class="p">[</span><span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">():</span><span class="n">match</span><span class="o">.</span><span class="n">end</span><span class="p">()],</span> <span class="n">match</span><span class="o">.</span><span class="n">span</span><span class="p">()])</span>
+
+        <span class="n">returnRHS</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">oldSpan</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">variables</span> <span class="o">!=</span> <span class="p">[]:</span>
+            <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">oldSpan</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">variable</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">returnRHS</span> <span class="o">+=</span> <span class="n">rawRateLaw</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">variable</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="k">elif</span> <span class="n">oldSpan</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">returnRHS</span> <span class="o">+=</span> <span class="n">rawRateLaw</span><span class="p">[</span><span class="n">oldSpan</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="n">variable</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">oldSpan</span> <span class="o">=</span> <span class="n">variable</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">extended_param_names</span> <span class="ow">and</span> <span class="n">reaction_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">reaction_name</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">species</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">species</span><span class="p">[</span><span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">hasOnlySubstanceUnits</span><span class="p">:</span>
+                    <span class="n">returnRHS</span> <span class="o">+=</span> <span class="s1">&#39;(&#39;</span>
+
+                <span class="k">if</span> <span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">c_indexes</span><span class="p">:</span>
+                    <span class="n">returnRHS</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">cvar</span><span class="si">}</span><span class="s1">[</span><span class="si">{</span><span class="n">c_indexes</span><span class="p">[</span><span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="si">}</span><span class="s1">]&#39;</span>
+                <span class="k">elif</span> <span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">w_indexes</span><span class="p">:</span>
+                    <span class="n">returnRHS</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wvar</span><span class="si">}</span><span class="s1">[</span><span class="si">{</span><span class="n">w_indexes</span><span class="p">[</span><span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="si">}</span><span class="s1">]&#39;</span>
+                <span class="k">elif</span> <span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">y_indexes</span><span class="p">:</span>
+                    <span class="n">returnRHS</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">yvar</span><span class="si">}</span><span class="s1">[</span><span class="si">{</span><span class="n">y_indexes</span><span class="p">[</span><span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="si">}</span><span class="s1">]&#39;</span>
+                <span class="k">elif</span> <span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">mathFuncs</span><span class="p">:</span>
+                    <span class="n">returnRHS</span> <span class="o">+=</span> <span class="n">mathFuncs</span><span class="p">[</span><span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="k">elif</span> <span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">functions</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Custom functions are not handled&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;time&quot;</span><span class="p">:</span>
+                    <span class="n">returnRHS</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">tvar</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="k">elif</span> <span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;pi&quot;</span><span class="p">:</span>
+                    <span class="n">returnRHS</span> <span class="o">+=</span> <span class="s2">&quot;jnp.pi&quot;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="p">(</span><span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;New case: unkown Reaction variable: &#39;</span> <span class="o">+</span> <span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+                <span class="k">if</span> <span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">species</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">species</span><span class="p">[</span><span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">hasOnlySubstanceUnits</span><span class="p">:</span>
+                    <span class="n">returnRHS</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">compartments</span><span class="p">[</span><span class="n">species</span><span class="p">[</span><span class="n">variable</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">compartment</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">)&#39;</span>
+            <span class="n">returnRHS</span> <span class="o">+=</span> <span class="n">rawRateLaw</span><span class="p">[</span><span class="n">variable</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span><span class="nb">len</span><span class="p">(</span><span class="n">rawRateLaw</span><span class="p">)]</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">returnRHS</span> <span class="o">=</span> <span class="n">rawRateLaw</span>
+
+        <span class="k">return</span> <span class="n">returnRHS</span>
+
+    <span class="c1"># ================================================================================================================================</span>
+    <span class="n">ruleDefinedVars</span> <span class="o">=</span> <span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">variable</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">assignmentRules</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">assignment</span> <span class="ow">in</span> <span class="n">initialAssignments</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">ruleDefinedVars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">assignment</span><span class="o">.</span><span class="n">variable</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">assignmentRules</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\b[a-zA-Z_]\w*&#39;</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">math</span><span class="p">):</span>  <span class="c1"># look for variable names</span>
+            <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">math</span><span class="p">[</span><span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">():</span><span class="n">match</span><span class="o">.</span><span class="n">end</span><span class="p">()])</span>
+        <span class="n">originalLen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">dependents</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">originalLen</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span><span class="p">[</span><span class="n">originalLen</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ruleDefinedVars</span><span class="p">:</span>
+                <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">originalLen</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">assignment</span> <span class="ow">in</span> <span class="n">initialAssignments</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">assignment</span><span class="o">.</span><span class="n">dependents</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\b[a-zA-Z_]\w*&#39;</span><span class="p">,</span> <span class="n">assignment</span><span class="o">.</span><span class="n">math</span><span class="p">):</span>  <span class="c1"># look for variable names</span>
+            <span class="n">assignment</span><span class="o">.</span><span class="n">dependents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">assignment</span><span class="o">.</span><span class="n">math</span><span class="p">[</span><span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">():</span><span class="n">match</span><span class="o">.</span><span class="n">end</span><span class="p">()])</span>
+        <span class="n">originalLen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">assignment</span><span class="o">.</span><span class="n">dependents</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">originalLen</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">assignment</span><span class="o">.</span><span class="n">dependents</span><span class="p">[</span><span class="n">originalLen</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ruleDefinedVars</span><span class="p">:</span>
+                <span class="n">assignment</span><span class="o">.</span><span class="n">dependents</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">originalLen</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">continueVar</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">breakVar</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">varDefinedThisLoop</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">assignmentRules</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span> <span class="o">==</span> <span class="p">[]:</span>
+                <span class="n">var_amount</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">ParseRHS</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">math</span><span class="p">,</span> <span class="n">yvar</span><span class="o">=</span><span class="s2">&quot;y0&quot;</span><span class="p">,</span> <span class="n">wvar</span><span class="o">=</span><span class="s2">&quot;w0&quot;</span><span class="p">,</span> <span class="n">cvar</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="n">tvar</span><span class="o">=</span><span class="s2">&quot;t0&quot;</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">variable</span> <span class="ow">in</span> <span class="n">species</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">species</span><span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">hasOnlySubstanceUnits</span><span class="p">:</span>
+                    <span class="n">var_amount</span> <span class="o">*=</span> <span class="n">compartments</span><span class="p">[</span><span class="n">species</span><span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">compartment</span><span class="p">]</span><span class="o">.</span><span class="n">size</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var_amount</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                    <span class="n">var_amount</span> <span class="o">=</span> <span class="n">var_amount</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">variable</span> <span class="ow">in</span> <span class="n">y_indexes</span><span class="p">:</span>
+                    <span class="n">y0</span><span class="p">[</span><span class="n">y_indexes</span><span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">variable</span><span class="p">]]</span> <span class="o">=</span> <span class="n">var_amount</span>
+                <span class="k">elif</span> <span class="n">rule</span><span class="o">.</span><span class="n">variable</span> <span class="ow">in</span> <span class="n">w_indexes</span><span class="p">:</span>
+                    <span class="n">w0</span><span class="p">[</span><span class="n">w_indexes</span><span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">variable</span><span class="p">]]</span> <span class="o">=</span> <span class="n">var_amount</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Rule variable is not in y nor w&quot;</span><span class="p">)</span>
+                <span class="n">varDefinedThisLoop</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">variable</span>
+                <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">continueVar</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">breakVar</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">breakVar</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">continueVar</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">assignment</span> <span class="ow">in</span> <span class="n">initialAssignments</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">assignment</span><span class="o">.</span><span class="n">dependents</span> <span class="o">==</span> <span class="p">[]:</span>
+                    <span class="n">var_amount</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">ParseRHS</span><span class="p">(</span><span class="n">assignment</span><span class="o">.</span><span class="n">math</span><span class="p">,</span> <span class="n">yvar</span><span class="o">=</span><span class="s2">&quot;y0&quot;</span><span class="p">,</span> <span class="n">wvar</span><span class="o">=</span><span class="s2">&quot;w0&quot;</span><span class="p">,</span> <span class="n">cvar</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="n">assignment</span><span class="o">.</span><span class="n">variable</span> <span class="ow">in</span> <span class="n">species</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span>
+                    <span class="n">species</span><span class="p">[</span><span class="n">assignment</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">hasOnlySubstanceUnits</span><span class="p">):</span>
+                        <span class="n">var_amount</span> <span class="o">*=</span> <span class="n">compartments</span><span class="p">[</span><span class="n">species</span><span class="p">[</span><span class="n">assignment</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">compartment</span><span class="p">]</span><span class="o">.</span><span class="n">size</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var_amount</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                        <span class="n">var_amount</span> <span class="o">=</span> <span class="n">var_amount</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">assignment</span><span class="o">.</span><span class="n">variable</span> <span class="ow">in</span> <span class="n">y_indexes</span><span class="p">:</span>
+                        <span class="n">y0</span><span class="p">[</span><span class="n">y_indexes</span><span class="p">[</span><span class="n">assignment</span><span class="o">.</span><span class="n">variable</span><span class="p">]]</span> <span class="o">=</span> <span class="n">var_amount</span>
+                    <span class="k">elif</span> <span class="n">assignment</span><span class="o">.</span><span class="n">variable</span> <span class="ow">in</span> <span class="n">w_indexes</span><span class="p">:</span>
+                        <span class="n">w0</span><span class="p">[</span><span class="n">w_indexes</span><span class="p">[</span><span class="n">assignment</span><span class="o">.</span><span class="n">variable</span><span class="p">]]</span> <span class="o">=</span> <span class="n">var_amount</span>
+                    <span class="k">elif</span> <span class="n">assignment</span><span class="o">.</span><span class="n">variable</span> <span class="ow">in</span> <span class="n">c_indexes</span><span class="p">:</span>
+                        <span class="n">c</span><span class="p">[</span><span class="n">c_indexes</span><span class="p">[</span><span class="n">assignment</span><span class="o">.</span><span class="n">variable</span><span class="p">]]</span> <span class="o">=</span> <span class="n">var_amount</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Assignment variable is not in y, w nor c&quot;</span><span class="p">)</span>
+                    <span class="n">varDefinedThisLoop</span> <span class="o">=</span> <span class="n">assignment</span><span class="o">.</span><span class="n">variable</span>
+                    <span class="n">assignment</span><span class="o">.</span><span class="n">dependents</span> <span class="o">=</span> <span class="kc">None</span>
+                    <span class="n">continueVar</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="n">breakVar</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">break</span>
+                <span class="k">elif</span> <span class="ow">not</span> <span class="n">assignment</span><span class="o">.</span><span class="n">dependents</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">breakVar</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">assignmentRules</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">originalLen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">dependents</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">originalLen</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span><span class="p">[</span><span class="n">originalLen</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">varDefinedThisLoop</span><span class="p">:</span>
+                        <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">originalLen</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">assignment</span> <span class="ow">in</span> <span class="n">initialAssignments</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">assignment</span><span class="o">.</span><span class="n">dependents</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">originalLen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">assignment</span><span class="o">.</span><span class="n">dependents</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">originalLen</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">assignment</span><span class="o">.</span><span class="n">dependents</span><span class="p">[</span><span class="n">originalLen</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">varDefinedThisLoop</span><span class="p">:</span>
+                        <span class="n">assignment</span><span class="o">.</span><span class="n">dependents</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">originalLen</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">continueVar</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">breakVar</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Algebraic Loop in AssignmentRules&#39;</span><span class="p">)</span>
+
+    <span class="c1"># ================================================================================================================================</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;t0 = </span><span class="si">{</span><span class="n">t0</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;y0 = jnp.array(</span><span class="si">{</span><span class="n">y0</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;y_indexes = </span><span class="si">{</span><span class="n">y_indexes</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;w0 = jnp.array(</span><span class="si">{</span><span class="n">w0</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;w_indexes = </span><span class="si">{</span><span class="n">w_indexes</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;c = jnp.array(</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">) </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;c_indexes = </span><span class="si">{</span><span class="n">c_indexes</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># ================================================================================================================================</span>
+
+    <span class="c1"># Set up stoichCoeffMat, a matrix of stoichiometric coefficients for solving the reactions</span>
+    <span class="n">reactionCounter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">reactionIndex</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">stoichCoeffMat</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">y_indexes</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">reactions</span><span class="p">),</span> <span class="mi">1</span><span class="p">)])</span>
+
+    <span class="k">for</span> <span class="n">rxnId</span> <span class="ow">in</span> <span class="n">reactions</span><span class="p">:</span>
+        <span class="n">reactionIndex</span><span class="p">[</span><span class="n">rxnId</span><span class="p">]</span> <span class="o">=</span> <span class="n">reactionCounter</span>
+        <span class="n">reactionCounter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">reaction</span> <span class="o">=</span> <span class="n">reactions</span><span class="p">[</span><span class="n">rxnId</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">reactant</span> <span class="ow">in</span> <span class="n">reaction</span><span class="o">.</span><span class="n">reactants</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">reactant</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">y_indexes</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">species</span><span class="p">[</span><span class="n">reactant</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">isBoundarySpecies</span><span class="p">)</span> <span class="ow">or</span> <span class="n">vary_boundary_reactants</span><span class="p">:</span>
+                    <span class="n">stoichCoeffMat</span> <span class="o">=</span> <span class="n">stoichCoeffMat</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">y_indexes</span><span class="p">[</span><span class="n">reactant</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">reactionIndex</span><span class="p">[</span><span class="n">rxnId</span><span class="p">]]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">reactant</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">rateArray</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0.0&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_indexes</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">rule_name</span><span class="p">,</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rateRules</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">rateArray</span><span class="p">[</span><span class="n">y_indexes</span><span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">variable</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;self.Rate&#39;</span> <span class="o">+</span> <span class="n">rule</span><span class="o">.</span><span class="n">variable</span> <span class="o">+</span> <span class="s1">&#39;(y, w, c, t)&#39;</span>
+
+
+    <span class="c1"># Write</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;class &quot;</span> <span class="o">+</span> <span class="n">RateofSpeciesChangeName</span> <span class="o">+</span> <span class="s2">&quot;(eqx.Module):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">stoichiometricMatrix = jnp.array(</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">stoichCoeffMat</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span><span class="si">}</span><span class="s2">, dtype=jnp.float32) </span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">@jit</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">def __call__(self, y, t, w, c):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t\t</span><span class="s1">rateRuleVector = jnp.array([&#39;</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">var</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">rateArray</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;], dtype=jnp.float32)</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t\t</span><span class="s1">reactionVelocities = self.calc_reaction_velocities(y, w, c, t)</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t\t</span><span class="s1">rateOfSpeciesChange = self.stoichiometricMatrix @ reactionVelocities + rateRuleVector</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t\t</span><span class="s1">return rateOfSpeciesChange</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n\t</span><span class="s1">def calc_reaction_velocities(self, y, w, c, t):</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">reactionElements</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t\t</span><span class="s1">reactionVelocities = jnp.array([&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">reactions</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">reactionId</span> <span class="ow">in</span> <span class="n">reactions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">reactionElements</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">reactionElements</span> <span class="o">+=</span> <span class="p">(</span><span class="s1">&#39;self.&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">reactionId</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;(y, w, c, t)&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">reactionElements</span> <span class="o">+=</span> <span class="p">(</span><span class="s1">&#39;, self.&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">reactionId</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;(y, w, c, t)&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">reactionElements</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">reactionElements</span> <span class="o">+</span> <span class="s1">&#39;], dtype=jnp.float32)</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t\t</span><span class="s1">return reactionVelocities</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">reaction_name</span> <span class="ow">in</span> <span class="n">reactions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n\t</span><span class="s1">def </span><span class="si">{</span><span class="n">reaction_name</span><span class="si">}</span><span class="s1">(self, y, w, c, t):</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">rxnParamNames</span> <span class="o">=</span> <span class="p">[</span><span class="n">param</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">reactions</span><span class="p">[</span><span class="n">reaction_name</span><span class="p">]</span><span class="o">.</span><span class="n">rxnParameters</span><span class="p">]</span>
+        <span class="n">rateLaw</span> <span class="o">=</span> <span class="n">ParseRHS</span><span class="p">(</span><span class="n">reactions</span><span class="p">[</span><span class="n">reaction_name</span><span class="p">]</span><span class="o">.</span><span class="n">rateLaw</span><span class="p">,</span> <span class="n">extended_param_names</span><span class="o">=</span><span class="n">rxnParamNames</span><span class="p">,</span> <span class="n">reaction_name</span><span class="o">=</span><span class="n">reaction_name</span><span class="p">,</span> <span class="n">yvar</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">wvar</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">cvar</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">)</span>
+        <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t\t</span><span class="s1">return &#39;</span> <span class="o">+</span> <span class="n">rateLaw</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">rateRule</span> <span class="ow">in</span> <span class="n">rateRules</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">def Rate&quot;</span> <span class="o">+</span> <span class="n">rateRule</span><span class="o">.</span><span class="n">variable</span> <span class="o">+</span> <span class="s2">&quot;(self, y, w, c, t):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">rateLaw</span> <span class="o">=</span> <span class="n">ParseRHS</span><span class="p">(</span><span class="n">rateRule</span><span class="o">.</span><span class="n">math</span><span class="p">,</span> <span class="n">yvar</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">wvar</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">cvar</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">)</span>
+        <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t\t</span><span class="s1">return &#39;</span> <span class="o">+</span> <span class="n">rateLaw</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># ================================================================================================================================</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;class &quot;</span> <span class="o">+</span> <span class="n">AssignmentRuleName</span> <span class="o">+</span> <span class="s2">&quot;(eqx.Module):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">@jit</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">def __call__(self, y, w, c, t):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">ruleDefinedVars</span> <span class="o">=</span> <span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">variable</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">assignmentRules</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">assignmentRules</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\b[a-zA-Z_]\w*&#39;</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">math</span><span class="p">):</span>  <span class="c1"># look for variable names</span>
+            <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">math</span><span class="p">[</span><span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">():</span><span class="n">match</span><span class="o">.</span><span class="n">end</span><span class="p">()])</span>
+        <span class="n">originalLen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">dependents</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">originalLen</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span><span class="p">[</span><span class="n">originalLen</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ruleDefinedVars</span><span class="p">:</span>
+                <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">originalLen</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">continueVar</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">breakVar</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">varDefinedThisLoop</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">assignmentRules</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span> <span class="o">==</span> <span class="p">[]:</span>
+                <span class="n">ruleLHS</span> <span class="o">=</span> <span class="n">ParseLHS</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">variable</span><span class="p">)</span>
+                <span class="n">ruleRHS</span> <span class="o">=</span> <span class="n">ParseRHS</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">math</span><span class="p">,</span> <span class="n">yvar</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">wvar</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">cvar</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">)</span>
+                <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">ruleLHS</span> <span class="o">+</span> <span class="n">ruleRHS</span> <span class="o">+</span> <span class="s1">&#39;))</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">varDefinedThisLoop</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">variable</span>
+                <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">continueVar</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">breakVar</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">breakVar</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">assignmentRules</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">originalLen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">dependents</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">originalLen</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span><span class="p">[</span><span class="n">originalLen</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">varDefinedThisLoop</span><span class="p">:</span>
+                        <span class="n">rule</span><span class="o">.</span><span class="n">dependents</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">originalLen</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">continueVar</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">breakVar</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Algebraic Loop in AssignmentRules&#39;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">return w</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ================================================================================================================================</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;class &quot;</span> <span class="o">+</span> <span class="n">ModelStepName</span> <span class="o">+</span> <span class="s2">&quot;(eqx.Module):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">y_indexes: dict = eqx.static_field()</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">w_indexes: dict = eqx.static_field()</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">c_indexes: dict = eqx.static_field()</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">ratefunc: </span><span class="si">{</span><span class="n">RateofSpeciesChangeName</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">atol: float = eqx.static_field()</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">rtol: float = eqx.static_field()</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">mxstep: int = eqx.static_field()</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">assignmentfunc: </span><span class="si">{</span><span class="n">AssignmentRuleName</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">def __init__(self, &quot;</span>
+                     <span class="sa">f</span><span class="s2">&quot;y_indexes=</span><span class="si">{</span><span class="n">y_indexes</span><span class="si">}</span><span class="s2">, &quot;</span>
+                     <span class="sa">f</span><span class="s2">&quot;w_indexes=</span><span class="si">{</span><span class="n">w_indexes</span><span class="si">}</span><span class="s2">, &quot;</span>
+                     <span class="sa">f</span><span class="s2">&quot;c_indexes=</span><span class="si">{</span><span class="n">c_indexes</span><span class="si">}</span><span class="s2">, &quot;</span>
+                     <span class="sa">f</span><span class="s2">&quot;atol=</span><span class="si">{</span><span class="n">atol</span><span class="si">}</span><span class="s2">, rtol=</span><span class="si">{</span><span class="n">rtol</span><span class="si">}</span><span class="s2">, mxstep=</span><span class="si">{</span><span class="n">mxstep</span><span class="si">}</span><span class="s2">):</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">self.y_indexes = y_indexes</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">self.w_indexes = w_indexes</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">self.c_indexes = c_indexes</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">self.ratefunc = </span><span class="si">{</span><span class="n">RateofSpeciesChangeName</span><span class="si">}</span><span class="s2">()</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">self.rtol = rtol</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">self.atol = atol</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">self.mxstep = mxstep</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">self.assignmentfunc = </span><span class="si">{</span><span class="n">AssignmentRuleName</span><span class="si">}</span><span class="s2">()</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">@jit</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">def __call__(self, y, w, c, t, deltaT):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">y_new = odeint(self.ratefunc, y, jnp.array([t, t + deltaT]), w, c, atol=self.atol, rtol=self.rtol, mxstep=self.mxstep)[-1]</span><span class="se">\t\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">t_new = t + deltaT</span><span class="se">\t\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">w_new = self.assignmentfunc(y_new, w, c, t_new)</span><span class="se">\t\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">return y_new, w_new, c, t_new</span><span class="se">\t\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ================================================================================================================================</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;class &quot;</span> <span class="o">+</span> <span class="n">ModelRolloutName</span> <span class="o">+</span> <span class="s2">&quot;(eqx.Module):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">deltaT: float = eqx.static_field()</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">modelstepfunc: </span><span class="si">{</span><span class="n">ModelStepName</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">def __init__(self, deltaT=</span><span class="si">{</span><span class="n">deltaT</span><span class="si">}</span><span class="s2">, atol=</span><span class="si">{</span><span class="n">atol</span><span class="si">}</span><span class="s2">, rtol=</span><span class="si">{</span><span class="n">rtol</span><span class="si">}</span><span class="s2">, mxstep=</span><span class="si">{</span><span class="n">mxstep</span><span class="si">}</span><span class="s2">):</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">self.deltaT = deltaT</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">self.modelstepfunc = </span><span class="si">{</span><span class="n">ModelStepName</span><span class="si">}</span><span class="s2">(atol=atol, rtol=rtol, mxstep=mxstep)</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">@partial(jit, static_argnames=(</span><span class="se">\&quot;</span><span class="s2">n_steps</span><span class="se">\&quot;</span><span class="s2">,))</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">def __call__(self, n_steps, &quot;</span>
+                     <span class="sa">f</span><span class="s2">&quot;y0=jnp.array(</span><span class="si">{</span><span class="n">y0</span><span class="si">}</span><span class="s2">), &quot;</span>
+                     <span class="sa">f</span><span class="s2">&quot;w0=jnp.array(</span><span class="si">{</span><span class="n">w0</span><span class="si">}</span><span class="s2">), &quot;</span>
+                     <span class="sa">f</span><span class="s2">&quot;c=jnp.array(</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">), &quot;</span>
+                     <span class="sa">f</span><span class="s2">&quot;t0=</span><span class="si">{</span><span class="n">t0</span><span class="si">}</span><span class="s2">&quot;</span>
+                     <span class="sa">f</span><span class="s2">&quot;):</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">@jit</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">def f(carry, x):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t\t</span><span class="s2">y, w, c, t = carry</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t\t</span><span class="s2">return self.modelstepfunc(y, w, c, t, self.deltaT), (y, w, t)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">(y, w, c, t), (ys, ws, ts) = lax.scan(f, (y0, w0, c, t0), jnp.arange(n_steps))</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">ys = jnp.moveaxis(ys, 0, -1)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">ws = jnp.moveaxis(ws, 0, -1)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">return ys, ws, ts</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ================================================================================================================================</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mayalen Etcheverry
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023, Mayalen Etcheverry.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,996 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Benchmarking &#8212; sbmltoodejax</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=0f4711b3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/benchmark';</script>
+    <link rel="canonical" href="https://developmentalsystems.org/sbmltoodejax/tutorials/benchmark.html" />
+    <link rel="icon" href="../_static/logo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Gradient descent" href="gradient_descent.html" />
+    <link rel="prev" title="Parallel execution" href="parallel_execution.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.4.3" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="sbmltoodejax - Home"/>
+    <img src="../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="sbmltoodejax - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">SBMLtoODEjax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">🏡 Home</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">🛠️ Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../why_use.html">👀 Why SBMLtoODEjax?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design_principles.html">🎨 Design Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">🤝 Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jax101.html">📎 Jax 101 [external]</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🎓 Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="biomodels_curation.html">Numerical simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_execution.html">Parallel execution</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Benchmarking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gradient_descent.html">Gradient descent</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Public API - sbmltoodejax package</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api/parse.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.parse</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/modulegeneration.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.modulegeneration</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/jaxfuncs.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.jaxfuncs</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/biomodels_api.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.biomodels_api</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/utils.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.utils</span></code></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/flowersteam/sbmltoodejax/blob/main/docs/tutorials/benchmark.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/flowersteam/sbmltoodejax" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tutorials/benchmark.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Benchmarking</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports-and-utils">Imports and Utils</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-benchmark">Run benchmark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">Benchmark results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-limitations">⚠️ Benchmark limitations</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="benchmarking">
+<h1>Benchmarking<a class="headerlink" href="#benchmarking" title="Link to this heading">#</a></h1>
+<p>In this tutorial, we compare simulation times (on CPU on a laptop machine) when simulating models generated  with original SBMLtoODEpy library versus with the SBMLtoODEjax library.
+The code in this notebook is rather complicated, but you can run it on your own machine and customize it to your needs if you want to benchmark for specific SBML models and/or reaction times and/or batch size. Otherwise, we advise jumping directly to the benchmark results which summarizes when (and when not) using SBMLtoODEjax can become advantageous.</p>
+<section id="imports-and-utils">
+<h2>Imports and Utils<a class="headerlink" href="#imports-and-utils" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># imports</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;jax_platform_name&quot;</span><span class="p">,</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">vmap</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">import</span> <span class="nn">jax.random</span> <span class="k">as</span> <span class="nn">jrandom</span>
+
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sbmltoodejax.biomodels_api</span> <span class="kn">import</span> <span class="n">get_content_for_model</span>
+<span class="kn">from</span> <span class="nn">sbmltoodejax.parse</span> <span class="kn">import</span> <span class="n">ParseSBMLFile</span>
+<span class="kn">from</span> <span class="nn">sbmltoodejax.modulegeneration</span> <span class="kn">import</span> <span class="n">GenerateModel</span> <span class="k">as</span> <span class="n">GenerateJaxModel</span>
+<span class="kn">from</span> <span class="nn">sbmltoodepy.modulegeneration</span> <span class="kn">import</span> <span class="n">GenerateModel</span> <span class="k">as</span> <span class="n">GeneratePyModel</span>
+
+
+<span class="c1"># load model utils</span>
+<span class="k">def</span> <span class="nf">generate_models</span><span class="p">(</span><span class="n">model_idx</span><span class="p">,</span> <span class="n">deltaT</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">mxstep</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    
+    <span class="n">model_xml_body</span> <span class="o">=</span> <span class="n">get_content_for_model</span><span class="p">(</span><span class="n">model_idx</span><span class="p">)</span>
+    <span class="n">model_data</span> <span class="o">=</span> <span class="n">ParseSBMLFile</span><span class="p">(</span><span class="n">model_xml_body</span><span class="p">)</span>
+    
+    <span class="n">py_model_fp</span> <span class="o">=</span> <span class="s2">&quot;py_model.py&quot;</span>
+    <span class="n">GeneratePyModel</span><span class="p">(</span><span class="n">model_data</span><span class="p">,</span> <span class="n">py_model_fp</span><span class="p">)</span>
+    
+    <span class="n">jax_model_fp</span> <span class="o">=</span> <span class="s2">&quot;jax_model.py&quot;</span>
+    <span class="n">GenerateJaxModel</span><span class="p">(</span><span class="n">model_data</span><span class="p">,</span> <span class="n">jax_model_fp</span><span class="p">,</span> <span class="n">deltaT</span><span class="o">=</span><span class="n">deltaT</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">py_model_fp</span><span class="p">,</span> <span class="n">jax_model_fp</span>
+
+<span class="k">def</span> <span class="nf">load_models</span><span class="p">(</span><span class="n">model_idx</span><span class="p">,</span> <span class="n">deltaT</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">mxstep</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="c1"># Generate model files</span>
+    <span class="n">py_model_fp</span><span class="p">,</span> <span class="n">jax_model_fp</span> <span class="o">=</span> <span class="n">generate_models</span><span class="p">(</span><span class="n">model_idx</span><span class="p">,</span> <span class="n">deltaT</span><span class="o">=</span><span class="n">deltaT</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">,</span> <span class="n">mxstep</span><span class="o">=</span><span class="n">mxstep</span><span class="p">)</span>
+    
+    <span class="c1"># Load Jax model</span>
+    <span class="n">jax_spec</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">spec_from_file_location</span><span class="p">(</span><span class="s2">&quot;ModelSpec&quot;</span><span class="p">,</span> <span class="n">jax_model_fp</span><span class="p">)</span>
+    <span class="n">jax_module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">module_from_spec</span><span class="p">(</span><span class="n">jax_spec</span><span class="p">)</span>
+    <span class="n">jax_spec</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">exec_module</span><span class="p">(</span><span class="n">jax_module</span><span class="p">)</span>
+    
+    <span class="n">jax_model_cls</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">jax_module</span><span class="p">,</span> <span class="s2">&quot;ModelRollout&quot;</span><span class="p">)</span>
+    <span class="n">jax_model</span> <span class="o">=</span> <span class="n">jax_model_cls</span><span class="p">()</span>
+    <span class="n">jax_y0</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">jax_module</span><span class="p">,</span> <span class="s2">&quot;y0&quot;</span><span class="p">)</span>
+    <span class="n">jax_w0</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">jax_module</span><span class="p">,</span> <span class="s2">&quot;w0&quot;</span><span class="p">)</span>
+    <span class="n">jax_c</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">jax_module</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">)</span>
+    
+    <span class="n">y_indexes</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">jax_module</span><span class="p">,</span> <span class="s2">&quot;y_indexes&quot;</span><span class="p">)</span>
+    <span class="n">w_indexes</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">jax_module</span><span class="p">,</span> <span class="s2">&quot;w_indexes&quot;</span><span class="p">)</span>
+    <span class="n">c_indexes</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">jax_module</span><span class="p">,</span> <span class="s2">&quot;c_indexes&quot;</span><span class="p">)</span>
+    
+    
+    <span class="c1"># Load numpy model</span>
+    <span class="n">py_spec</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">spec_from_file_location</span><span class="p">(</span><span class="s2">&quot;ModelSpec&quot;</span><span class="p">,</span> <span class="n">py_model_fp</span><span class="p">)</span>
+    <span class="n">py_module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">module_from_spec</span><span class="p">(</span><span class="n">py_spec</span><span class="p">)</span>
+    <span class="n">py_spec</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">exec_module</span><span class="p">(</span><span class="n">py_module</span><span class="p">)</span>
+    
+    <span class="n">py_model_cls</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">py_module</span><span class="p">,</span> <span class="s2">&quot;SBMLmodel&quot;</span><span class="p">)</span>
+    <span class="n">py_model</span> <span class="o">=</span> <span class="n">py_model_cls</span><span class="p">()</span>
+    <span class="n">py_y0</span><span class="p">,</span> <span class="n">py_w0</span><span class="p">,</span> <span class="n">py_c</span> <span class="o">=</span> <span class="n">get_sbmltoodepy_model_variables</span><span class="p">(</span><span class="n">py_model</span><span class="p">,</span> <span class="n">y_indexes</span><span class="p">,</span> <span class="n">w_indexes</span><span class="p">,</span> <span class="n">c_indexes</span><span class="p">)</span>
+
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">jax_model</span><span class="p">,</span> <span class="n">jax_y0</span><span class="p">,</span> <span class="n">jax_w0</span><span class="p">,</span> <span class="n">jax_c</span><span class="p">),</span> <span class="p">(</span><span class="n">py_model</span><span class="p">,</span> <span class="n">py_y0</span><span class="p">,</span> <span class="n">py_w0</span><span class="p">,</span> <span class="n">py_c</span><span class="p">),</span> <span class="p">(</span><span class="n">y_indexes</span><span class="p">,</span> <span class="n">w_indexes</span><span class="p">,</span> <span class="n">c_indexes</span><span class="p">)</span>
+
+<span class="c1"># utils for converting SBMLtoODEpy according to SBMLtoODEjax conventions (for comparison)</span>
+<span class="k">def</span> <span class="nf">get_sbmltoodepy_model_variables</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">y_indexes</span><span class="p">,</span> <span class="n">w_indexes</span><span class="p">,</span> <span class="n">c_indexes</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_indexes</span><span class="p">))</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w_indexes</span><span class="p">))</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">c_indexes</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">y_indexes</span><span class="p">:</span>
+            <span class="n">y</span><span class="p">[</span><span class="n">y_indexes</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">amount</span>
+        <span class="k">elif</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">w_indexes</span><span class="p">:</span>
+            <span class="n">w</span><span class="p">[</span><span class="n">w_indexes</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">amount</span>
+        <span class="k">elif</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">c_indexes</span><span class="p">:</span>
+            <span class="n">c</span><span class="p">[</span><span class="n">c_indexes</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">amount</span>
+
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">y_indexes</span><span class="p">:</span>
+            <span class="n">y</span><span class="p">[</span><span class="n">y_indexes</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">elif</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">w_indexes</span><span class="p">:</span>
+            <span class="n">w</span><span class="p">[</span><span class="n">w_indexes</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">elif</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">c_indexes</span><span class="p">:</span>
+            <span class="n">c</span><span class="p">[</span><span class="n">c_indexes</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">y_indexes</span><span class="p">:</span>
+            <span class="n">y</span><span class="p">[</span><span class="n">y_indexes</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">size</span>
+        <span class="k">elif</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">w_indexes</span><span class="p">:</span>
+            <span class="n">w</span><span class="p">[</span><span class="n">w_indexes</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">size</span>
+        <span class="k">elif</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">c_indexes</span><span class="p">:</span>
+            <span class="n">c</span><span class="p">[</span><span class="n">c_indexes</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">size</span>
+
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">sub_k</span><span class="p">,</span> <span class="n">sub_v</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">sub_k</span><span class="si">}</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">w_indexes</span><span class="p">:</span>
+                <span class="n">w</span><span class="p">[</span><span class="n">w_indexes</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">sub_k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">sub_v</span><span class="o">.</span><span class="n">value</span>
+            <span class="k">elif</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">sub_k</span><span class="si">}</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">c_indexes</span><span class="p">:</span>
+                <span class="n">c</span><span class="p">[</span><span class="n">c_indexes</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">sub_k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">sub_v</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">c</span>
+
+
+<span class="k">def</span> <span class="nf">set_sbmltoodepy_model_variables</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y_indexes</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Util to set the model variables</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">y_indexes</span><span class="p">:</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">s</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">concentration</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">y_indexes</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">y_indexes</span><span class="p">:</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">y_indexes</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span>
+
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">y_indexes</span><span class="p">:</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">y_indexes</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span>
+
+    <span class="k">return</span> <span class="n">model</span>
+
+<span class="c1"># plot utils</span>
+<span class="n">default_colors</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">204</span><span class="p">,</span><span class="mi">121</span><span class="p">,</span><span class="mi">167</span><span class="p">),</span> 
+                  <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">114</span><span class="p">,</span><span class="mi">178</span><span class="p">),</span>
+                  <span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">159</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>  
+                  <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">158</span><span class="p">,</span><span class="mi">115</span><span class="p">),</span>
+                  <span class="p">(</span><span class="mi">127</span><span class="p">,</span><span class="mi">127</span><span class="p">,</span><span class="mi">127</span><span class="p">),</span>
+                  <span class="p">(</span><span class="mi">240</span><span class="p">,</span><span class="mi">228</span><span class="p">,</span><span class="mi">66</span><span class="p">),</span>
+                  <span class="p">(</span><span class="mi">148</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">189</span><span class="p">),</span>
+                  <span class="p">(</span><span class="mi">86</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">233</span><span class="p">),</span>
+                  <span class="p">(</span><span class="mi">213</span><span class="p">,</span><span class="mi">94</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+                  <span class="p">(</span><span class="mi">140</span><span class="p">,</span><span class="mi">86</span><span class="p">,</span><span class="mi">75</span><span class="p">),</span>
+                  <span class="p">(</span><span class="mi">214</span><span class="p">,</span><span class="mi">39</span><span class="p">,</span><span class="mi">40</span><span class="p">),</span>
+                  <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
+<span class="n">default_colors</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">([</span><span class="n">c</span><span class="o">/</span><span class="mi">255</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">color</span><span class="p">])</span> <span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">default_colors</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="run-benchmark">
+<h2>Run benchmark<a class="headerlink" href="#run-benchmark" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulation for different (rollout durations, number of rollouts in parallel)</span>
+<span class="n">all_model_ids</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">all_n_secs</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">100000</span><span class="p">]</span>
+<span class="n">all_n_in_parallel</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># same ODE solver parameters than SBMLtoODEpy ones for fair comparison</span>
+<span class="n">deltaT</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">atol</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<span class="n">rtol</span> <span class="o">=</span> <span class="mf">1e-12</span>
+<span class="n">mxstep</span> <span class="o">=</span> <span class="mi">5000000</span> 
+
+<span class="n">key</span> <span class="o">=</span> <span class="n">jrandom</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># prepare results dictionary</span>
+<span class="n">compute_time</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;jax&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;py_pool&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">model_idx</span> <span class="ow">in</span> <span class="n">all_model_ids</span><span class="p">:</span>
+    <span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;jax&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;py_pool&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">n_in_parallel</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">all_n_in_parallel</span><span class="p">:</span> 
+        <span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;jax&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">][</span><span class="n">n_in_parallel</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">][</span><span class="n">n_in_parallel</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;py_pool&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">][</span><span class="n">n_in_parallel</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+
+<span class="k">for</span> <span class="n">model_idx</span> <span class="ow">in</span> <span class="n">all_model_ids</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;model_idx: </span><span class="si">{</span><span class="n">model_idx</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># load models</span>
+    <span class="p">(</span><span class="n">jax_model</span><span class="p">,</span> <span class="n">jax_y0</span><span class="p">,</span> <span class="n">jax_w0</span><span class="p">,</span> <span class="n">jax_c</span><span class="p">),</span> <span class="p">(</span><span class="n">py_model</span><span class="p">,</span> <span class="n">py_y0</span><span class="p">,</span> <span class="n">py_w0</span><span class="p">,</span> <span class="n">py_c</span><span class="p">),</span> <span class="p">(</span><span class="n">y_indexes</span><span class="p">,</span> <span class="n">w_indexes</span><span class="p">,</span> <span class="n">c_indexes</span><span class="p">)</span> <span class="o">=</span> <span class="n">load_models</span><span class="p">(</span><span class="n">model_idx</span><span class="p">,</span> <span class="n">deltaT</span><span class="o">=</span><span class="n">deltaT</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">,</span> <span class="n">mxstep</span><span class="o">=</span><span class="n">mxstep</span><span class="p">)</span>
+
+    
+    <span class="c1"># We first test for different n_secs without parallel execution (n_in_parallel = 1)</span>
+    <span class="n">n_in_parallel</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n_secs</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">all_n_secs</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;n_secs: </span><span class="si">{</span><span class="n">n_secs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">n_steps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_secs</span> <span class="o">/</span> <span class="n">deltaT</span><span class="p">)</span>
+
+
+        <span class="c1"># Simulate JAX model</span>
+        <span class="n">jax_cstart</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">jax_ys</span><span class="p">,</span> <span class="n">jax_ws</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">jax_model</span><span class="p">(</span><span class="n">n_steps</span><span class="p">,</span> <span class="n">jax_y0</span><span class="p">,</span> <span class="n">jax_w0</span><span class="p">)</span>
+        <span class="n">jax_ys</span><span class="o">.</span><span class="n">block_until_ready</span><span class="p">()</span>
+        <span class="n">jax_cend</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;jax&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">][</span><span class="n">n_in_parallel</span><span class="p">][</span><span class="n">n_secs</span><span class="p">]</span> <span class="o">=</span> <span class="n">jax_cend</span> <span class="o">-</span> <span class="n">jax_cstart</span>
+
+        <span class="c1"># Simulate NUMPY model </span>
+        <span class="k">if</span> <span class="n">n_secs</span> <span class="o">&lt;=</span> <span class="mi">1000</span><span class="p">:</span>
+
+            <span class="n">py_cstart</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">step_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+                <span class="n">py_model</span><span class="o">.</span><span class="n">RunSimulation</span><span class="p">(</span><span class="n">deltaT</span><span class="p">,</span> <span class="n">absoluteTolerance</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">relativeTolerance</span><span class="o">=</span><span class="n">rtol</span><span class="p">)</span>
+            <span class="n">py_cend</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+            <span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">][</span><span class="n">n_in_parallel</span><span class="p">][</span><span class="n">n_secs</span><span class="p">]</span> <span class="o">=</span> <span class="n">py_cend</span> <span class="o">-</span> <span class="n">py_cstart</span>
+        
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># we do linear approximation for big n_secs (too long to run)</span>
+            <span class="n">prev_n_secs</span> <span class="o">=</span> <span class="n">all_n_secs</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">ratio</span> <span class="o">=</span> <span class="n">n_secs</span><span class="o">/</span><span class="n">prev_n_secs</span>
+            <span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">][</span><span class="n">n_in_parallel</span><span class="p">][</span><span class="n">n_secs</span><span class="p">]</span> <span class="o">=</span> <span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">][</span><span class="n">n_in_parallel</span><span class="p">][</span><span class="n">prev_n_secs</span><span class="p">]</span><span class="o">*</span><span class="n">ratio</span>
+        
+        
+    <span class="c1"># We then test different number of simulations launched in parallel and n_secs = 10</span>
+    <span class="n">n_secs</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">n_steps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_secs</span> <span class="o">/</span> <span class="n">deltaT</span><span class="p">)</span>
+    
+    <span class="c1"># batch jax model</span>
+    <span class="n">batched_jax_model</span> <span class="o">=</span> <span class="n">vmap</span><span class="p">(</span><span class="n">jax_model</span><span class="p">,</span> <span class="n">in_axes</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">out_axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+    
+    <span class="c1"># Create batched init (by adding perturbation to default init state)</span>
+    <span class="n">key</span><span class="p">,</span> <span class="n">subkey</span> <span class="o">=</span> <span class="n">jrandom</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="n">perturb</span> <span class="o">=</span> <span class="n">jrandom</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">subkey</span><span class="p">,</span> <span class="p">(</span><span class="n">all_n_in_parallel</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">jax_y0</span><span class="p">)),</span> <span class="n">minval</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">maxval</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+    <span class="n">batched_jax_y0</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">jax_y0</span><span class="p">,</span> <span class="p">(</span><span class="n">all_n_in_parallel</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="n">perturb</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">batched_jax_w0</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">jax_w0</span><span class="p">,</span> <span class="p">(</span><span class="n">all_n_in_parallel</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">batched_py_y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">batched_jax_y0</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n_in_parallel</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">all_n_in_parallel</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;n_in_parallel: </span><span class="si">{</span><span class="n">n_in_parallel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+        <span class="c1"># Simulate JAX model</span>
+        <span class="n">jax_cstart</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">jax_ys</span><span class="p">,</span> <span class="n">jax_ws</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">batched_jax_model</span><span class="p">(</span><span class="n">n_steps</span><span class="p">,</span> <span class="n">batched_jax_y0</span><span class="p">[:</span><span class="n">n_in_parallel</span><span class="p">],</span> <span class="n">batched_jax_w0</span><span class="p">[:</span><span class="n">n_in_parallel</span><span class="p">])</span>
+        <span class="n">jax_ys</span><span class="o">.</span><span class="n">block_until_ready</span><span class="p">()</span>
+        <span class="n">jax_cend</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        
+        <span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;jax&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">][</span><span class="n">n_in_parallel</span><span class="p">][</span><span class="n">n_secs</span><span class="p">]</span> <span class="o">=</span> <span class="n">jax_cend</span> <span class="o">-</span> <span class="n">jax_cstart</span>
+        
+        <span class="c1"># Simulate NUMPY model with for loop over init states</span>
+        <span class="k">if</span> <span class="n">n_in_parallel</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
+        
+            <span class="n">py_ctime</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">cur_py_y0</span> <span class="ow">in</span> <span class="n">batched_py_y0</span><span class="p">[:</span><span class="n">n_in_parallel</span><span class="p">]:</span>
+
+                <span class="c1"># Change initial state </span>
+                <span class="n">py_model</span> <span class="o">=</span> <span class="n">set_sbmltoodepy_model_variables</span><span class="p">(</span><span class="n">py_model</span><span class="p">,</span> <span class="n">cur_py_y0</span><span class="p">,</span> <span class="n">y_indexes</span><span class="p">)</span>
+
+                <span class="c1"># Run simulation</span>
+                <span class="n">py_cstart</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">step_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+                    <span class="n">py_model</span><span class="o">.</span><span class="n">RunSimulation</span><span class="p">(</span><span class="n">deltaT</span><span class="p">,</span> <span class="n">absoluteTolerance</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">relativeTolerance</span><span class="o">=</span><span class="n">rtol</span><span class="p">)</span>
+                <span class="n">py_cend</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+                <span class="n">py_ctime</span> <span class="o">+=</span> <span class="n">py_cend</span> <span class="o">-</span> <span class="n">py_cstart</span>
+
+            <span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">][</span><span class="n">n_in_parallel</span><span class="p">][</span><span class="n">n_secs</span><span class="p">]</span> <span class="o">=</span> <span class="n">py_ctime</span>
+        
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># we do linear approximation for big n_in_parallel (too long to run)</span>
+            <span class="n">prev_n_in_parallel</span> <span class="o">=</span> <span class="n">all_n_in_parallel</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">ratio</span> <span class="o">=</span> <span class="n">n_in_parallel</span><span class="o">/</span><span class="n">prev_n_in_parallel</span>
+            <span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">][</span><span class="n">n_in_parallel</span><span class="p">][</span><span class="n">n_secs</span><span class="p">]</span> <span class="o">=</span> <span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">][</span><span class="n">prev_n_in_parallel</span><span class="p">][</span><span class="n">n_secs</span><span class="p">]</span><span class="o">*</span><span class="n">ratio</span>
+        
+        
+        <span class="c1"># Simulate NUMPY model with pooling over init states</span>
+        <span class="k">def</span> <span class="nf">simulate_py_model</span><span class="p">(</span><span class="n">cur_py_y0</span><span class="p">):</span>
+            <span class="c1"># Change initial state </span>
+            <span class="n">cur_py_model</span> <span class="o">=</span> <span class="n">set_sbmltoodepy_model_variables</span><span class="p">(</span><span class="n">py_model</span><span class="p">,</span> <span class="n">cur_py_y0</span><span class="p">,</span> <span class="n">y_indexes</span><span class="p">)</span>
+
+            <span class="c1"># Run simulation</span>
+            <span class="k">for</span> <span class="n">step_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+                <span class="n">cur_py_model</span><span class="o">.</span><span class="n">RunSimulation</span><span class="p">(</span><span class="n">deltaT</span><span class="p">,</span> <span class="n">absoluteTolerance</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">relativeTolerance</span><span class="o">=</span><span class="n">rtol</span><span class="p">)</span>
+
+            <span class="k">return</span>
+
+        <span class="c1"># Simulate the OOP Numpy/Scipy-based Model</span>
+        <span class="n">py_cstart</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">()</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">simulate_py_model</span><span class="p">,</span> <span class="p">[</span><span class="n">cur_py_y0</span> <span class="k">for</span> <span class="n">cur_py_y0</span> <span class="ow">in</span> <span class="n">batched_py_y0</span><span class="p">[:</span><span class="n">n_in_parallel</span><span class="p">]])</span>
+        <span class="n">py_cend</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        
+        <span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;py_pool&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">][</span><span class="n">n_in_parallel</span><span class="p">][</span><span class="n">n_secs</span><span class="p">]</span> <span class="o">=</span> <span class="n">py_cend</span> <span class="o">-</span> <span class="n">py_cstart</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model_idx: 3
+n_secs: 0.1
+n_secs: 1
+n_secs: 10
+n_secs: 100
+n_secs: 1000
+n_secs: 10000
+n_secs: 100000
+n_in_parallel: 5
+n_in_parallel: 50
+n_in_parallel: 100
+n_in_parallel: 250
+n_in_parallel: 500
+n_in_parallel: 1000
+model_idx: 4
+n_secs: 0.1
+n_secs: 1
+n_secs: 10
+n_secs: 100
+n_secs: 1000
+n_secs: 10000
+n_secs: 100000
+n_in_parallel: 5
+n_in_parallel: 50
+n_in_parallel: 100
+n_in_parallel: 250
+n_in_parallel: 500
+n_in_parallel: 1000
+model_idx: 6
+n_secs: 0.1
+n_secs: 1
+n_secs: 10
+n_secs: 100
+n_secs: 1000
+n_secs: 10000
+n_secs: 100000
+n_in_parallel: 5
+n_in_parallel: 50
+n_in_parallel: 100
+n_in_parallel: 250
+n_in_parallel: 500
+n_in_parallel: 1000
+model_idx: 8
+n_secs: 0.1
+n_secs: 1
+n_secs: 10
+n_secs: 100
+n_secs: 1000
+n_secs: 10000
+n_secs: 100000
+n_in_parallel: 5
+n_in_parallel: 50
+n_in_parallel: 100
+n_in_parallel: 250
+n_in_parallel: 500
+n_in_parallel: 1000
+model_idx: 10
+n_secs: 0.1
+n_secs: 1
+n_secs: 10
+n_secs: 100
+n_secs: 1000
+n_secs: 10000
+n_secs: 100000
+n_in_parallel: 5
+n_in_parallel: 50
+n_in_parallel: 100
+n_in_parallel: 250
+n_in_parallel: 500
+n_in_parallel: 1000
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="benchmark-results">
+<h2>Benchmark results<a class="headerlink" href="#benchmark-results" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_jax_times</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">all_py_times</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">model_idx</span> <span class="ow">in</span> <span class="n">all_model_ids</span><span class="p">:</span>
+    <span class="n">jax_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;jax&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="n">n_secs</span><span class="p">]</span> <span class="k">for</span> <span class="n">n_secs</span> <span class="ow">in</span> <span class="n">all_n_secs</span><span class="p">]</span>
+    <span class="n">py_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="n">n_secs</span><span class="p">]</span> <span class="k">for</span> <span class="n">n_secs</span> <span class="ow">in</span> <span class="n">all_n_secs</span><span class="p">]</span> 
+    <span class="n">all_jax_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">jax_times</span><span class="p">)</span>
+    <span class="n">all_py_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">py_times</span><span class="p">)</span>
+<span class="n">all_jax_times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">all_jax_times</span><span class="p">)</span>
+<span class="n">all_py_times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">all_py_times</span><span class="p">)</span>
+
+<span class="n">jax_ymean</span> <span class="o">=</span> <span class="n">all_jax_times</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">jax_ystd</span> <span class="o">=</span> <span class="n">all_jax_times</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">py_ymean</span> <span class="o">=</span> <span class="n">all_py_times</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">py_ystd</span> <span class="o">=</span> <span class="n">all_py_times</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_n_secs</span><span class="p">)</span> 
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">py_ymean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">default_colors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SBMLtoODEpy&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">py_ymean</span><span class="o">+</span><span class="n">py_ystd</span><span class="p">,</span> <span class="n">py_ymean</span><span class="o">-</span><span class="n">py_ystd</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">default_colors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">jax_ymean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">default_colors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SBMLtoODEjax (jit)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">jax_ymean</span><span class="o">+</span><span class="n">jax_ystd</span><span class="p">,</span> <span class="n">jax_ymean</span><span class="o">-</span><span class="n">jax_ystd</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">default_colors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;reaction time (secs)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;compute time (secs)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Linear Scale&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Log Scale&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Compute time comparison for different rollout lengths&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/e1d11cba84f2799fb40bf8d885a294f6aa76bddc25ed85ef445ec23e65d7ce9a.png" src="../_images/e1d11cba84f2799fb40bf8d885a294f6aa76bddc25ed85ef445ec23e65d7ce9a.png" />
+</div>
+</div>
+<p>Above we show the average compute time of model rollouts for different rollout lengths (reaction times),  for models generated with the original SBMLtoODEpy library (shown in pink) versus with the SBMLtoODEjax library (shown in blue).</p>
+<p>We can see that for short reaction times (here &lt;100 secs with <span class="math notranslate nohighlight">\(\Delta T=0.1\)</span>, see Log Scale), SBMLtoODEjax simulation takes longer than the original SBMLtoODEpy
+library because when calling <em>ModelStep</em> for the first time, it takes some time to generate the compiled trace.
+However, the advantage of SBMLtoODEjax becomes clear when considering longer rollouts where we obtain huge speed-ups with respect to original SBMLtoODEpy library (see Linear Scale).
+This is because the original SBMLtoODEpy python code uses for-loops, hence have linear increase of compute time, whereas the scanned JIT-compiled step function executes much faster.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_jax_times</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">all_py_times</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">all_py_pool_times</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">model_idx</span> <span class="ow">in</span> <span class="n">all_model_ids</span><span class="p">:</span>
+    <span class="n">jax_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;jax&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">][</span><span class="n">n_in_parallel</span><span class="p">][</span><span class="mi">10</span><span class="p">]</span> <span class="k">for</span> <span class="n">n_in_parallel</span> <span class="ow">in</span> <span class="n">all_n_in_parallel</span><span class="p">]</span>
+    <span class="n">py_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">][</span><span class="n">n_in_parallel</span><span class="p">][</span><span class="mi">10</span><span class="p">]</span> <span class="k">for</span> <span class="n">n_in_parallel</span> <span class="ow">in</span> <span class="n">all_n_in_parallel</span><span class="p">]</span>
+    <span class="n">py_pool_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_time</span><span class="p">[</span><span class="s1">&#39;py_pool&#39;</span><span class="p">][</span><span class="n">model_idx</span><span class="p">][</span><span class="n">n_in_parallel</span><span class="p">][</span><span class="mi">10</span><span class="p">]</span> <span class="k">for</span> <span class="n">n_in_parallel</span> <span class="ow">in</span> <span class="n">all_n_in_parallel</span><span class="p">]</span>
+    <span class="n">all_jax_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">jax_times</span><span class="p">)</span>
+    <span class="n">all_py_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">py_times</span><span class="p">)</span>
+    <span class="n">all_py_pool_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">py_pool_times</span><span class="p">)</span>
+<span class="n">all_jax_times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">all_jax_times</span><span class="p">)</span>
+<span class="n">all_py_times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">all_py_times</span><span class="p">)</span>
+<span class="n">all_py_pool_times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">all_py_pool_times</span><span class="p">)</span>
+
+<span class="n">jax_ymean</span> <span class="o">=</span> <span class="n">all_jax_times</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">jax_ystd</span> <span class="o">=</span> <span class="n">all_jax_times</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">py_ymean</span> <span class="o">=</span> <span class="n">all_py_times</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">py_ystd</span> <span class="o">=</span> <span class="n">all_py_times</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">py_pool_ymean</span> <span class="o">=</span> <span class="n">all_py_pool_times</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">py_pool_ystd</span> <span class="o">=</span> <span class="n">all_py_pool_times</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_n_in_parallel</span><span class="p">)</span> 
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">py_ymean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">default_colors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SBMLtoODEpy + for loop&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">py_ymean</span><span class="o">+</span><span class="n">py_ystd</span><span class="p">,</span> <span class="n">py_ymean</span><span class="o">-</span><span class="n">py_ystd</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">default_colors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">py_pool_ymean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">default_colors</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SBMLtoODEpy + pooling&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">py_pool_ymean</span><span class="o">+</span><span class="n">py_pool_ystd</span><span class="p">,</span> <span class="n">py_pool_ymean</span><span class="o">-</span><span class="n">py_pool_ystd</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">default_colors</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">jax_ymean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">default_colors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SBMLtoODEjax (vmap)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">jax_ymean</span><span class="o">+</span><span class="n">jax_ystd</span><span class="p">,</span> <span class="n">jax_ymean</span><span class="o">-</span><span class="n">jax_ystd</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">default_colors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;number of rollouts&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;compute time (secs)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Linear Scale&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Log Scale&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Compute time comparison for different number of rollouts (i.e. different initial states)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/acead121cf06dc2007d6584afcf9077f331ebc0b63657b0ee3fe618b740160fe.png" src="../_images/acead121cf06dc2007d6584afcf9077f331ebc0b63657b0ee3fe618b740160fe.png" />
+</div>
+</div>
+<p>Above we show the average compute time of model rollouts for different batch sizes (x-axis), where all runs have a rollout length of 10 seconds with <span class="math notranslate nohighlight">\(\Delta T=0.1\)</span>. We compare the average compute time of model rollouts for 1) the SBMLtoODEpy-generated models and for loop computations over the inputs (pink), 2) the SBMLtoODEpy-generated models and pooling over the inputs (orange)
+and 3) the SBMLtoODEjax library with vectorized computations (blue).</p>
+<p>Again, similar conclusions can be drawn where SBMLtoODEjax is less efficient for small batch sizes (and small rollout lengths), but becomes very advantageous for larger batch sizes.</p>
+</section>
+<section id="benchmark-limitations">
+<h2>⚠️ Benchmark limitations<a class="headerlink" href="#benchmark-limitations" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Our benchmark only compares with the <a class="reference external" href="https://sbmltoodepy.readthedocs.io/en/latest/">SBMLtoODEpy</a> library, as we directly extend from it, which relies on the Numpy/Scipy backend. Other software tools, such as <a class="reference external" href="https://tellurium.analogmachine.org/">Tellurium</a> which relies on the C++ libRoadRunner backend, might be more performant.</p></li>
+<li><p>Whereas we use similar hyper-parameters for the ODE equation solvers (absolute and relative tolerance and maximum number of solver steps), SBMLtoODEpy uses <code class="docutils literal notranslate"><span class="pre">scipy.integrate.odeint</span></code> solver whereas SBMLtoODEjax uses <code class="docutils literal notranslate"><span class="pre">jax.experimental.odeint</span></code> solver, which might have some impact on the precision of the results and would need to be more rigorously examined as well argued in <a class="reference external" href="https://www.nature.com/articles/s41598-021-82196-2">this paper</a>.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="parallel_execution.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Parallel execution</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="gradient_descent.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Gradient descent</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports-and-utils">Imports and Utils</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-benchmark">Run benchmark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-results">Benchmark results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-limitations">⚠️ Benchmark limitations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mayalen Etcheverry
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023, Mayalen Etcheverry.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

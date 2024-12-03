@@ -1,0 +1,642 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Design principles &#8212; sbmltoodejax</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="_static/documentation_options.js?v=0f4711b3"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'design_principles';</script>
+    <link rel="canonical" href="https://developmentalsystems.org/sbmltoodejax/design_principles.html" />
+    <link rel="icon" href="_static/logo.svg"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributing" href="contributing.html" />
+    <link rel="prev" title="Should you use SBMLtoODEjax?" href="why_use.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.4.3" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.svg" class="logo__image only-light" alt="sbmltoodejax - Home"/>
+    <img src="_static/logo.svg" class="logo__image only-dark pst-js-only" alt="sbmltoodejax - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">SBMLtoODEjax</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="index.html">🏡 Home</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">🛠️ Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="why_use.html">👀 Why SBMLtoODEjax?</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">🎨 Design Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">🤝 Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jax101.html">📎 Jax 101 [external]</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🎓 Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tutorials/biomodels_curation.html">Numerical simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/parallel_execution.html">Parallel execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/benchmark.html">Benchmarking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/gradient_descent.html">Gradient descent</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Public API - sbmltoodejax package</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api/parse.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.parse</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/modulegeneration.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.modulegeneration</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/jaxfuncs.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.jaxfuncs</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/biomodels_api.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.biomodels_api</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/utils.html"><code class="docutils literal notranslate"><span class="pre">sbmltoodejax.utils</span></code></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/flowersteam/sbmltoodejax" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/design_principles.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Design principles</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#context">💡 Context</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sbml-core-components">SBML core components</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax-main-principles">JAX main principles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equinox-s-module-abstraction">Equinox’s <em>Module</em> abstraction</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-of-the-generated-python-file">🔍 Structure of the generated python file</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="design-principles">
+<h1>Design principles<a class="headerlink" href="#design-principles" title="Link to this heading">#</a></h1>
+<p>Before diving into the specifications of SBMLtoODEjax, we provide some context on the <a class="reference external" href="https://sbml.org/">SBML</a> core components,
+as well as on the core principles behind the <a class="reference external" href="https://jax.readthedocs.io/en/latest/">JAX</a> library and the <em>module</em> abstraction of the <a class="reference external" href="https://docs.kidger.site/equinox/">Equinox</a> library,
+all of which is useful to better understand SBMLtoODEjax main design principles.
+Feel free to jump directly to <a class="reference internal" href="#structure-of-the-generated-python-file"><span class="std std-ref">🔍 Structure of the generated python file</span></a> if you want to get into the specifics of SBMLtoODEjax.</p>
+<section id="context">
+<h2>💡 Context<a class="headerlink" href="#context" title="Link to this heading">#</a></h2>
+<section id="sbml-core-components">
+<h3>SBML core components<a class="headerlink" href="#sbml-core-components" title="Link to this heading">#</a></h3>
+<p>SBML (Systems Biology Markup Language) is a standard file format used in computational systems biology to represent models of biological processes.</p>
+<p>SBML files are written in XML format, such that it can be read and simulated by different software tools.
+To decide whether you should use SBMLtoODEjax or not will depend on your needs and experience in programming,
+be sure to check our <a class="reference internal" href="why_use.html"><span class="std std-doc">Why use SBMLtoODEjax?</span></a> section.</p>
+<p>SBML models use the following core components to describe the structure and dynamics of biological systems:</p>
+<ul class="simple">
+<li><p>Compartments: compartments represent the physical (or conceptual) spaces where biological entities reside and are defined by their spatial characteristics, in particular their <em>size</em>.</p></li>
+<li><p>Species: species represent the individual entities in a biological system (e.g. molecules or proteins). Each species is associated with a compartment where it resides and participate in reactions. The initial amount/concentration of species is often provided in the SBML file.</p></li>
+<li><p>Reactions: Reactions describe the transformations or interactions between species. Each reaction consists of reactants, products, and modifiers (species that affect the reaction but are not consumed or produced).</p></li>
+<li><p>Parameters: Parameters are used to define numerical values in mathematical equations or to represent model constants. They can be associated with species, reactions, or other elements in the model.</p></li>
+<li><p>Events: Events represent discrete occurrences that can trigger discontinuous changes in the model (e.g. addition or removal of species or changes in reaction rates).
+⚠️ Models with events are currently not handled in SBMLtoODEjax.</p></li>
+<li><p>Rules: Rules define mathematical relationships or constraints in the model, and can be of different types:</p>
+<ul>
+<li><p>Algebraic rules specify relationships between variables</p></li>
+<li><p>Differential rules describe the rate of change of a variable</p></li>
+<li><p>Assignment rules set the value of a variable based on a mathematical expression</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>There is much more to know about SBML, such as how it integrates annotations and metadata, how it handles units and quantities, and so on.
+It can be quite involving to dig into their <a class="reference external" href="https://sbml.org/documents/specifications/">specifications</a>, but you will find all the necessary information in there.</p>
+</div>
+</section>
+<section id="jax-main-principles">
+<h3>JAX main principles<a class="headerlink" href="#jax-main-principles" title="Link to this heading">#</a></h3>
+<p>JAX is a recently-developed python library which provides a simple and powerful API for writing accelerated numerical code,
+which is why we use it in SBMLtoODEjax. However, it is important to understand how JAX operates to use it properly.</p>
+<p>Here are the main things to know about JAX for us:</p>
+<ol class="arabic simple">
+<li><p><strong>Numpy-inspired Syntax</strong>: JAX API closely mirrors the Numpy API, allowing an easy entry into the library for users already familiar with Numpy.</p></li>
+<li><p><strong>Functional programming style</strong>: JAX encourages the use of pure functions, and contrary to Numpy JAX arrays are immutable.
+Using pure functions can sometimes be cumbersome, but it brings several benefits and in particular the use of JAX transformations.</p></li>
+<li><p><strong>Transformations</strong>: JAX provides several operations which act on pure functions such as
+just-in-time compilation (<code class="docutils literal notranslate"><span class="pre">jit</span></code>), automatic vectorization (<code class="docutils literal notranslate"><span class="pre">vmap</span></code>) and automatic differentiation (<code class="docutils literal notranslate"><span class="pre">grad</span></code>).</p></li>
+<li><p><strong>PyTree abstraction</strong>: JAX introduces the use of <em>PyTrees</em> to represent any nested data structure as trees with leaves (arrays, scalars, or other simple Python data types)
+and internal nodes (tuples, lists, dictionaries, or custom nodes). This abstraction is useful to create more complex data structures that are fully compatible with JAX transformations.</p></li>
+<li><p><strong>Efficient execution</strong>: JAX leverages XLA (Accelerated Linear Algebra), a domain-specific compiler that optimizes and compiles numerical
+computations for efficient execution on CPUs (also GPUs and TPUs but we don’t use it in SBMLtoODEjax).</p></li>
+<li><p><strong>Automatic differentiation</strong>: JAX provides automatic differentiation capabilities allowing to easily compute gradients of complex functions and to perform gradient-descent optimization.</p></li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In short, if your code respect the standard JAX practices where <strong>everything is just PyTrees and transformations on PyTrees</strong>, you should be able to make full advantage of jax main features.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>There is much more to know bout JAX and we recommend checking their documentation to know more about <a class="reference external" href="https://jax.readthedocs.io/en/latest/notebooks/quickstart.html">how to make advantage of JAX function transformations</a>
+and <a class="reference external" href="https://jax.readthedocs.io/en/latest/notebooks/thinking_in_jax.html">how to think in JAX</a>.</p>
+</div>
+</section>
+<section id="equinox-s-module-abstraction">
+<h3>Equinox’s <em>Module</em> abstraction<a class="headerlink" href="#equinox-s-module-abstraction" title="Link to this heading">#</a></h3>
+<p>Equinox is a small library from the JAX ecosystem, which introduces the <em>Module</em> abstraction to represent parameterised functions (such as neural networks)
+following a <em>class-based</em> syntax (simple syntax similar to PyTorch modules) but that is registered as a <em>PyTree</em> (allows to use JAX transformation such as <code class="docutils literal notranslate"><span class="pre">jit</span></code>,<code class="docutils literal notranslate"><span class="pre">vmap</span></code> and <code class="docutils literal notranslate"><span class="pre">grad</span></code>).</p>
+<p>We use this abstraction to represent parametrized functions in the python-generated files.
+This allows to have parameters of the models (such as the stoichiometric Matrix and the parameters of the ODE solver) but also other modules to be specified as fields at the class-level,
+instead of having to pass those parameters as inputs (together with all other variables) each time the functions are called.</p>
+<p>Equinox also defines filters such as <code class="docutils literal notranslate"><span class="pre">filter_jit</span></code>, <code class="docutils literal notranslate"><span class="pre">filter_grad</span></code> and <code class="docutils literal notranslate"><span class="pre">filter_vmap</span></code> to customize with respect to which parameters/variables one wishes to operate JAX transformations.</p>
+</section>
+</section>
+<section id="structure-of-the-generated-python-file">
+<span id="id1"></span><h2>🔍 Structure of the generated python file<a class="headerlink" href="#structure-of-the-generated-python-file" title="Link to this heading">#</a></h2>
+<p>SBMLtoODEjax automatically parses a given SBML file and convert it to a python file written in JAX.
+The generated files contains several <em>variables</em>,  <em>modules</em> and some additional <em>data</em> allowing to simulate the original SBML model, and to manipulate it based on one’s needs.</p>
+<section id="variables">
+<h3>Variables<a class="headerlink" href="#variables" title="Link to this heading">#</a></h3>
+<p>Among the original SBML conventions, we found the following to be difficulty compatible with a functional programming paradigm:
+<em>parameters</em> can represent both constants and variables that are manipulated by the model’s rules, <em>species</em> mainly represent
+variables that are reactants and/or products of the model’s reactions but it happens that some of them are neither consumed nor produced,
+<em>compartments</em> are distinguished from parameters but in the end they are (another) parameter of the model.</p>
+<p>Moreover, in most existing software tools, in order to modify the model’s parameters and/or variable states, users often need to access the variables by their specific identifier/name.</p>
+<p>Here, we use slightly different conventions for representing the model variables that we believe allow for more general mathematical formalism (and hence functional-style implementation)
+as well as more flexible manipulations:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>SBMLtoODEjax</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>y</p></td>
+<td><p>vector of variables that represent the model’s species amount (e.g. gene expression level) and that is evolving in time at a rate governed by the model’s ODE-based reactions</p></td>
+</tr>
+<tr class="row-odd"><td><p>w</p></td>
+<td><p>vector of non-constant parameters that intervene either in the model reactions or assignment rules (e.g. kinematic parameters) and whose state is evolving in time according to assigment rules</p></td>
+</tr>
+<tr class="row-even"><td><p>c</p></td>
+<td><p>vector of constant parameters that intervene either in the model reactions or assignment rules (e.g. kinematic parameters)</p></td>
+</tr>
+<tr class="row-odd"><td><p>t</p></td>
+<td><p>time serie of points for which to solve for y and w</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="modules">
+<h3>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h3>
+<p>The generated files contain 4 modules (functions) that operate on the above variables:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>SBMLtoODEjax</p></th>
+<th class="head"><p>Math</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>RateofSpeciesChange</p></td>
+<td><p><span class="math notranslate nohighlight">\(y(t), t, w(t) \mapsto \frac{dy(t)}{dt}\)</span></p></td>
+<td><p>system of ODE-governed equations that governs the rate of species changes <span class="math notranslate nohighlight">\(\frac{dy}{dt}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>AssignmentRule</p></td>
+<td><p><span class="math notranslate nohighlight">\(w(t), y(t+\Delta t),  t+\Delta t \mapsto w(t+\Delta t)\)</span></p></td>
+<td><p>system of equations that governs the temporal evolution of <span class="math notranslate nohighlight">\(w\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>ModelStep</p></td>
+<td><p><span class="math notranslate nohighlight">\(y(t),  w(t), c, t, \mapsto y(t+\Delta t),  w(t+\Delta t), c, t+\Delta t\)</span></p></td>
+<td><p>iteratively integrates <code class="docutils literal notranslate"><span class="pre">RateofSpeciesChange</span></code> using jax’s <a class="reference external" href="https://github.com/google/jax/blob/main/jax/experimental/ode.py">odeint</a> and calls <code class="docutils literal notranslate"><span class="pre">AssignmentRule</span></code> to update variables <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(w\)</span> in time</p></td>
+</tr>
+<tr class="row-odd"><td><p>ModelRollout</p></td>
+<td><p><span class="math notranslate nohighlight">\(y(0), w(0), c, t0, T \mapsto y[0..T], w[0..T]\)</span></p></td>
+<td><p>iteratively calls <code class="docutils literal notranslate"><span class="pre">ModelStep</span></code> for a given number of steps</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="data">
+<h3>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h3>
+<p>The generated files also contain additional data about the initial state of the (y,w,t) variables and about their identifiers/names in the original SBML file:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>SBMLtoODEjax</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>y0</p></td>
+<td><p>default initial state of <span class="math notranslate nohighlight">\(y\)</span> (as provided in the SBML file)</p></td>
+</tr>
+<tr class="row-odd"><td><p>w0</p></td>
+<td><p>default initial state of <span class="math notranslate nohighlight">\(w\)</span> (as provided in the SBML file)</p></td>
+</tr>
+<tr class="row-even"><td><p>t0</p></td>
+<td><p>default initial state of <span class="math notranslate nohighlight">\(t\)</span> (0.0)</p></td>
+</tr>
+<tr class="row-odd"><td><p>y_indexes</p></td>
+<td><p>mapping between the SBML species identifiers and their index in the <span class="math notranslate nohighlight">\(y\)</span> vector</p></td>
+</tr>
+<tr class="row-even"><td><p>w_indexes</p></td>
+<td><p>mapping between the SBML identifiers and their index in the <span class="math notranslate nohighlight">\(w\)</span> vector</p></td>
+</tr>
+<tr class="row-odd"><td><p>c_indexes</p></td>
+<td><p>mapping between the SBML identifiers and their index in the <span class="math notranslate nohighlight">\(c\)</span> vector</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="why_use.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Should you use SBMLtoODEjax?</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="contributing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Contributing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#context">💡 Context</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sbml-core-components">SBML core components</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax-main-principles">JAX main principles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equinox-s-module-abstraction">Equinox’s <em>Module</em> abstraction</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-of-the-generated-python-file">🔍 Structure of the generated python file</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mayalen Etcheverry
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023, Mayalen Etcheverry.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
