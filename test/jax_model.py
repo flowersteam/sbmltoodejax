@@ -3,6 +3,8 @@ from functools import partial
 from jax import jit, lax, vmap
 from jax.experimental.ode import odeint
 import jax.numpy as jnp
+from diffrax import ODETerm, Tsit5, Dopri5, Dopri8, Euler, Midpoint, Heun, Bosh3, Ralston
+from typing import Any
 
 from sbmltoodejax import jaxfuncs
 
@@ -90,34 +92,52 @@ class ModelStep(eqx.Module):
 	rtol: float = eqx.static_field()
 	mxstep: int = eqx.static_field()
 	assignmentfunc: AssignmentRule
+	solver_type: str = eqx.static_field()
+	solver: Any = eqx.static_field()
 
-	def __init__(self, y_indexes={'MKKK': 0, 'MKKK_P': 1, 'MKK': 2, 'MKK_P': 3, 'MKK_PP': 4, 'MAPK': 5, 'MAPK_P': 6, 'MAPK_PP': 7}, w_indexes={}, c_indexes={'uVol': 0, 'J0_V1': 1, 'J0_Ki': 2, 'J0_n': 3, 'J0_K1': 4, 'J1_V2': 5, 'J1_KK2': 6, 'J2_k3': 7, 'J2_KK3': 8, 'J3_k4': 9, 'J3_KK4': 10, 'J4_V5': 11, 'J4_KK5': 12, 'J5_V6': 13, 'J5_KK6': 14, 'J6_k7': 15, 'J6_KK7': 16, 'J7_k8': 17, 'J7_KK8': 18, 'J8_V9': 19, 'J8_KK9': 20, 'J9_V10': 21, 'J9_KK10': 22}, atol=1e-06, rtol=1e-12, mxstep=5000000):
+	def __init__(self, y_indexes={'MKKK': 0, 'MKKK_P': 1, 'MKK': 2, 'MKK_P': 3, 'MKK_PP': 4, 'MAPK': 5, 'MAPK_P': 6, 'MAPK_PP': 7}, w_indexes={}, c_indexes={'uVol': 0, 'J0_V1': 1, 'J0_Ki': 2, 'J0_n': 3, 'J0_K1': 4, 'J1_V2': 5, 'J1_KK2': 6, 'J2_k3': 7, 'J2_KK3': 8, 'J3_k4': 9, 'J3_KK4': 10, 'J4_V5': 11, 'J4_KK5': 12, 'J5_V6': 13, 'J5_KK6': 14, 'J6_k7': 15, 'J6_KK7': 16, 'J7_k8': 17, 'J7_KK8': 18, 'J8_V9': 19, 'J8_KK9': 20, 'J9_V10': 21, 'J9_KK10': 22}, atol=1e-06, rtol=1e-12, mxstep=5000000, solver_type='diffrax', diffrax_solver='Dopri8'):
 
 		self.y_indexes = y_indexes
 		self.w_indexes = w_indexes
 		self.c_indexes = c_indexes
-
 		self.ratefunc = RateofSpeciesChange()
 		self.rtol = rtol
 		self.atol = atol
 		self.mxstep = mxstep
 		self.assignmentfunc = AssignmentRule()
+		self.solver_type = solver_type
+		if solver_type == 'odeint':
+			self.solver = odeint
+		elif solver_type == 'diffrax':
+			from diffrax import ODETerm, Tsit5, Dopri5, Dopri8, Euler, Midpoint, Heun, Bosh3, Ralston
+			valid_solvers = {'Tsit5', 'Dopri5', 'Dopri8', 'Euler', 'Midpoint', 'Heun', 'Bosh3', 'Ralston'}
+			if diffrax_solver not in valid_solvers:
+				raise ValueError(f'Unknown diffrax solver: {diffrax_solver}')
+			self.solver = Dopri8()
+		else:
+			raise ValueError(f'Unknown solver type: {solver_type}')
 
 	@jit
 	def __call__(self, y, w, c, t, deltaT):
-		y_new = odeint(self.ratefunc, y, jnp.array([t, t + deltaT]), w, c, atol=self.atol, rtol=self.rtol, mxstep=self.mxstep)[-1]	
-		t_new = t + deltaT	
-		w_new = self.assignmentfunc(y_new, w, c, t_new)	
-		return y_new, w_new, c, t_new	
+		if self.solver_type == 'odeint':
+			y_new = odeint(self.ratefunc, y, jnp.array([t, t + deltaT]), w, c, atol=self.atol, rtol=self.rtol, mxstep=self.mxstep)[-1]
+		else:  # diffrax
+			term = ODETerm(lambda t, y, args: self.ratefunc(y, t, *args))
+			tprev, tnext = t, t + deltaT
+			state = self.solver.init(term, tprev, tnext, y, (w, c))
+			y_new, _, _, _, _ = self.solver.step(term, tprev, tnext, y, (w, c), state, made_jump=False)
+		t_new = t + deltaT
+		w_new = self.assignmentfunc(y_new, w, c, t_new)
+		return y_new, w_new, c, t_new
 
 class ModelRollout(eqx.Module):
 	deltaT: float = eqx.static_field()
 	modelstepfunc: ModelStep
 
-	def __init__(self, deltaT=0.1, atol=1e-06, rtol=1e-12, mxstep=5000000):
+	def __init__(self, deltaT=0.1, atol=1e-06, rtol=1e-12, mxstep=5000000, solver_type='diffrax', diffrax_solver='Dopri8'):
 
 		self.deltaT = deltaT
-		self.modelstepfunc = ModelStep(atol=atol, rtol=rtol, mxstep=mxstep)
+		self.modelstepfunc = ModelStep(atol=atol, rtol=rtol, mxstep=mxstep, solver_type=solver_type, diffrax_solver=diffrax_solver)
 
 	@partial(jit, static_argnames=("n_steps",))
 	def __call__(self, n_steps, y0=jnp.array([90.0, 10.0, 280.0, 10.0, 10.0, 280.0, 10.0, 10.0]), w0=jnp.array([]), c=jnp.array([1.0, 2.5, 9.0, 1.0, 10.0, 0.25, 8.0, 0.025, 15.0, 0.025, 15.0, 0.75, 15.0, 0.75, 15.0, 0.025, 15.0, 0.025, 15.0, 0.5, 15.0, 0.5, 15.0]), t0=0.0):
