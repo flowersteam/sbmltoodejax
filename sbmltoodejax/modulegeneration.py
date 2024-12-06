@@ -14,7 +14,7 @@ def GenerateModel(modelData, outputFilePath,
                   atol: float=1e-6,
                   rtol: float = 1e-12,
                   mxstep: int = 5000000,
-                  solver_type: str = 'odeint',
+                  solver_type: str = 'diffrax',
                   diffrax_solver: str = 'Tsit5'
                   ):
     """
@@ -592,13 +592,3 @@ def GenerateModel(modelData, outputFilePath,
 
     # ================================================================================================================================
     outputFile.close()
-
-
-
-
-
-
-
-
-
-

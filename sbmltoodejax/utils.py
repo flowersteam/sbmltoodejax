@@ -6,7 +6,7 @@ from sbmltoodejax.parse import ParseSBMLFile
 def generate_biomodel(model_idx, model_fp="jax_model.py",
                       vary_constant_reactants=False, vary_boundary_reactants=False,
                       deltaT=0.1, atol=1e-6, rtol=1e-12, mxstep=5000000,
-                      solver_type='odeint', diffrax_solver='Tsit5'):
+                      solver_type='diffrax', diffrax_solver='Tsit5'):
     """Calls the `sbmltoodejax.modulegeneration_3.GenerateModel` for a SBML model hosted on the BioModel website and indexed by the provided `model_idx`.
 
     Args:
@@ -16,7 +16,7 @@ def generate_biomodel(model_idx, model_fp="jax_model.py",
         atol (float, optional): parameter passed to `sbmltoodejax.modulegeneration.GenerateModel`. Default to 1e-6.
         rtol (float, optional): parameter passed to `sbmltoodejax.modulegeneration.GenerateModel`. Default to 1e-12.
         mxstep (int, optional): parameter passed to `sbmltoodejax.modulegeneration.GenerateModel`. Default to 5000000.
-        solver_type (str, optional): parameter passed to `sbmltoodejax.modulegeneration.GenerateModel`. Default to 'odeint'.
+        solver_type (str, optional): parameter passed to `sbmltoodejax.modulegeneration.GenerateModel`. Default to 'diffrax'.
         diffrax_solver (str, optional): parameter passed to `sbmltoodejax.modulegeneration.GenerateModel`. Default to 'Tsit5'.
 
     Returns:
@@ -35,7 +35,7 @@ def generate_biomodel(model_idx, model_fp="jax_model.py",
 def load_biomodel(model_idx, model_fp="jax_model.py",
                   vary_constant_reactants=False, vary_boundary_reactants=False,
                   deltaT=0.1, atol=1e-6, rtol=1e-12, mxstep=5000000,
-                  solver_type='odeint', diffrax_solver='Tsit5'):
+                  solver_type='diffrax', diffrax_solver='Tsit5'):
     """Calls the generate_biomodel function for a SBML model hosted on the BioModel website and indexed by the provided `model_idx`,
     then loads and returns the generated `model` module and `y0`, `w0`, `c` variables.
 
@@ -46,6 +46,8 @@ def load_biomodel(model_idx, model_fp="jax_model.py",
         atol (float, optional): parameter passed to `generate_biomodel`. Default to 1e-6.
         rtol (float, optional): parameter passed to `generate_biomodel`. Default to 1e-12.
         mxstep (int, optional): parameter passed to `generate_biomodel`. Default to 5000000.
+        solver_type (str, optional): parameter passed to `sbmltoodejax.modulegeneration.GenerateModel`. Default to 'diffrax'.
+        diffrax_solver (str, optional): parameter passed to `sbmltoodejax.modulegeneration.GenerateModel`. Default to 'Tsit5'.
 
     Returns:
         tuple containing
