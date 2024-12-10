@@ -7,8 +7,8 @@ def test_modulegeneration():
 
     #BIOMD 3
     model, y0, w0, c = load_biomodel(3)
-    y_indexes = model.modelstepfunc.y_indexes
-    c_indexes = model.modelstepfunc.c_indexes
+    y_indexes = model.y_indexes
+    c_indexes = model.c_indexes
     assert y0[y_indexes['C']] == 0.01
     assert y0[y_indexes['M']] == 0.01
     assert y0[y_indexes['X']] == 0.01
@@ -18,8 +18,8 @@ def test_modulegeneration():
 
     # BIOMD 4
     model, y0, w0, c = load_biomodel(4)
-    y_indexes = model.modelstepfunc.y_indexes
-    c_indexes = model.modelstepfunc.c_indexes
+    y_indexes = model.y_indexes
+    c_indexes = model.c_indexes
 
     assert y0[y_indexes['C']] == 0.01
     assert y0[y_indexes['MI']] == 0.99
@@ -33,8 +33,8 @@ def test_modulegeneration():
 
     # BIOMD 6
     model, y0, w0, c = load_biomodel(6)
-    y_indexes = model.modelstepfunc.y_indexes
-    c_indexes = model.modelstepfunc.c_indexes
+    y_indexes = model.y_indexes
+    c_indexes = model.c_indexes
 
     y0[y_indexes['EmptySet']] == 1.0
     assert y0[y_indexes['z']] == 0.0
@@ -48,8 +48,8 @@ def test_modulegeneration():
 
     # BIOMD 8
     model, y0, w0, c = load_biomodel(8)
-    y_indexes = model.modelstepfunc.y_indexes
-    c_indexes = model.modelstepfunc.c_indexes
+    y_indexes = model.y_indexes
+    c_indexes = model.c_indexes
 
     assert y0[y_indexes['C']] == 0.0
     assert y0[y_indexes['M']] == 0.0
@@ -62,8 +62,8 @@ def test_modulegeneration():
 
     # BIOMD 10
     model, y0, w0, c = load_biomodel(10)
-    y_indexes = model.modelstepfunc.y_indexes
-    c_indexes = model.modelstepfunc.c_indexes
+    y_indexes = model.y_indexes
+    c_indexes = model.c_indexes
 
     assert y0[y_indexes['MKKK']] == 90.0
     assert y0[y_indexes['MKKK_P']] == 10.0

@@ -1,3 +1,4 @@
+import diffrax
 import jax.numpy as jnp
 from sbmltoodejax import jaxfuncs
 import re
@@ -6,16 +7,15 @@ import sys
 def GenerateModel(modelData, outputFilePath,
                   RateofSpeciesChangeName: str ='RateofSpeciesChange',
                   AssignmentRuleName: str='AssignmentRule',
-                  ModelStepName: str='ModelStep',
                   ModelRolloutName: str='ModelRollout',
-                  vary_constant_reactants: bool=False,
-                  vary_boundary_reactants: bool=False,
-                  deltaT: float =0.1,
+                  vary_constant_reactants: bool = False,
+                  vary_boundary_reactants: bool = False,
+                  diffrax_solver: str = 'Tsit5',
+                  iterative_solve: bool = False,
+                  deltaT: float = 0.1,
                   atol: float=1e-6,
                   rtol: float = 1e-12,
-                  mxstep: int = 5000000,
-                  solver_type: str = 'diffrax',
-                  diffrax_solver: str = 'Tsit5'
+                  max_steps: int = 5000000
                   ):
     """
     This function takes model data created by :func:`~sbmltoodejax.parse.ParseSBMLFile` and generates a python file containing
@@ -35,17 +35,23 @@ def GenerateModel(modelData, outputFilePath,
 
         AssignmentRuleName (str): The name of the AssignmentRule module defined in the resulting python file. Default to 'AssignmentRule'.
 
-        ModelStepName (str): The name of the ModelStep module defined in the resulting python file. Default to 'ModelStep'.
-
         ModelRolloutName (str): The name of the ModelRollout module defined in the resulting python file. Default to'ModelRollout'.
+
+        vary_constant_reactants (bool): If True, the function will allow reactants that are defined as constant to vary. Default to False.
+
+        vary_boundary_reactants (bool): If True, the function will allow reactants that are defined as boundary species to vary. Default to False.
+
+        diffrax_solver (str): The name of the diffrax solver to use. Default to 'Tsit5'.
+
+        iterative_solve (bool): If True, the function will use iterative step through a solve (on step at a time). Can be faster but also less accurate. Default to False.
 
         deltaT (float): Time step size (in seconds). Default to 0.1.
 
-        atol (float): Absolute local error tolerance for ``jax.experimental.odeint`` solver. Default to 1e-6.
+        atol (float): Absolute local error tolerance for ``diffrax.PIDController`` step size controller. Default to 1e-6.
 
-        rtol (float): Relative local error tolerance for ``jax.experimental.odeint`` solver. Default to 1e-12.
+        rtol (float): Relative local error tolerance for ``diffrax.PIDController`` step size controller. Default to 1e-12.
 
-        mxstep (int): Maximum number of steps to take for each timepoint for ``jax.experimental.odeint`` solver. Default to 5000000.
+        max_steps (int): Maximum number of steps to take for each timepoint by the diffrax solver. Default to 5000000.
 
 
     """
@@ -121,17 +127,16 @@ def GenerateModel(modelData, outputFilePath,
 
     # TODO: Add in user defined functions
 
+    if not hasattr(diffrax, diffrax_solver):
+        raise ValueError(f'Unknown diffrax solver: {diffrax_solver}')
+
     # ================================================================================================================================
 
+    outputFile.write("import diffrax\n")
     outputFile.write("import equinox as eqx\n")
-    outputFile.write("from functools import partial\n")
     outputFile.write("from jax import jit, lax, vmap\n")
-    outputFile.write("from jax.experimental.ode import odeint\n")
     outputFile.write("import jax.numpy as jnp\n")
-    outputFile.write("from diffrax import ODETerm, Tsit5, Dopri5, Dopri8, Euler, Midpoint, Heun, Bosh3, Ralston\n")
-    outputFile.write("from typing import Any\n\n")
     outputFile.write("from sbmltoodejax import jaxfuncs\n\n")
-
 
     # ================================================================================================================================
     t0 = 0.0
@@ -286,6 +291,7 @@ def GenerateModel(modelData, outputFilePath,
         return returnRHS
 
     # ================================================================================================================================
+
     ruleDefinedVars = [rule.variable for rule in assignmentRules.values()]
     for key, assignment in initialAssignments.items():
         ruleDefinedVars.append(assignment.variable)
@@ -380,6 +386,7 @@ def GenerateModel(modelData, outputFilePath,
             raise Exception('Algebraic Loop in AssignmentRules')
 
     # ================================================================================================================================
+
     outputFile.write(f"t0 = {t0}\n\n")
 
     outputFile.write(f"y0 = jnp.array({y0})\n")
@@ -390,6 +397,7 @@ def GenerateModel(modelData, outputFilePath,
 
     outputFile.write(f"c = jnp.array({c}) \n")
     outputFile.write(f"c_indexes = {c_indexes}\n\n")
+
     # ================================================================================================================================
 
     # Set up stoichCoeffMat, a matrix of stoichiometric coefficients for solving the reactions
@@ -418,7 +426,6 @@ def GenerateModel(modelData, outputFilePath,
 
     outputFile.write("\t@jit\n")
     outputFile.write("\tdef __call__(self, y, t, w, c):\n")
-
 
 
     outputFile.write('\t\trateRuleVector = jnp.array([' + ', '.join(var for var in rateArray) + '], dtype=jnp.float32)\n\n')
@@ -508,86 +515,93 @@ def GenerateModel(modelData, outputFilePath,
 
     # ================================================================================================================================
 
-    outputFile.write("class " + ModelStepName + "(eqx.Module):\n")
+    outputFile.write("class " + ModelRolloutName + "(eqx.Module):\n")
     outputFile.write("\ty_indexes: dict = eqx.static_field()\n")
     outputFile.write("\tw_indexes: dict = eqx.static_field()\n")
     outputFile.write("\tc_indexes: dict = eqx.static_field()\n")
     outputFile.write(f"\tratefunc: {RateofSpeciesChangeName}\n")
-    outputFile.write("\tatol: float = eqx.static_field()\n")
-    outputFile.write("\trtol: float = eqx.static_field()\n")
-    outputFile.write("\tmxstep: int = eqx.static_field()\n")
     outputFile.write(f"\tassignmentfunc: {AssignmentRuleName}\n")
-    outputFile.write("\tsolver_type: str = eqx.static_field()\n")
-    outputFile.write("\tsolver: Any = eqx.static_field()\n\n")
+    outputFile.write(f"\tode_term: diffrax.ODETerm\n")
+    outputFile.write("\tsolver: diffrax.AbstractERK = eqx.static_field()\n")
+    outputFile.write("\titerative_solve: bool = eqx.static_field()\n\n")
+    
 
     outputFile.write(f"\tdef __init__(self, "
                      f"y_indexes={y_indexes}, "
                      f"w_indexes={w_indexes}, "
                      f"c_indexes={c_indexes}, "
-                     f"atol={atol}, rtol={rtol}, mxstep={mxstep}, "
-                     f"solver_type='{solver_type}', diffrax_solver='{diffrax_solver}'):\n\n")
-
+                     f"solver=diffrax.{diffrax_solver}(), iterative_solve={iterative_solve}):\n\n")
+    
     outputFile.write("\t\tself.y_indexes = y_indexes\n")
     outputFile.write("\t\tself.w_indexes = w_indexes\n")
-    outputFile.write("\t\tself.c_indexes = c_indexes\n")
-    outputFile.write(f"\t\tself.ratefunc = {RateofSpeciesChangeName}()\n")
-    outputFile.write("\t\tself.rtol = rtol\n")
-    outputFile.write("\t\tself.atol = atol\n")
-    outputFile.write("\t\tself.mxstep = mxstep\n")
-    outputFile.write(f"\t\tself.assignmentfunc = {AssignmentRuleName}()\n")
-    outputFile.write("\t\tself.solver_type = solver_type\n")
-    outputFile.write("\t\tif solver_type == 'odeint':\n")
-    outputFile.write("\t\t\tself.solver = odeint\n")
-    outputFile.write("\t\telif solver_type == 'diffrax':\n")
-    outputFile.write("\t\t\tfrom diffrax import ODETerm, Tsit5, Dopri5, Dopri8, Euler, Midpoint, Heun, Bosh3, Ralston\n")
-    outputFile.write("\t\t\tvalid_solvers = {'Tsit5', 'Dopri5', 'Dopri8', 'Euler', 'Midpoint', 'Heun', 'Bosh3', 'Ralston'}\n")
-    outputFile.write("\t\t\tif diffrax_solver not in valid_solvers:\n")
-    outputFile.write("\t\t\t\traise ValueError(f'Unknown diffrax solver: {diffrax_solver}')\n")
-    outputFile.write(f"\t\t\tself.solver = eval(diffrax_solver)()\n")
-    outputFile.write("\t\telse:\n")
-    outputFile.write("\t\t\traise ValueError(f'Unknown solver type: {solver_type}')\n\n")
+    outputFile.write("\t\tself.c_indexes = c_indexes\n\n")
 
-    outputFile.write("\t@jit\n")
-    outputFile.write("\tdef __call__(self, y, w, c, t, deltaT):\n")
-    outputFile.write("\t\tif self.solver_type == 'odeint':\n")
-    outputFile.write("\t\t\ty_new = self.solver(self.ratefunc, y, jnp.array([t, t + deltaT]), w, c, atol=self.atol, rtol=self.rtol, mxstep=self.mxstep)[-1]\n")
-    outputFile.write("\t\telse:  # diffrax\n")
-    outputFile.write("\t\t\tterm = ODETerm(lambda t, y, args: self.ratefunc(y, t, *args))\n")
-    outputFile.write("\t\t\ttprev, tnext = t, t + deltaT\n")
-    outputFile.write("\t\t\tstate = self.solver.init(term, tprev, tnext, y, (w, c))\n")
-    outputFile.write("\t\t\ty_new, _, _, _, _ = self.solver.step(term, tprev, tnext, y, (w, c), state, made_jump=False)\n")
+    outputFile.write(f"\t\tself.ratefunc = {RateofSpeciesChangeName}()\n")
+    outputFile.write(f"\t\tself.assignmentfunc = {AssignmentRuleName}()\n\n")
+
+    outputFile.write("\t\tdef ode_func(t, y, args):\n")
+    outputFile.write("\t\t\tw, c = args\n")
+    outputFile.write("\t\t\t# Update w using the assignment rule\n")
+    outputFile.write("\t\t\tw = self.assignmentfunc(y, w, c, t)\n\n")
+    
+    outputFile.write("\t\t\t# Calculate the rate of change\n")
+    outputFile.write("\t\t\tdy_dt = self.ratefunc(y, t, w, c)\n\n")
+    
+    outputFile.write("\t\t\treturn dy_dt\n\n")
+    
+    outputFile.write("\t\tself.ode_term = diffrax.ODETerm(ode_func)\n")
+    outputFile.write("\t\tself.solver = solver\n")
+    outputFile.write("\t\tself.iterative_solve = iterative_solve\n\n")
+    
+    outputFile.write("\t@eqx.filter_jit\n")
+    outputFile.write(f"\tdef step(self, y, w, c, t, deltaT={deltaT}):\n")
     outputFile.write("\t\tt_new = t + deltaT\n")
+    outputFile.write("\t\tstate = self.solver.init(self.ode_term, t, t_new, y, (w, c))\n")
+    outputFile.write("\t\ty_new, _, _, _, _ = self.solver.step(self.ode_term, t, t_new, y, (w, c), state, made_jump=False)\n")
     outputFile.write("\t\tw_new = self.assignmentfunc(y_new, w, c, t_new)\n")
     outputFile.write("\t\treturn y_new, w_new, c, t_new\n\n")
 
-    # ================================================================================================================================
 
-    outputFile.write("class " + ModelRolloutName + "(eqx.Module):\n")
-    outputFile.write("\tdeltaT: float = eqx.static_field()\n")
-    outputFile.write(f"\tmodelstepfunc: {ModelStepName}\n\n")
-
-    outputFile.write(f"\tdef __init__(self, deltaT={deltaT}, atol={atol}, rtol={rtol}, mxstep={mxstep}, solver_type='{solver_type}', diffrax_solver='{diffrax_solver}'):\n\n")
-    outputFile.write("\t\tself.deltaT = deltaT\n")
-    outputFile.write(f"\t\tself.modelstepfunc = {ModelStepName}(atol=atol, rtol=rtol, mxstep=mxstep, solver_type=solver_type, diffrax_solver=diffrax_solver)\n\n")
-
-    outputFile.write("\t@partial(jit, static_argnames=(\"n_steps\",))\n")
-    outputFile.write("\tdef __call__(self, n_steps, "
+    outputFile.write("\t@eqx.filter_jit\n")
+    outputFile.write(f"\tdef __call__(self, t1,"
                      f"y0=jnp.array({y0}), "
                      f"w0=jnp.array({w0}), "
                      f"c=jnp.array({c}), "
-                     f"t0={t0}"
+                     f"t0={t0}, deltaT={deltaT}, "
+                     f"stepsize_controller=diffrax.PIDController(atol={atol}, rtol={rtol}), max_steps={max_steps}"
                      f"):\n\n")
+    
+    outputFile.write("\t\t# Number of steps\n")
+    outputFile.write("\t\tn_steps = int(t1 / deltaT)\n\n")
 
-    outputFile.write("\t\t@jit\n")
-    outputFile.write("\t\tdef f(carry, x):\n")
-    outputFile.write("\t\t\ty, w, c, t = carry\n")
-    outputFile.write("\t\t\treturn self.modelstepfunc(y, w, c, t, self.deltaT), (y, w, t)\n")
+    outputFile.write("\t\t# Solve the ODE system\n")
+    outputFile.write("\t\tif self.iterative_solve:\n")
+    outputFile.write("\t\t\tdef f(carry, x):\n")
+    outputFile.write("\t\t\t\ty, w, c, t = carry\n")
+    outputFile.write("\t\t\t\treturn self.step(y, w, c, t, deltaT), (y, w, t)\n")
+    outputFile.write("\t\t\t(y, w, c, t), (ys, ws, ts) = lax.scan(f, (y0, w0, c, t0), jnp.arange(n_steps)) \n\n")
 
-    outputFile.write("\t\t(y, w, c, t), (ys, ws, ts) = lax.scan(f, (y0, w0, c, t0), jnp.arange(n_steps))\n")
+    outputFile.write("\t\telse:\n")
+    outputFile.write("\t\t\tsol = diffrax.diffeqsolve(\n")
+    outputFile.write("\t\t\t\tself.ode_term,\n")
+    outputFile.write("\t\t\t\tself.solver,\n")
+    outputFile.write("\t\t\t\tt0=t0,\n")
+    outputFile.write("\t\t\t\tt1=t1,\n")
+    outputFile.write("\t\t\t\tdt0=deltaT,\n")
+    outputFile.write("\t\t\t\ty0=y0,\n")
+    outputFile.write("\t\t\t\targs=(w0, c),\n")
+    outputFile.write("\t\t\t\tsaveat=diffrax.SaveAt(ts=jnp.linspace(t0, t1, n_steps)),\n")
+    outputFile.write("\t\t\t\tstepsize_controller=stepsize_controller,\n")
+    outputFile.write("\t\t\t\tmax_steps=max_steps\n")
+    outputFile.write("\t\t\t)\n\n")
 
-    outputFile.write("\t\tys = jnp.moveaxis(ys, 0, -1)\n")
-    outputFile.write("\t\tws = jnp.moveaxis(ws, 0, -1)\n")
+    outputFile.write("\t\t\t# Extract results and recompute ws\n")
+    outputFile.write("\t\t\tts = sol.ts\n")
+    outputFile.write("\t\t\tys = sol.ys\n")
+    outputFile.write("\t\t\tws = vmap(lambda t, y: self.assignmentfunc(y, w0, c, t))(ts, ys)\n")
 
+    outputFile.write("\t\tys = jnp.moveaxis(ys, 0, -1) #(n_species, n_steps)\n")
+    outputFile.write("\t\tws = jnp.moveaxis(ws, 0, -1) #(n_params, n_steps)\n")
     outputFile.write("\t\treturn ys, ws, ts\n\n")
 
     # ================================================================================================================================
