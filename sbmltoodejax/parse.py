@@ -53,6 +53,11 @@ def ParseSBMLFile(file: str):
     if doc.getNumErrors() > 0:
         raise ValueError("LibSBML read error")
     
+    # inline user-defined functions
+    props = libsbml.ConversionProperties()
+    props.addOption("expandFunctionDefinitions", True)
+    doc.convert(props)
+    
     # Raise an Error if the model contains events as they are not handled by SBMLtoODEpy
     model = doc.getModel()
     if model.getNumEvents() > 0:
