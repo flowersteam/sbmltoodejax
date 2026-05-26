@@ -505,13 +505,13 @@ def GenerateModel(modelData, outputFilePath,
     # ================================================================================================================================
 
     outputFile.write("class " + ModelStepName + "(eqx.Module):\n")
-    outputFile.write("\ty_indexes: dict = eqx.static_field()\n")
-    outputFile.write("\tw_indexes: dict = eqx.static_field()\n")
-    outputFile.write("\tc_indexes: dict = eqx.static_field()\n")
+    outputFile.write("\ty_indexes: dict = eqx.field(static=True)\n")
+    outputFile.write("\tw_indexes: dict = eqx.field(static=True)\n")
+    outputFile.write("\tc_indexes: dict = eqx.field(static=True)\n")
     outputFile.write(f"\tratefunc: {RateofSpeciesChangeName}\n")
-    outputFile.write("\tatol: float = eqx.static_field()\n")
-    outputFile.write("\trtol: float = eqx.static_field()\n")
-    outputFile.write("\tmxstep: int = eqx.static_field()\n")
+    outputFile.write("\tatol: float = eqx.field(static=True)\n")
+    outputFile.write("\trtol: float = eqx.field(static=True)\n")
+    outputFile.write("\tmxstep: int = eqx.field(static=True)\n")
     outputFile.write(f"\tassignmentfunc: {AssignmentRuleName}\n\n")
 
     outputFile.write(f"\tdef __init__(self, "
@@ -542,7 +542,7 @@ def GenerateModel(modelData, outputFilePath,
     # ================================================================================================================================
 
     outputFile.write("class " + ModelRolloutName + "(eqx.Module):\n")
-    outputFile.write("\tdeltaT: float = eqx.static_field()\n")
+    outputFile.write("\tdeltaT: float = eqx.field(static=True)\n")
     outputFile.write(f"\tmodelstepfunc: {ModelStepName}\n\n")
 
     outputFile.write(f"\tdef __init__(self, deltaT={deltaT}, atol={atol}, rtol={rtol}, mxstep={mxstep}):\n\n")

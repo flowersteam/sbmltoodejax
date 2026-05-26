@@ -37,6 +37,15 @@ pip install sbmltoodejax
 
 Requires SBMLtoODEpy, JAX (cpu) and Equinox.
 
+For development (running the test suite), install the `dev` extras from a local checkout:
+
+```bash
+git clone https://github.com/flowersteam/sbmltoodejax.git
+cd sbmltoodejax
+pip install -e ".[dev]"
+pytest test/
+```
+
 # Why use SBMLtoODEjax?
 
 ## Simplicity and extensibility
@@ -122,7 +131,7 @@ They are several use cases that are not handled by the current codebase includin
 This means that a large portion of the possible SBML files cannot yet be simulated, for instance as we detail on the below image, out of 1048
 curated models that one can load from the BioModels website, only 232 can successfully be simulated (given the default initial conditions) in SBMLtoODEjax:
 <img src="https://raw.githubusercontent.com/flowersteam/sbmltoodejax/main/docs/source/_static/error_cases.png" width="450px">
-
+Edit: Custom functions are now accepted.
 > 👉 Please consider contributing and check our [Contribution Guidelines](https://developmentalsystems.org/sbmltoodejax/contributing.html) to learn how to do so.
 
 # License

@@ -74,4 +74,16 @@ def test_modulegeneration():
     assert y0[y_indexes['MAPK_P']] == 10.0
     assert y0[y_indexes['MAPK_PP']] == 10.0
 
+    # BIOMD 582 — DallePezze2014; 32 user-defined function definitions.
+    model, y0, w0, c = load_biomodel(582)
+    y_indexes = model.modelstepfunc.y_indexes
+    c_indexes = model.modelstepfunc.c_indexes
+
+    assert y0[y_indexes['CDKN1A']] == 10.0
+    assert y0[y_indexes['mTORC1']] == 10.0
+    assert y0[y_indexes['Mitophagy']] == 10.0
+    assert c[c_indexes['Akt_S473_phos_by_insulin']] == 0.588783148144923
+    assert c[c_indexes['mTORC1_pS2448_dephos_by_AMPK_pT172']] == 191.297262771509
+
+
 
