@@ -37,6 +37,15 @@ pip install sbmltoodejax
 
 Requires SBMLtoODEpy, JAX (cpu) and Equinox.
 
+For development (running the test suite), install the `dev` extras from a local checkout:
+
+```bash
+git clone https://github.com/flowersteam/sbmltoodejax.git
+cd sbmltoodejax
+pip install -e ".[dev]"
+pytest test/
+```
+
 # Why use SBMLtoODEjax?
 
 ## Simplicity and extensibility
