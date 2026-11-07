@@ -27,6 +27,11 @@ while tailoring them to take advantage of JAX main features for efficient and pa
 
 > 📖 The documentation, notebook tutorials and public APU are available at https://developmentalsystems.org/sbmltoodejax/.
 
+For offline checks of assignment-rule semantics against exact solutions,
+libRoadRunner, and COPASI, see the
+[independent simulator validation tutorial](docs/source/tutorials/assignment_rule_validation.md).
+The optional oracle dependencies are separate from the library's runtime requirements.
+
 # Installation
 
 The latest stable release of `SBMLtoODEjax` can be installed via `pip`:

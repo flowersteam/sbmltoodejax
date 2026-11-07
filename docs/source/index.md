@@ -71,6 +71,7 @@ tutorials/biomodels_curation
 tutorials/parallel_execution
 tutorials/benchmark
 tutorials/gradient_descent
+tutorials/assignment_rule_validation
 ```
 
 ```{toctree}

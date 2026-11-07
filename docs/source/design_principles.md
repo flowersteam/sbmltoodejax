@@ -101,9 +101,17 @@ The generated files contain 4 modules (functions) that operate on the above vari
 | SBMLtoODEjax   | Math                                                                   | Description                                                                                                                                                                                                 |
 |-------------------|------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | RateofSpeciesChange | $y(t), t, w(t) \mapsto \frac{dy(t)}{dt}$                               | system of ODE-governed equations that governs the rate of species changes $\frac{dy}{dt}$                                                                                                                   |
-| AssignmentRule    | $w(t), y(t+\Delta t),  t+\Delta t \mapsto w(t+\Delta t)$               | system of equations that governs the temporal evolution of $w$                                                                                                                                              |
-| ModelStep         | $y(t),  w(t), c, t, \mapsto y(t+\Delta t),  w(t+\Delta t), c, t+\Delta t$ | iteratively integrates `RateofSpeciesChange` using jax's [odeint](https://github.com/google/jax/blob/main/jax/experimental/ode.py) and calls `AssignmentRule` to update variables $y$ and $w$ in time |
+| AssignmentRule    | $y(t), w, c, t \mapsto w(t)$                                         | evaluates assignment equalities in dependency order at the current state and time; incoming $w$ is storage, not a previous-time recurrence |
+| ModelStep         | $y(t), w(t), c, t \mapsto y(t+\Delta t), w(t+\Delta t), c, t+\Delta t$ | integrates with `odeint`, evaluating `AssignmentRule` before each internal rate evaluation and again at the output endpoint |
 | ModelRollout      | $y(0), w(0), c, t0, T \mapsto y[0..T], w[0..T]$                        | iteratively calls `ModelStep` for a given number of steps                                                                                                                                                   |
+
+Assignment rules hold continuously in SBML, including inside an integration
+interval. `ModelStep` therefore computes $w(t)=g(y(t),c,t)$ before evaluating
+$dy/dt=f(y(t),w(t),c,t)$. `RateofSpeciesChange` remains available as the lower-level
+function for users who supply an instantaneous `w` themselves. See
+[independent simulator validation](tutorials/assignment_rule_validation.md) for
+analytic examples and comparisons with COPASI and libRoadRunner. Previously
+generated Python files must be regenerated to obtain this corrected behavior.
 
 
 ### Data
