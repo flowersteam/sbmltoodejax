@@ -1,0 +1,10 @@
+# Optional conformance environment (Python 3.12); not library runtime pins.
+jax[cpu]==0.12.0.1
+equinox==0.13.8
+sbmltoodepy==1.0.4
+python-libsbml==5.21.2
+numpy==2.5.4
+copasi-basico==0.92
+python-copasi==4.48.311
+libroadrunner==2.11.0
+pytest==9.2.0

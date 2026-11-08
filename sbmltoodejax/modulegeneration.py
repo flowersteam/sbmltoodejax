@@ -530,11 +530,14 @@ def GenerateModel(modelData, outputFilePath,
     outputFile.write("\t\tself.mxstep = mxstep\n")
 
     outputFile.write(f"\t\tself.assignmentfunc = {AssignmentRuleName}()\n\n")
-    
 
     outputFile.write("\t@jit\n")
     outputFile.write("\tdef __call__(self, y, w, c, t, deltaT):\n")
-    outputFile.write("\t\ty_new = odeint(self.ratefunc, y, jnp.array([t, t + deltaT]), w, c, atol=self.atol, rtol=self.rtol, mxstep=self.mxstep)[-1]\t\n")
+    outputFile.write("\t\tdef rate_with_assignments(y, t, w, c):\n")
+    outputFile.write("\t\t\t# SBML assignment rules hold at every solver stage, not just output times.\n")
+    outputFile.write("\t\t\tw = self.assignmentfunc(y, w, c, t)\n")
+    outputFile.write("\t\t\treturn self.ratefunc(y, t, w, c)\n\n")
+    outputFile.write("\t\ty_new = odeint(rate_with_assignments, y, jnp.array([t, t + deltaT]), w, c, atol=self.atol, rtol=self.rtol, mxstep=self.mxstep)[-1]\t\n")
     outputFile.write("\t\tt_new = t + deltaT\t\n")
     outputFile.write("\t\tw_new = self.assignmentfunc(y_new, w, c, t_new)\t\n")
     outputFile.write("\t\treturn y_new, w_new, c, t_new\t\n\n")
